@@ -1,0 +1,497 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="filterActivity"
+            type="com.hdh.baekalleyproject.ui.filter.FilterActivity" />
+    </data>
+
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#f0f0f0">
+
+
+        <android.support.constraint.Guideline
+            android:id="@+id/gl_08"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.08" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/gl_90"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.9" />
+
+        <!--Toolbar Section-->
+        <View
+            android:id="@+id/vToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="#ffffff"
+            app:layout_constraintBottom_toTopOf="@+id/gl_08"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/gl_13"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.13"/>
+
+        <View
+            android:id="@+id/vDismiss"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="@+id/gl_13"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/vToolbar"/>
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:src="@drawable/ic_close_black_24dp"
+            app:layout_constraintBottom_toBottomOf="@+id/vToolbar"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/filter_mainText"
+            android:textColor="#000000"
+            android:textSize="20dp"
+            app:layout_constraintBottom_toBottomOf="@+id/vToolbar"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+
+        <android.support.constraint.Guideline
+            android:id="@+id/gl_87"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.87"/>
+
+        <View
+            android:id="@+id/vReset"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintLeft_toLeftOf="@+id/gl_87"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/vToolbar"/>
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="15dp"
+            android:src="@drawable/ic_refresh_black_24dp"
+            app:layout_constraintBottom_toBottomOf="@+id/vToolbar"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+
+        <!--Age Section-->
+        <View
+            android:id="@+id/vAge"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:background="#e2e2e2"
+            app:layout_constraintTop_toTopOf="@+id/gl_08" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:text="@string/filter_foodStyleText"
+            android:textColor="#5a5a5a"
+            app:layout_constraintBottom_toBottomOf="@+id/vAge"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/vAge" />
+
+        <LinearLayout
+            android:id="@+id/llAge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="15dp"
+            app:layout_constraintTop_toBottomOf="@+id/vAge">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btKoreaFood"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_margin="3dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/round_button_mint_empty"
+                    android:text="@string/filter_foodStyleText1"
+                    android:textColor="#6fc8ce"
+                    android:textSize="13dp" />
+
+                <Button
+                    android:id="@+id/btChineseFood"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_margin="3dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/round_button_mint_empty"
+                    android:text="@string/filter_foodStyleText2"
+                    android:textColor="#6fc8ce"
+                    android:textSize="13dp" />
+
+                <Button
+                    android:id="@+id/btJapaneseFood"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_margin="3dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/round_button_mint_empty"
+                    android:text="@string/filter_foodStyleText3"
+                    android:textColor="#6fc8ce"
+                    android:textSize="13dp" />
+
+                <Button
+                    android:id="@+id/btWesternFood"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_margin="3dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/round_button_mint_empty"
+                    android:text="@string/filter_foodStyleText4"
+                    android:textColor="#6fc8ce"
+                    android:textSize="13dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btSchoolFood"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_margin="3dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/round_button_mint_empty"
+                    android:text="@string/filter_foodStyleText5"
+                    android:textColor="#6fc8ce"
+                    android:textSize="13dp" />
+
+                <!--<Button-->
+                    <!--android:id="@+id/btAgeMid30"-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_height="30dp"-->
+                    <!--android:layout_margin="3dp"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:background="@drawable/round_button_mint_empty"-->
+                    <!--android:text="@string/filter_foodStyleText6"-->
+                    <!--android:textColor="#6fc8ce"-->
+                    <!--android:textSize="13dp" />-->
+
+
+                <!--<Button-->
+                    <!--android:id="@+id/btAgeLate30"-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_height="30dp"-->
+                    <!--android:layout_margin="3dp"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:background="@drawable/round_button_mint_empty"-->
+                    <!--android:text="@string/filter_foodStyleText7"-->
+                    <!--android:textColor="#6fc8ce"-->
+                    <!--android:textSize="13dp" />-->
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_margin="3dp"
+                    android:layout_weight="1" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_margin="3dp"
+                    android:layout_weight="1" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_margin="3dp"
+                    android:layout_weight="1" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!--Style Section-->
+        <View
+            android:id="@+id/vStyle"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:background="#e2e2e2"
+            app:layout_constraintTop_toBottomOf="@+id/llAge" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:text="@string/filter_alleyText"
+            android:textColor="#5a5a5a"
+            app:layout_constraintBottom_toBottomOf="@+id/vStyle"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/vStyle" />
+
+
+        <LinearLayout
+            android:id="@+id/llStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="15dp"
+            app:layout_constraintTop_toBottomOf="@+id/vStyle">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btSamguri"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_margin="3dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/round_button_red_empty"
+                    android:text="@string/filter_alleyText1"
+                    android:textColor="#E81E61"
+                    android:textSize="13dp" />
+
+                <Button
+                    android:id="@+id/btPhilDong"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_margin="3dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/round_button_red_empty"
+                    android:text="@string/filter_alleyText2"
+                    android:textColor="#E81E61"
+                    android:textSize="13dp" />
+
+                <Button
+                    android:id="@+id/btGongDuck"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_margin="3dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/round_button_red_empty"
+                    android:text="@string/filter_alleyText3"
+                    android:textColor="#E81E61"
+                    android:textSize="13dp" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btHeaBang"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_margin="3dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/round_button_red_empty"
+                    android:text="@string/filter_alleyText4"
+                    android:textColor="#E81E61"
+                    android:textSize="13dp" />
+
+                <Button
+                    android:id="@+id/btIncheon"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_margin="3dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/round_button_red_empty"
+                    android:text="@string/filter_alleyText5"
+                    android:textColor="#E81E61"
+                    android:textSize="13dp" />
+
+
+                <Button
+                    android:id="@+id/btPobangtu"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_margin="3dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/round_button_red_empty"
+                    android:text="@string/filter_alleyText6"
+                    android:textColor="#E81E61"
+                    android:textSize="13dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btChungpa"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_margin="3dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/round_button_red_empty"
+                    android:text="@string/filter_alleyText7"
+                    android:textColor="#E81E61"
+                    android:textSize="13dp" />
+
+                <Button
+                    android:id="@+id/btHoegi"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_margin="3dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/round_button_red_empty"
+                    android:text="@string/filter_alleyText8"
+                    android:textColor="#E81E61"
+                    android:textSize="13dp" />
+
+
+                <Button
+                    android:id="@+id/btGouje"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_margin="3dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/round_button_red_empty"
+                    android:text="@string/filter_alleyText9"
+                    android:textColor="#E81E61"
+                    android:textSize="13dp" />
+
+            </LinearLayout>
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:orientation="horizontal">-->
+
+                <!--<Button-->
+                    <!--android:id="@+id/btSchoolLook"-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_height="30dp"-->
+                    <!--android:layout_margin="3dp"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:background="@drawable/round_button_red_empty"-->
+                    <!--android:text="@string/filter_alleyText10"-->
+                    <!--android:textColor="#E81E61"-->
+                    <!--android:textSize="13dp" />-->
+
+                <!--<Button-->
+                    <!--android:id="@+id/btRomantic"-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_height="30dp"-->
+                    <!--android:layout_margin="3dp"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:background="@drawable/round_button_red_empty"-->
+                    <!--android:text="@string/filter_alleyText11"-->
+                    <!--android:textColor="#E81E61"-->
+                    <!--android:textSize="13dp" />-->
+
+
+                <!--<Button-->
+                    <!--android:id="@+id/btOfficeLook"-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_height="30dp"-->
+                    <!--android:layout_margin="3dp"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:background="@drawable/round_button_red_empty"-->
+                    <!--android:text="@string/filter_alleyText12"-->
+                    <!--android:textColor="#E81E61"-->
+                    <!--android:textSize="13dp" />-->
+
+            <!--</LinearLayout>-->
+
+            <!--<LinearLayout-->
+
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:orientation="horizontal">-->
+
+                <!--<Button-->
+                    <!--android:id="@+id/btLuxury"-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_height="30dp"-->
+                    <!--android:layout_margin="3dp"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:background="@drawable/round_button_red_empty"-->
+                    <!--android:text="@string/filter_alleyText13"-->
+                    <!--android:textColor="#E81E61"-->
+                    <!--android:textSize="13dp" />-->
+
+                <!--<Button-->
+                    <!--android:id="@+id/btHollywoodStyle"-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_height="30dp"-->
+                    <!--android:layout_margin="3dp"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:background="@drawable/round_button_red_empty"-->
+                    <!--android:text="@string/filter_alleyText14"-->
+                    <!--android:textColor="#E81E61"-->
+                    <!--android:textSize="13dp" />-->
+
+
+                <!--<View-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_height="30dp"-->
+                    <!--android:layout_margin="3dp"-->
+                    <!--android:layout_weight="1" />-->
+
+            <!--</LinearLayout>-->
+
+
+        </LinearLayout>
+
+
+        <!--Bottom Button Section-->
+        <Button
+            android:id="@+id/btComplete"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="#6fc8ce"
+            android:text="@string/filter_ButtonText"
+            android:textColor="#ffffff"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/gl_90" />
+
+
+    </android.support.constraint.ConstraintLayout>
+
+</layout>

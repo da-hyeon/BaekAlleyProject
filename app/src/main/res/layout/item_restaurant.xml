@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:background="#ffffff"
+        android:padding="5dp">
+
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/clView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#ffffff">
+
+            <android.support.constraint.Guideline
+                android:id="@+id/gl_70"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.7" />
+
+            <ImageView
+                android:id="@+id/ivRestaurantImage"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="@+id/gl_70"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0"
+                tools:layout_editor_absoluteX="-58dp" />
+
+            <TextView
+                android:id="@+id/tvRestaurantRank"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="1."
+                android:textColor="#1e1e1e"
+                android:textSize="20dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/gl_70" />
+
+            <TextView
+                android:id="@+id/tvRestaurantName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="홍탁집"
+                android:textColor="#1e1e1e"
+                android:singleLine="true"
+                android:textSize="20dp"
+                app:layout_constraintLeft_toRightOf="@+id/tvRestaurantRank"
+                app:layout_constraintRight_toLeftOf="@+id/tvRestaurantStar"
+                app:layout_constraintTop_toTopOf="@+id/gl_70" />
+
+            <TextView
+                android:id="@+id/tvRestaurantAlley"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="홍은동 시장"
+                android:textColor="#c7c7c7"
+                android:textSize="12dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvRestaurantRank" />
+
+            <TextView
+                android:id="@+id/tvRestaurantNOV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_visibility_gray_24dp"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:text="106.462"
+                android:textColor="#c7c7c7"
+                android:textSize="12dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvRestaurantAlley" />
+
+            <TextView
+                android:id="@+id/tvRestaurantNOR"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_mode_edit_gray_24dp"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:text="49"
+                android:textColor="#c7c7c7"
+                android:textSize="12dp"
+                android:layout_marginLeft="10dp"
+                app:layout_constraintLeft_toRightOf="@+id/tvRestaurantNOV"
+                app:layout_constraintTop_toBottomOf="@+id/tvRestaurantAlley" />
+
+            <TextView
+                android:id="@+id/tvRestaurantStar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="4.8"
+                android:textColor="#e8b500"
+                android:textSize="30dp"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/gl_70" />
+
+
+        </android.support.constraint.ConstraintLayout>
+
+    </LinearLayout>
+</layout>
