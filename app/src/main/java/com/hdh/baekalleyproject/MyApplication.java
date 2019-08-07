@@ -3,7 +3,9 @@ package com.hdh.baekalleyproject;
 import android.app.Activity;
 import android.app.Application;
 
+import com.hdh.baekalleyproject.adapter.KakaoSDKAdapter;
 import com.hdh.baekalleyproject.data.util.ServerAPI;
+import com.kakao.auth.KakaoSDK;
 
 import java.net.CookieManager;
 import java.net.CookiePolicy;
@@ -42,6 +44,7 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         appInstance = this;
+        KakaoSDK.init(new KakaoSDKAdapter());
     }
 
     /**
