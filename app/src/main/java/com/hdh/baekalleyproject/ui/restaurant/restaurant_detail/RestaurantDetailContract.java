@@ -1,15 +1,12 @@
-package com.hdh.baekalleyproject.ui.restaurant;
+package com.hdh.baekalleyproject.ui.restaurant.restaurant_detail;
 
 import android.support.v7.widget.RecyclerView;
 
-public interface RestaurantContract {
+public interface RestaurantDetailContract {
     interface View{
 
     }
     interface Presenter{
         void setView(RecyclerView recyclerView);
-
-        void clickFilter();
-        void clickSearch();
     }
 }

@@ -2,6 +2,7 @@ package com.hdh.baekalleyproject.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.hdh.baekalleyproject.data.model.Restaurant;
 import com.hdh.baekalleyproject.databinding.ItemRestaurantBinding;
+import com.hdh.baekalleyproject.ui.restaurant.restaurant_detail.RestaurantDetailActivity;
 
 import java.util.ArrayList;
 
@@ -50,6 +52,10 @@ public class RestaurantListAdapter extends RecyclerView.Adapter<RestaurantListAd
         holder.binding.tvRestaurantName.setText(" "+mRestaurantList.get(position).getRestaurantName());
         //holder.binding.tvRestaurantAlley.setText(mRestaurantList.get(position).getRestaurantTime());
 //        holder.binding.tvRestaurantRepFood.setText(mRestaurantList.get(position).getRestaurantRepFood());
+        holder.binding.llRestaurant.setOnClickListener(v1->{
+            Intent intent = new Intent(mContext , RestaurantDetailActivity.class);
+            mContext.startActivity(intent);
+        });
     }
 
     @Override

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="loginActivity"
+            type="com.hdh.baekalleyproject.ui.login.LoginActivity" />
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_login">
+
+        <ImageView
+            android:id="@+id/ivLogo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginTop="110.5dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/logo_main"/>
+
+        <Button
+            android:id="@+id/btKakao"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:background="@drawable/round_fdd101"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            app:layout_constraintTop_toBottomOf="@+id/ivLogo"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginTop="105.8dp"
+            android:fontFamily="@font/notosans"
+            android:includeFontPadding="false"
+            android:textSize="16dp"
+            android:paddingLeft="50dp"
+            android:textColor="#381e1f"
+            android:drawableLeft="@drawable/icon_kakao"
+            android:drawablePadding="-20dp"
+            android:text="카카오톡으로 로그인"/>
+        
+        <View
+            android:id="@+id/vLine"
+            android:layout_width="90dp"
+            android:layout_height="1dp"
+            android:background="#f5f5f5"
+            app:layout_constraintTop_toBottomOf="@+id/btKakao"
+            android:layout_marginTop="35.5dp"
+            android:layout_marginLeft="10dp"
+            app:layout_constraintLeft_toLeftOf="@+id/btKakao"/>
+
+        <TextView
+            android:id="@+id/tvOR"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="or"
+            android:textSize="20dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/vLine"
+            app:layout_constraintBottom_toBottomOf="@+id/vLine"
+            android:fontFamily="@font/notosans"
+            android:includeFontPadding="false"
+            android:textColor="#dddddd"
+            android:lineSpacingExtra="9.7dp"/>
+
+        <View
+            android:layout_width="90dp"
+            android:layout_height="1dp"
+            android:background="#f5f5f5"
+            app:layout_constraintTop_toBottomOf="@+id/btKakao"
+            android:layout_marginTop="35.5dp"
+            android:layout_marginRight="10dp"
+            app:layout_constraintRight_toRightOf="@+id/btKakao"/>
+
+        <Button
+            android:id="@+id/btEmail"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:background="@drawable/round_f5f5f5"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            app:layout_constraintTop_toBottomOf="@+id/tvOR"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginTop="27.7dp"
+            android:fontFamily="@font/notosans"
+            android:includeFontPadding="false"
+            android:textSize="16dp"
+            android:paddingLeft="50dp"
+            android:textColor="#333333"
+            android:drawableLeft="@drawable/icon_email"
+            android:drawablePadding="-30dp"
+            android:text="이메일로 로그인"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/notosans"
+            android:includeFontPadding="false"
+            android:text="로그인 없이 둘러보기"
+            android:textColor="#f5f5f5"
+            android:textSize="12dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btEmail"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

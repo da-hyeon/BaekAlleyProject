@@ -1,6 +1,7 @@
 package com.hdh.baekalleyproject.ui.restaurant;
 
 
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.hdh.baekalleyproject.R;
+import com.hdh.baekalleyproject.databinding.FragmentRestaurantBinding;
 import com.hdh.baekalleyproject.ui.base.fragment.BaseFragment;
 
 /**
@@ -16,7 +18,7 @@ import com.hdh.baekalleyproject.ui.base.fragment.BaseFragment;
 public class RestaurantFragment extends BaseFragment implements RestaurantContract.View{
 
     private RestaurantContract.Presenter mPresenter;
-
+    private FragmentRestaurantBinding mBinding;
 
     public RestaurantFragment() {
         // Required empty public constructor
@@ -27,7 +29,25 @@ public class RestaurantFragment extends BaseFragment implements RestaurantContra
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_restaurant, container, false);
+        mBinding = DataBindingUtil.inflate(inflater , R.layout.fragment_restaurant, container, false);
+        mPresenter = new RestaurantPresenter(this, getContext());
+
+        initData();
+
+        mBinding.btFilter.setOnClickListener(v->
+                mPresenter.clickFilter()
+        );
+
+        return mBinding.getRoot();
     }
 
+    private void initData(){
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mPresenter.setView(mBinding.rvRestaurantList);
+    }
 }
