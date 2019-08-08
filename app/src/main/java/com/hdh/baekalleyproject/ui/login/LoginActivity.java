@@ -2,6 +2,7 @@ package com.hdh.baekalleyproject.ui.login;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.view.WindowManager;
 
 import com.hdh.baekalleyproject.MyApplication;
 import com.hdh.baekalleyproject.R;
@@ -20,6 +21,8 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
         mBinding.setLoginActivity(this);
         mPresenter = new LoginPresenter(this, this, this);
         MyApplication.getInstance().setActivity(this);
+
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         initData();
 
         mBinding.btKakao.setOnClickListener(v->{

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/img_tab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:scaleType="fitCenter"
+        android:tint="@color/selector_click_tab"
+        tools:src="@drawable/button_my_info" />
+
+    <TextView
+        android:id="@+id/txt_tab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:fontFamily="@font/notosans"
+        android:includeFontPadding="false"
+        android:textColor="@color/selector_click_tab"
+        android:textIsSelectable="true"
+        android:textSize="10dp"
+        android:letterSpacing="-0.01"
+        android:lineSpacingExtra="5sp"
+        tools:text="식당찾기" />
+</LinearLayout>

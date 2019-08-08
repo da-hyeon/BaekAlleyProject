@@ -2,13 +2,20 @@ package com.hdh.baekalleyproject.ui.restaurant;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
 import com.hdh.baekalleyproject.MyApplication;
+import com.hdh.baekalleyproject.adapter.EventImageSliderAdapter;
 import com.hdh.baekalleyproject.adapter.RestaurantListAdapter;
+import com.hdh.baekalleyproject.data.model.Event;
 import com.hdh.baekalleyproject.data.model.RestaurantList;
+
+import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -18,15 +25,20 @@ public class RestaurantPresenter implements RestaurantContract.Presenter{
 
     private RestaurantContract.View mView;
     private Context mContext;
+    private FragmentManager mFragmentManager;
 
-    RestaurantPresenter(RestaurantContract.View mView, Context mContext) {
+    private EventImageSliderAdapter mEventImageSliderAdapter;
+
+    RestaurantPresenter(RestaurantContract.View mView, Context mContext , FragmentManager mFragmentManager) {
         this.mView = mView;
         this.mContext = mContext;
+        this.mFragmentManager = mFragmentManager;
+        mEventImageSliderAdapter = new EventImageSliderAdapter(mContext , mFragmentManager);
     }
 
 
     @Override
-    public void setView(final RecyclerView recyclerView) {
+    public void setView(final RecyclerView recyclerView , ViewPager viewPager, TabLayout tabLayout) {
 
         Call<RestaurantList> eventOnGoingList = MyApplication
                 .getRestAdapter()
@@ -44,10 +56,6 @@ public class RestaurantPresenter implements RestaurantContract.Presenter{
                         recyclerView.setLayoutManager(mGridLayoutManager);
                         recyclerView.setAdapter(new RestaurantListAdapter( restaurantList.getRestaurantList() , mContext));
 
-//                        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(), mGridLayoutManager.getOrientation());
-//                        recyclerView.addItemDecoration(dividerItemDecoration);
-
-
                     } else {
                         //mView.showFailDialog("실패" , "데이터 로딩 실패");
                         Log.d("실패", "데이터 로딩 실패");
@@ -61,6 +69,16 @@ public class RestaurantPresenter implements RestaurantContract.Presenter{
                 Log.d("error" , t.getLocalizedMessage());
             }
         });
+
+        ArrayList<Event> eventArrayList = new ArrayList<>();
+        eventArrayList.add(new Event("http://leehwangco.cafe24.com/resources/shopImg/mainbanner_1.png"));
+        eventArrayList.add(new Event("http://leehwangco.cafe24.com/resources/shopImg/mainbanner_1.png"));
+        eventArrayList.add(new Event("http://leehwangco.cafe24.com/resources/shopImg/mainbanner_1.png"));
+        eventArrayList.add(new Event("http://leehwangco.cafe24.com/resources/shopImg/mainbanner_1.png"));
+
+        mEventImageSliderAdapter.setmEventArrayList(eventArrayList);
+        viewPager.setAdapter(mEventImageSliderAdapter);
+        tabLayout.setupWithViewPager(viewPager , true);
 
     }
 

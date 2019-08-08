@@ -15,6 +15,7 @@ public class SessionCallBack implements ISessionCallback {
     @Override
     public void onSessionOpened() {
 
+        //사용자정보 요청 결과에 대한 Callback
         UserManagement.getInstance().me(new MeV2ResponseCallback() {
 
             @Override
@@ -38,14 +39,14 @@ public class SessionCallBack implements ISessionCallback {
             public void onSuccess(MeV2Response result) {
                 Log.e(TAG, "requestMe onSuccess message : " + result.getKakaoAccount().getEmail() + " " + result.getId() + " " + result.getNickname() + " " + result.getProfileImagePath() + " " + result.getThumbnailImagePath());
             }
-
         });
-
     }
+
     // 세션 실패시
     @Override
     public void onSessionOpenFailed(KakaoException exception) {
-
-
+        Log.e(TAG, "onSessionOpenFailed : " + exception.getMessage());
     }
+
+
 }

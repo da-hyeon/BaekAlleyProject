@@ -3,6 +3,8 @@ package com.hdh.baekalleyproject.adapter;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -40,6 +42,7 @@ public class RestaurantListAdapter extends RecyclerView.Adapter<RestaurantListAd
         return new RestaurantListViewHolder(ItemRestaurantBinding.inflate(LayoutInflater.from(parent.getContext()) , parent , false));
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(RestaurantListViewHolder holder, int position) {
@@ -47,6 +50,7 @@ public class RestaurantListAdapter extends RecyclerView.Adapter<RestaurantListAd
                 .load(mRestaurantList.get(position).getRestaurantImageURL())
                 .apply(new RequestOptions().centerCrop())
                 .into(holder.binding.ivRestaurantImage);
+        holder.binding.ivRestaurantImage.setClipToOutline(true);
 
         holder.binding.tvRestaurantRank.setText((position + 1) + ".");
         holder.binding.tvRestaurantName.setText(" "+mRestaurantList.get(position).getRestaurantName());
@@ -56,6 +60,8 @@ public class RestaurantListAdapter extends RecyclerView.Adapter<RestaurantListAd
             Intent intent = new Intent(mContext , RestaurantDetailActivity.class);
             mContext.startActivity(intent);
         });
+
+
     }
 
     @Override

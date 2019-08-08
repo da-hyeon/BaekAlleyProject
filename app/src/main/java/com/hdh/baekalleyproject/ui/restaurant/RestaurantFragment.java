@@ -30,7 +30,7 @@ public class RestaurantFragment extends BaseFragment implements RestaurantContra
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         mBinding = DataBindingUtil.inflate(inflater , R.layout.fragment_restaurant, container, false);
-        mPresenter = new RestaurantPresenter(this, getContext());
+        mPresenter = new RestaurantPresenter(this, getContext() , getFragmentManager());
 
         initData();
 
@@ -48,6 +48,6 @@ public class RestaurantFragment extends BaseFragment implements RestaurantContra
     @Override
     public void onResume() {
         super.onResume();
-        mPresenter.setView(mBinding.rvRestaurantList);
+        mPresenter.setView(mBinding.rvRestaurantList , mBinding.vpEvent , mBinding.tlDots);
     }
 }

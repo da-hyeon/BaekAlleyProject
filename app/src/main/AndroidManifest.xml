@@ -22,7 +22,8 @@
             android:value="@string/kakao_app_key" />
 
         <activity
-            android:name=".ui.login.LoginActivity"
+            android:name=".ui.main.MainActivity"
+
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
             android:exported="true"
             android:launchMode="singleTop"
@@ -43,12 +44,13 @@
         </activity>
 
         <activity
-            android:name=".ui.main.MainActivity"
+            android:name=".ui.login.LoginActivity"
+
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
             android:exported="true"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.FullScreen.Transparent"
+            android:theme="@style/AppTheme.FullScreen.Transparent_Login"
             android:windowSoftInputMode="adjustResize"
             tools:replace="screenOrientation" />
 
