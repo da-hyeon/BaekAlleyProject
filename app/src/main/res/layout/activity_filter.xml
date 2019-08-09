@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
 
     <data>
 
@@ -8,19 +10,11 @@
             type="com.hdh.baekalleyproject.ui.filter.FilterActivity" />
     </data>
 
-    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#f0f0f0">
+        android:background="#ffffff">
 
-
-        <android.support.constraint.Guideline
-            android:id="@+id/gl_08"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.08" />
 
         <android.support.constraint.Guideline
             android:id="@+id/gl_90"
@@ -33,9 +27,8 @@
         <View
             android:id="@+id/vToolbar"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:background="#ffffff"
-            app:layout_constraintBottom_toTopOf="@+id/gl_08"
+            android:layout_height="40dp"
+            android:background="#eeeeee"
             app:layout_constraintTop_toTopOf="parent" />
 
         <android.support.constraint.Guideline
@@ -43,23 +36,29 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.13"/>
+            app:layout_constraintGuide_percent="0.13" />
 
         <View
             android:id="@+id/vDismiss"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="@+id/vToolbar"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="@+id/gl_13"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="@+id/vToolbar"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
 
-        <ImageView
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
-            android:src="@drawable/ic_close_black_24dp"
+            android:fontFamily="@font/notosans"
+            android:includeFontPadding="false"
+            android:letterSpacing="-0.02"
+            android:lineSpacingExtra="7sp"
+            android:textSize="15dp"
+            android:text="@string/filter_dismissText"
+            android:textColor="#666666"
             app:layout_constraintBottom_toBottomOf="@+id/vToolbar"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -67,429 +66,582 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/notosans"
+            android:includeFontPadding="false"
+            android:lineSpacingExtra="7sp"
             android:text="@string/filter_mainText"
-            android:textColor="#000000"
-            android:textSize="20dp"
+            android:textColor="#222222"
+            android:textSize="15dp"
             app:layout_constraintBottom_toBottomOf="@+id/vToolbar"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
 
-
         <android.support.constraint.Guideline
-            android:id="@+id/gl_87"
+            android:id="@+id/gl_8"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.87"/>
+            app:layout_constraintGuide_percent="0.8" />
 
         <View
             android:id="@+id/vReset"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_constraintLeft_toLeftOf="@+id/gl_87"
+            app:layout_constraintBottom_toBottomOf="@+id/vToolbar"
+            app:layout_constraintLeft_toLeftOf="@+id/gl_8"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="@+id/vToolbar"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
 
-        <ImageView
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="15dp"
-            android:src="@drawable/ic_refresh_black_24dp"
+            android:layout_marginRight="12dp"
+            android:fontFamily="@font/notosans"
+            android:includeFontPadding="false"
+            android:lineSpacingExtra="6sp"
+            android:text="@string/filter_refreshText"
+            android:textColor="#666666"
+            android:textSize="12dp"
             app:layout_constraintBottom_toBottomOf="@+id/vToolbar"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
 
-
-        <!--Age Section-->
-        <View
-            android:id="@+id/vAge"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:background="#e2e2e2"
-            app:layout_constraintTop_toTopOf="@+id/gl_08" />
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/btComplete"
+            app:layout_constraintTop_toBottomOf="@+id/vToolbar">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:text="@string/filter_foodStyleText"
-            android:textColor="#5a5a5a"
-            app:layout_constraintBottom_toBottomOf="@+id/vAge"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/vAge" />
-
-        <LinearLayout
-            android:id="@+id/llAge"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="15dp"
-            app:layout_constraintTop_toBottomOf="@+id/vAge">
-
-            <LinearLayout
+            <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
-                <Button
-                    android:id="@+id/btKoreaFood"
-                    android:layout_width="0dp"
-                    android:layout_height="30dp"
-                    android:layout_margin="3dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/round_button_mint_empty"
-                    android:text="@string/filter_foodStyleText1"
-                    android:textColor="#6fc8ce"
-                    android:textSize="13dp" />
+                <!--골목 섹션-->
+                <TextView
+                    android:id="@+id/tvAlley"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/dohyeon"
+                    android:includeFontPadding="false"
+                    android:text="@string/filter_alleyText"
+                    android:textColor="#222222"
+                    android:textSize="16dp"
+                    android:letterSpacing="-0.02"
+                    android:lineSpacingExtra="3.3sp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-                <Button
-                    android:id="@+id/btChineseFood"
-                    android:layout_width="0dp"
-                    android:layout_height="30dp"
-                    android:layout_margin="3dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/round_button_mint_empty"
-                    android:text="@string/filter_foodStyleText2"
-                    android:textColor="#6fc8ce"
-                    android:textSize="13dp" />
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rvAlley"
+                    android:layout_width="match_parent"
+                    android:layout_height="91.3dp"
+                    android:paddingLeft="16dp"
+                    android:layout_marginTop="20dp"
+                    app:layout_constraintTop_toBottomOf="@+id/tvAlley" />
 
-                <Button
-                    android:id="@+id/btJapaneseFood"
-                    android:layout_width="0dp"
-                    android:layout_height="30dp"
-                    android:layout_margin="3dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/round_button_mint_empty"
-                    android:text="@string/filter_foodStyleText3"
-                    android:textColor="#6fc8ce"
-                    android:textSize="13dp" />
-
-                <Button
-                    android:id="@+id/btWesternFood"
-                    android:layout_width="0dp"
-                    android:layout_height="30dp"
-                    android:layout_margin="3dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/round_button_mint_empty"
-                    android:text="@string/filter_foodStyleText4"
-                    android:textColor="#6fc8ce"
-                    android:textSize="13dp" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/btSchoolFood"
-                    android:layout_width="0dp"
-                    android:layout_height="30dp"
-                    android:layout_margin="3dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/round_button_mint_empty"
-                    android:text="@string/filter_foodStyleText5"
-                    android:textColor="#6fc8ce"
-                    android:textSize="13dp" />
-
-                <!--<Button-->
-                    <!--android:id="@+id/btAgeMid30"-->
-                    <!--android:layout_width="0dp"-->
-                    <!--android:layout_height="30dp"-->
-                    <!--android:layout_margin="3dp"-->
-                    <!--android:layout_weight="1"-->
-                    <!--android:background="@drawable/round_button_mint_empty"-->
-                    <!--android:text="@string/filter_foodStyleText6"-->
-                    <!--android:textColor="#6fc8ce"-->
-                    <!--android:textSize="13dp" />-->
-
-
-                <!--<Button-->
-                    <!--android:id="@+id/btAgeLate30"-->
-                    <!--android:layout_width="0dp"-->
-                    <!--android:layout_height="30dp"-->
-                    <!--android:layout_margin="3dp"-->
-                    <!--android:layout_weight="1"-->
-                    <!--android:background="@drawable/round_button_mint_empty"-->
-                    <!--android:text="@string/filter_foodStyleText7"-->
-                    <!--android:textColor="#6fc8ce"-->
-                    <!--android:textSize="13dp" />-->
+                <!--음식종류 섹션-->
 
                 <View
-                    android:layout_width="0dp"
-                    android:layout_height="30dp"
-                    android:layout_margin="3dp"
-                    android:layout_weight="1" />
+                    android:id="@+id/vAlleyLine"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.33dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="20.5dp"
+                    android:layout_marginRight="16dp"
+                    android:background="#eeeeee"
+                    app:layout_constraintTop_toBottomOf="@+id/rvAlley" />
+
+
+                <TextView
+                    android:id="@+id/tvFoodType"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/dohyeon"
+                    android:includeFontPadding="false"
+                    android:text="@string/filter_foodTypeText"
+                    android:textColor="#222222"
+                    android:letterSpacing="-0.02"
+                    android:lineSpacingExtra="3.3sp"
+                    android:textSize="16dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/vAlleyLine" />
+
+                <!-- row 1 -->
+
+                <LinearLayout
+                    android:id="@+id/llFoodRow1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    app:layout_constraintTop_toBottomOf="@+id/tvFoodType"
+                    android:baselineAligned="false">
+
+
+                    <FrameLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <View
+                            android:id="@+id/vKoreanFood"
+                            android:layout_width="67dp"
+                            android:layout_height="67dp"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="13dp"
+                            android:background="@drawable/round_stroke_bbbbbb" />
+
+                        <ImageView
+                            android:id="@+id/ivKoreanFood"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="13dp"
+                            android:src="@drawable/icon_koreanfood"
+                            android:contentDescription="@string/filter_foodStyleText1" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <View
+                            android:id="@+id/vChineseFood"
+                            android:layout_width="67dp"
+                            android:layout_height="67dp"
+                            android:layout_gravity="center"
+                            android:background="@drawable/round_stroke_bbbbbb" />
+
+                        <ImageView
+                            android:id="@+id/ivChineseFood"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:src="@drawable/icon_chinesefood"
+                            android:contentDescription="@string/filter_foodStyleText2" />
+                    </FrameLayout>
+
+
+                    <FrameLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <View
+                            android:id="@+id/vJapaneseFood"
+                            android:layout_width="67dp"
+                            android:layout_height="67dp"
+                            android:layout_gravity="center"
+                            android:layout_marginRight="13dp"
+                            android:background="@drawable/round_stroke_bbbbbb" />
+
+                        <ImageView
+                            android:id="@+id/ivJapaneseFood"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginRight="13dp"
+                            android:src="@drawable/icon_japanesefood"
+                            android:contentDescription="@string/filter_foodStyleText3" />
+                    </FrameLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/llFoodTextRow1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@+id/llFoodRow1">
+
+                    <TextView
+                        android:id="@+id/tvKoreanFood"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/notosans"
+                        android:gravity="center"
+                        android:includeFontPadding="false"
+                        android:layout_marginLeft="19.5dp"
+                        android:letterSpacing="-0.02"
+                        android:lineSpacingExtra="5sp"
+                        android:text="@string/filter_foodStyleText1"
+                        android:textColor="#999999"
+                        android:textSize="14dp" />
+
+                    <TextView
+                        android:id="@+id/tvChineseFood"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/filter_foodStyleText2"
+                        android:fontFamily="@font/notosans"
+                        android:includeFontPadding="false"
+                        android:letterSpacing="-0.02"
+                        android:lineSpacingExtra="5sp"
+                        android:textColor="#999999"
+                        android:textSize="14dp" />
+
+                    <TextView
+                        android:id="@+id/tvJapaneseFood"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/filter_foodStyleText3"
+                        android:fontFamily="@font/notosans"
+                        android:layout_marginRight="19.5dp"
+                        android:includeFontPadding="false"
+                        android:letterSpacing="-0.02"
+                        android:lineSpacingExtra="5sp"
+                        android:textColor="#999999"
+                        android:textSize="14dp" />
+                </LinearLayout>
+
+
+
+                <!-- row 2 -->
+
+                <LinearLayout
+                    android:id="@+id/llFoodRow2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    app:layout_constraintTop_toBottomOf="@+id/llFoodTextRow1"
+                    android:baselineAligned="false">
+
+
+                    <FrameLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <View
+                            android:id="@+id/vWesternFood"
+                            android:layout_width="67dp"
+                            android:layout_height="67dp"
+                            android:layout_marginLeft="13dp"
+                            android:layout_gravity="center"
+                            android:background="@drawable/round_stroke_bbbbbb" />
+
+                        <ImageView
+                            android:id="@+id/ivWesternFood"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="13dp"
+                            android:src="@drawable/icon_englishfood"
+                            android:contentDescription="@string/filter_foodStyleText4" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <View
+                            android:id="@+id/vSnackFood"
+                            android:layout_width="67dp"
+                            android:layout_height="67dp"
+                            android:layout_gravity="center"
+                            android:background="@drawable/round_stroke_bbbbbb" />
+
+                        <ImageView
+                            android:id="@+id/ivSnackFood"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:src="@drawable/icon_snack"
+                            android:contentDescription="@string/filter_foodStyleText5" />
+                    </FrameLayout>
+
+
+                    <FrameLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <View
+                            android:id="@+id/vEtcFood"
+                            android:layout_width="67dp"
+                            android:layout_marginRight="13dp"
+                            android:layout_height="67dp"
+                            android:layout_gravity="center"
+                            android:background="@drawable/round_stroke_bbbbbb" />
+
+                        <ImageView
+                            android:id="@+id/ivEtcFood"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginRight="13dp"
+                            android:src="@drawable/icon_etcfood"
+                            android:contentDescription="@string/filter_foodStyleText6" />
+                    </FrameLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/llFoodTextRow2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@+id/llFoodRow2">
+
+                    <TextView
+                        android:id="@+id/tvWesternFood"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/notosans"
+                        android:gravity="center"
+                        android:includeFontPadding="false"
+                        android:letterSpacing="-0.02"
+                        android:layout_marginLeft="19.5dp"
+                        android:lineSpacingExtra="5sp"
+                        android:text="@string/filter_foodStyleText4"
+                        android:textColor="#999999"
+                        android:textSize="14dp" />
+
+                    <TextView
+                        android:id="@+id/tvSnackFood"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/filter_foodStyleText5"
+                        android:fontFamily="@font/notosans"
+                        android:includeFontPadding="false"
+                        android:letterSpacing="-0.02"
+                        android:lineSpacingExtra="5sp"
+                        android:textColor="#999999"
+                        android:textSize="14dp" />
+
+                    <TextView
+                        android:id="@+id/tvEtcFood"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:layout_marginRight="19.5dp"
+                        android:text="@string/filter_foodStyleText6"
+                        android:fontFamily="@font/notosans"
+                        android:includeFontPadding="false"
+                        android:letterSpacing="-0.02"
+                        android:lineSpacingExtra="5sp"
+                        android:textColor="#999999"
+                        android:textSize="14dp" />
+                </LinearLayout>
+
+                <!--가격대 섹션-->
 
                 <View
-                    android:layout_width="0dp"
-                    android:layout_height="30dp"
-                    android:layout_margin="3dp"
-                    android:layout_weight="1" />
+                    android:id="@+id/vPrice"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.33dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="20.5dp"
+                    android:layout_marginRight="16dp"
+                    android:background="#eeeeee"
+                    app:layout_constraintTop_toBottomOf="@+id/llFoodTextRow2" />
 
+
+
+                <TextView
+                    android:id="@+id/tvPriceType"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/dohyeon"
+                    android:includeFontPadding="false"
+                    android:text="@string/filter_priceTypeText"
+                    android:textColor="#222222"
+                    android:textSize="16dp"
+                    android:letterSpacing="-0.02"
+                    android:lineSpacingExtra="3.3sp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/vPrice" />
+
+                <LinearLayout
+                    android:id="@+id/llPriceRow"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:gravity="center"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintTop_toBottomOf="@+id/tvPriceType"
+                    android:baselineAligned="false">
+
+
+                    <FrameLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <View
+                            android:id="@+id/vBelow10000"
+                            android:layout_width="67dp"
+                            android:layout_height="67dp"
+                            android:layout_gravity="center"
+                            android:background="@drawable/circle_shape_bbbbbb" />
+
+                        <ImageView
+                            android:id="@+id/ivBelow10000"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="9dp"
+                            android:src="@drawable/icon_below_10000" />
+                        <TextView
+                            android:id="@+id/tvBelow10000"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="만원이하"
+                            android:textSize="12dp"
+                            android:layout_gravity="center_horizontal"
+                            android:fontFamily="@font/notosans"
+                            android:includeFontPadding="false"
+                            android:layout_marginTop="40.7dp"
+                            android:textColor="#666666"/>
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <View
+                            android:id="@+id/vAbove10000"
+                            android:layout_width="67dp"
+                            android:layout_height="67dp"
+                            android:layout_gravity="center"
+                            android:background="@drawable/circle_shape_bbbbbb" />
+
+                        <ImageView
+                            android:id="@+id/ivAbove10000"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:src="@drawable/icon_above_10000" />
+                        <TextView
+                            android:id="@+id/tvAbove10000"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="1만원 대"
+                            android:textSize="12dp"
+                            android:layout_gravity="center_horizontal"
+                            android:fontFamily="@font/notosans"
+                            android:includeFontPadding="false"
+                            android:layout_marginTop="40.7dp"
+                            android:textColor="#666666"/>
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <View
+                            android:id="@+id/vAbove20000"
+                            android:layout_width="67dp"
+                            android:layout_height="67dp"
+                            android:layout_gravity="center"
+                            android:background="@drawable/circle_shape_bbbbbb" />
+
+                        <ImageView
+                            android:id="@+id/ivAbove20000"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="23dp"
+                            android:src="@drawable/icon_above_20000" />
+                        <TextView
+                            android:id="@+id/tvAbove20000"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="2만원 대"
+                            android:textSize="12dp"
+                            android:layout_gravity="center_horizontal"
+                            android:fontFamily="@font/notosans"
+                            android:includeFontPadding="false"
+                            android:layout_marginTop="40.7dp"
+                            android:textColor="#666666"/>
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <View
+                            android:id="@+id/vAbove30000"
+                            android:layout_width="67dp"
+                            android:layout_height="67dp"
+                            android:layout_gravity="center"
+                            android:background="@drawable/circle_shape_bbbbbb" />
+
+                        <ImageView
+                            android:id="@+id/ivAbove30000"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="16dp"
+                            android:src="@drawable/icon_above_30000" />
+                        <TextView
+                            android:id="@+id/tvAbove30000"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="3만원 ~"
+                            android:textSize="12dp"
+                            android:layout_gravity="center_horizontal"
+                            android:fontFamily="@font/notosans"
+                            android:includeFontPadding="false"
+                            android:layout_marginTop="40.7dp"
+                            android:textColor="#666666"/>
+                    </FrameLayout>
+                </LinearLayout>
                 <View
-                    android:layout_width="0dp"
-                    android:layout_height="30dp"
-                    android:layout_margin="3dp"
-                    android:layout_weight="1" />
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <!--Style Section-->
-        <View
-            android:id="@+id/vStyle"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:background="#e2e2e2"
-            app:layout_constraintTop_toBottomOf="@+id/llAge" />
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    app:layout_constraintTop_toBottomOf="@+id/llPriceRow"/>
+            </android.support.constraint.ConstraintLayout>
 
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:text="@string/filter_alleyText"
-            android:textColor="#5a5a5a"
-            app:layout_constraintBottom_toBottomOf="@+id/vStyle"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/vStyle" />
-
-
-        <LinearLayout
-            android:id="@+id/llStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="15dp"
-            app:layout_constraintTop_toBottomOf="@+id/vStyle">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/btSamguri"
-                    android:layout_width="0dp"
-                    android:layout_height="30dp"
-                    android:layout_margin="3dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/round_button_red_empty"
-                    android:text="@string/filter_alleyText1"
-                    android:textColor="#E81E61"
-                    android:textSize="13dp" />
-
-                <Button
-                    android:id="@+id/btPhilDong"
-                    android:layout_width="0dp"
-                    android:layout_height="30dp"
-                    android:layout_margin="3dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/round_button_red_empty"
-                    android:text="@string/filter_alleyText2"
-                    android:textColor="#E81E61"
-                    android:textSize="13dp" />
-
-                <Button
-                    android:id="@+id/btGongDuck"
-                    android:layout_width="0dp"
-                    android:layout_height="30dp"
-                    android:layout_margin="3dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/round_button_red_empty"
-                    android:text="@string/filter_alleyText3"
-                    android:textColor="#E81E61"
-                    android:textSize="13dp" />
-
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/btHeaBang"
-                    android:layout_width="0dp"
-                    android:layout_height="30dp"
-                    android:layout_margin="3dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/round_button_red_empty"
-                    android:text="@string/filter_alleyText4"
-                    android:textColor="#E81E61"
-                    android:textSize="13dp" />
-
-                <Button
-                    android:id="@+id/btIncheon"
-                    android:layout_width="0dp"
-                    android:layout_height="30dp"
-                    android:layout_margin="3dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/round_button_red_empty"
-                    android:text="@string/filter_alleyText5"
-                    android:textColor="#E81E61"
-                    android:textSize="13dp" />
-
-
-                <Button
-                    android:id="@+id/btPobangtu"
-                    android:layout_width="0dp"
-                    android:layout_height="30dp"
-                    android:layout_margin="3dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/round_button_red_empty"
-                    android:text="@string/filter_alleyText6"
-                    android:textColor="#E81E61"
-                    android:textSize="13dp" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/btChungpa"
-                    android:layout_width="0dp"
-                    android:layout_height="30dp"
-                    android:layout_margin="3dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/round_button_red_empty"
-                    android:text="@string/filter_alleyText7"
-                    android:textColor="#E81E61"
-                    android:textSize="13dp" />
-
-                <Button
-                    android:id="@+id/btHoegi"
-                    android:layout_width="0dp"
-                    android:layout_height="30dp"
-                    android:layout_margin="3dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/round_button_red_empty"
-                    android:text="@string/filter_alleyText8"
-                    android:textColor="#E81E61"
-                    android:textSize="13dp" />
-
-
-                <Button
-                    android:id="@+id/btGouje"
-                    android:layout_width="0dp"
-                    android:layout_height="30dp"
-                    android:layout_margin="3dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/round_button_red_empty"
-                    android:text="@string/filter_alleyText9"
-                    android:textColor="#E81E61"
-                    android:textSize="13dp" />
-
-            </LinearLayout>
-
-            <!--<LinearLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:orientation="horizontal">-->
-
-                <!--<Button-->
-                    <!--android:id="@+id/btSchoolLook"-->
-                    <!--android:layout_width="0dp"-->
-                    <!--android:layout_height="30dp"-->
-                    <!--android:layout_margin="3dp"-->
-                    <!--android:layout_weight="1"-->
-                    <!--android:background="@drawable/round_button_red_empty"-->
-                    <!--android:text="@string/filter_alleyText10"-->
-                    <!--android:textColor="#E81E61"-->
-                    <!--android:textSize="13dp" />-->
-
-                <!--<Button-->
-                    <!--android:id="@+id/btRomantic"-->
-                    <!--android:layout_width="0dp"-->
-                    <!--android:layout_height="30dp"-->
-                    <!--android:layout_margin="3dp"-->
-                    <!--android:layout_weight="1"-->
-                    <!--android:background="@drawable/round_button_red_empty"-->
-                    <!--android:text="@string/filter_alleyText11"-->
-                    <!--android:textColor="#E81E61"-->
-                    <!--android:textSize="13dp" />-->
-
-
-                <!--<Button-->
-                    <!--android:id="@+id/btOfficeLook"-->
-                    <!--android:layout_width="0dp"-->
-                    <!--android:layout_height="30dp"-->
-                    <!--android:layout_margin="3dp"-->
-                    <!--android:layout_weight="1"-->
-                    <!--android:background="@drawable/round_button_red_empty"-->
-                    <!--android:text="@string/filter_alleyText12"-->
-                    <!--android:textColor="#E81E61"-->
-                    <!--android:textSize="13dp" />-->
-
-            <!--</LinearLayout>-->
-
-            <!--<LinearLayout-->
-
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:orientation="horizontal">-->
-
-                <!--<Button-->
-                    <!--android:id="@+id/btLuxury"-->
-                    <!--android:layout_width="0dp"-->
-                    <!--android:layout_height="30dp"-->
-                    <!--android:layout_margin="3dp"-->
-                    <!--android:layout_weight="1"-->
-                    <!--android:background="@drawable/round_button_red_empty"-->
-                    <!--android:text="@string/filter_alleyText13"-->
-                    <!--android:textColor="#E81E61"-->
-                    <!--android:textSize="13dp" />-->
-
-                <!--<Button-->
-                    <!--android:id="@+id/btHollywoodStyle"-->
-                    <!--android:layout_width="0dp"-->
-                    <!--android:layout_height="30dp"-->
-                    <!--android:layout_margin="3dp"-->
-                    <!--android:layout_weight="1"-->
-                    <!--android:background="@drawable/round_button_red_empty"-->
-                    <!--android:text="@string/filter_alleyText14"-->
-                    <!--android:textColor="#E81E61"-->
-                    <!--android:textSize="13dp" />-->
-
-
-                <!--<View-->
-                    <!--android:layout_width="0dp"-->
-                    <!--android:layout_height="30dp"-->
-                    <!--android:layout_margin="3dp"-->
-                    <!--android:layout_weight="1" />-->
-
-            <!--</LinearLayout>-->
-
-
-        </LinearLayout>
-
+        </ScrollView>
 
         <!--Bottom Button Section-->
         <Button
             android:id="@+id/btComplete"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:background="#6fc8ce"
+            android:layout_height="40dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/round_button_ff4f4f"
             android:text="@string/filter_ButtonText"
             android:textColor="#ffffff"
-            android:textSize="15dp"
+            android:textSize="14dp"
+            android:fontFamily="@font/notosans"
+            android:includeFontPadding="false"
             android:textStyle="bold"
+            android:lineSpacingExtra="6.7sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/gl_90" />
+            style="?android:attr/borderlessButtonStyle"/>
 
 
     </android.support.constraint.ConstraintLayout>

@@ -2,8 +2,11 @@
     <string name="app_name">BaekAlleyProject</string>
 
     <!--filter-->
-    <string name="filter_mainText">골목식당 필터</string>
-    <string name="filter_foodStyleText">음식 종류</string>
+    <string name="filter_mainText">필터</string>
+    <string name="filter_dismissText">취소</string>
+    <string name="filter_refreshText">다시 선택</string>
+    <string name="filter_foodTypeText">음식 종류</string>
+    <string name="filter_priceTypeText">가격대</string>
     <string name="filter_alleyText">골목</string>
 
     <string name="filter_foodStyleText1">한식</string>
@@ -11,6 +14,7 @@
     <string name="filter_foodStyleText3">일식</string>
     <string name="filter_foodStyleText4">양식</string>
     <string name="filter_foodStyleText5">분식</string>
+    <string name="filter_foodStyleText6">기타</string>
 
     <string name="filter_alleyText1">삼거리 꽃길</string>
     <string name="filter_alleyText2">필동</string>
@@ -22,7 +26,7 @@
     <string name="filter_alleyText8">회기동 벽화골목</string>
     <string name="filter_alleyText9">거제도</string>
 
-    <string name="filter_ButtonText">선택 완료</string>
+    <string name="filter_ButtonText">필터적용</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

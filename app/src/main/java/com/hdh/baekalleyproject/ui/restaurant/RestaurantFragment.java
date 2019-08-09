@@ -1,6 +1,7 @@
 package com.hdh.baekalleyproject.ui.restaurant;
 
 
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -49,5 +50,10 @@ public class RestaurantFragment extends BaseFragment implements RestaurantContra
     public void onResume() {
         super.onResume();
         mPresenter.setView(mBinding.rvRestaurantList , mBinding.vpEvent , mBinding.tlDots);
+    }
+
+    @Override
+    public void moveActivity(Intent intent) {
+        startActivity(intent);
     }
 }

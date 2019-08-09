@@ -1,6 +1,5 @@
 package com.hdh.baekalleyproject.ui.main;
 
-import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 
@@ -46,8 +45,5 @@ public class MainActivity extends BaseActivity implements MainActivityContract.V
 
     }
 
-    @Override
-    public void moveActivity(Intent intent) {
-        startActivity(intent);
-    }
+
 }

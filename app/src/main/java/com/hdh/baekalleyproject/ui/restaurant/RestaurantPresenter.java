@@ -1,6 +1,7 @@
 package com.hdh.baekalleyproject.ui.restaurant;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentManager;
@@ -14,6 +15,7 @@ import com.hdh.baekalleyproject.adapter.EventImageSliderAdapter;
 import com.hdh.baekalleyproject.adapter.RestaurantListAdapter;
 import com.hdh.baekalleyproject.data.model.Event;
 import com.hdh.baekalleyproject.data.model.RestaurantList;
+import com.hdh.baekalleyproject.ui.filter.FilterActivity;
 
 import java.util.ArrayList;
 
@@ -87,7 +89,7 @@ public class RestaurantPresenter implements RestaurantContract.Presenter{
      */
     @Override
     public void clickFilter() {
-        //mView.moveActivity(new Intent(mContext , FilterActivity.class));
+        mView.moveActivity(new Intent(mContext , FilterActivity.class));
     }
 
     /**

@@ -70,7 +70,7 @@
             android:exported="true"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.FullScreen.Transparent"
+            android:theme="@style/AppTheme.FullScreen.Transparent_Filter"
             android:windowSoftInputMode="adjustResize"
             tools:replace="screenOrientation" />
 
