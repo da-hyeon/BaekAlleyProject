@@ -133,6 +133,11 @@ public class FilterActivity extends BaseActivity implements FilterContract.View 
         };
     }
 
+    /**
+     * 음식종류 색상 변경하기
+     * @param index 변경할 배열의 index
+     * @param state true - 선택 , false - 선택안함
+     */
     @Override
     public void changeTintColorOfFoodType(int index, boolean state) {
         if (state) {
@@ -148,6 +153,11 @@ public class FilterActivity extends BaseActivity implements FilterContract.View 
         }
     }
 
+    /**
+     * 가격대 색상 변경하기
+     * @param index 변경할 배열의 index
+     * @param state true - 선택 , false - 선택안함
+     */
     @Override
     public void changeTintColorOfPriceType(int index, boolean state) {
         if (state) {
@@ -163,6 +173,9 @@ public class FilterActivity extends BaseActivity implements FilterContract.View 
         }
     }
 
+    /**
+     * 선택 초기화
+     */
     @Override
     public void changeColorReset() {
         for(int i = 0; i < mFoodTypeViews.length; i++){
@@ -171,6 +184,7 @@ public class FilterActivity extends BaseActivity implements FilterContract.View 
                 changeTintColorOfFoodType(i, false);
             }
         }
+
         for(int i = 0; i < mPriceTypeViews.length; i++) {
             if (!mPriceTypeViews[i].getTag().equals("0")) {
                 mPriceTypeViews[i].setTag("0");
@@ -179,6 +193,9 @@ public class FilterActivity extends BaseActivity implements FilterContract.View 
         }
     }
 
+    /**
+     * 뒤로가기 버튼 클릭
+     */
     @Override
     public void onBackPressed() {
         mPresenter.clickDismiss();

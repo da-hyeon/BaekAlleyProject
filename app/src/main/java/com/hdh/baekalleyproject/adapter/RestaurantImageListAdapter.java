@@ -53,4 +53,6 @@ public class RestaurantImageListAdapter extends RecyclerView.Adapter<RestaurantI
     public int getItemCount() {
         return (mRestaurantImageList != null ? mRestaurantImageList.size() : 0);
     }
+
+
 }

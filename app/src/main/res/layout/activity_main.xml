@@ -26,14 +26,15 @@
         <android.support.design.widget.TabLayout
             android:id="@+id/tlMenu"
             android:layout_width="match_parent"
-            android:layout_height="55dp"
+            android:layout_height="48dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:tabMode="fixed"
             app:tabGravity="fill"
+            app:tabPaddingBottom="-10dp"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
+            android:paddingBottom="-20dp"
             app:tabIndicatorHeight="0dp"/>
-
 
     </android.support.constraint.ConstraintLayout>
 </layout>

@@ -52,21 +52,21 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
         View restaurantFind = mActivity.getLayoutInflater().inflate(R.layout.custom_tab, null);
         ImageView restaurantFindImg = restaurantFind.findViewById(R.id.img_tab);
         TextView restaurantFindText = restaurantFind.findViewById(R.id.txt_tab);
-        restaurantFindImg.setImageResource(R.drawable.button_restaurant_search);
+        restaurantFindImg.setImageResource(R.drawable.selector_findshop);
         restaurantFindText.setText("식당찾기");
         Objects.requireNonNull(tabLayout.getTabAt(0)).setCustomView(restaurantFind);
 
         View restaurantNews = mActivity.getLayoutInflater().inflate(R.layout.custom_tab, null);
         ImageView restaurantNewsImg = restaurantNews.findViewById(R.id.img_tab);
         TextView restaurantNewsText = restaurantNews.findViewById(R.id.txt_tab);
-        restaurantNewsImg.setImageResource(R.drawable.button_restaurant_news);
+        restaurantNewsImg.setImageResource(R.drawable.selector_shopnews);
         restaurantNewsText.setText("식당소식");
         Objects.requireNonNull(tabLayout.getTabAt(1)).setCustomView(restaurantNews);
 
         View myInfo = mActivity.getLayoutInflater().inflate(R.layout.custom_tab, null);
         ImageView myInfoImg = myInfo.findViewById(R.id.img_tab);
         TextView myInfoText = myInfo.findViewById(R.id.txt_tab);
-        myInfoImg.setImageResource(R.drawable.button_my_info);
+        myInfoImg.setImageResource(R.drawable.selector_myinfo);
         myInfoText.setText("내 정보");
         Objects.requireNonNull(tabLayout.getTabAt(2)).setCustomView(myInfo);
 

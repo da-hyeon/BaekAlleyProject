@@ -44,6 +44,4 @@ public class MainActivity extends BaseActivity implements MainActivityContract.V
         //mBinding.tlMenu.setupWithViewPager(mBinding.vpPager);
 
     }
-
-
 }
