@@ -1,4 +1,4 @@
-package com.hdh.baekalleyproject.ui.restaurant.restaurant_detail;
+package com.hdh.baekalleyproject.ui.restaurant_detail;
 
 import android.support.v7.widget.RecyclerView;
 

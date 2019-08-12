@@ -13,7 +13,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.hdh.baekalleyproject.data.model.Restaurant;
 import com.hdh.baekalleyproject.databinding.ItemRestaurantBinding;
-import com.hdh.baekalleyproject.ui.restaurant.restaurant_detail.RestaurantDetailActivity;
+import com.hdh.baekalleyproject.ui.restaurant_detail.RestaurantDetailActivity;
 
 import java.util.ArrayList;
 

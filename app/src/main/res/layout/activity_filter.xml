@@ -71,7 +71,8 @@
             android:lineSpacingExtra="7sp"
             android:text="@string/filter_mainText"
             android:textColor="#222222"
-            android:textSize="15dp"
+            android:textStyle="bold"
+            android:textSize="16dp"
             app:layout_constraintBottom_toBottomOf="@+id/vToolbar"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -104,7 +105,7 @@
             android:lineSpacingExtra="6sp"
             android:text="@string/filter_refreshText"
             android:textColor="#666666"
-            android:textSize="12dp"
+            android:textSize="13dp"
             app:layout_constraintBottom_toBottomOf="@+id/vToolbar"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -131,7 +132,7 @@
                     android:includeFontPadding="false"
                     android:text="@string/filter_alleyText"
                     android:textColor="#222222"
-                    android:textSize="16dp"
+                    android:textSize="17dp"
                     android:letterSpacing="-0.02"
                     android:lineSpacingExtra="3.3sp"
                     app:layout_constraintLeft_toLeftOf="parent"
@@ -141,7 +142,7 @@
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/rvAlley"
                     android:layout_width="match_parent"
-                    android:layout_height="91.3dp"
+                    android:layout_height="wrap_content"
                     android:paddingLeft="16dp"
                     android:layout_marginTop="20dp"
                     app:layout_constraintTop_toBottomOf="@+id/tvAlley" />
@@ -151,7 +152,7 @@
                 <View
                     android:id="@+id/vAlleyLine"
                     android:layout_width="match_parent"
-                    android:layout_height="0.33dp"
+                    android:layout_height="1dp"
                     android:layout_marginLeft="16dp"
                     android:layout_marginTop="20.5dp"
                     android:layout_marginRight="16dp"
@@ -170,7 +171,7 @@
                     android:textColor="#222222"
                     android:letterSpacing="-0.02"
                     android:lineSpacingExtra="3.3sp"
-                    android:textSize="16dp"
+                    android:textSize="17dp"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/vAlleyLine" />
@@ -178,15 +179,71 @@
                 <!-- row 1 -->
 
                 <LinearLayout
+                    android:id="@+id/llFoodDotsRow1"
+                    android:layout_width="match_parent"
+                    android:layout_height="6.7dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintTop_toBottomOf="@+id/tvFoodType"
+                    android:layout_marginTop="13.3dp"
+                    android:baselineAligned="false">
+
+                    <LinearLayout
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="19.5dp"
+                        android:gravity="center">
+                        <View
+                            android:id="@+id/vFoodDot1"
+                            android:layout_width="6.7dp"
+                            android:layout_height="6.7dp"
+                            android:visibility="invisible"
+                            android:background="@drawable/circle_shape_mini_ff4f4f"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:baselineAligned="false">
+
+                        <View
+                            android:id="@+id/vFoodDot2"
+                            android:layout_width="6.7dp"
+                            android:layout_height="6.7dp"
+                            android:visibility="invisible"
+                            android:background="@drawable/circle_shape_mini_ff4f4f"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:gravity="center"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="19.5dp"
+                        android:baselineAligned="false">
+
+                        <View
+                            android:id="@+id/vFoodDot3"
+                            android:layout_width="6.7dp"
+                            android:layout_height="6.7dp"
+                            android:visibility="invisible"
+                            android:background="@drawable/circle_shape_mini_ff4f4f"/>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
                     android:id="@+id/llFoodRow1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
                     android:gravity="center"
                     android:orientation="horizontal"
-                    app:layout_constraintTop_toBottomOf="@+id/tvFoodType"
+                    android:layout_marginTop="4dp"
+                    app:layout_constraintTop_toBottomOf="@+id/llFoodDotsRow1"
                     android:baselineAligned="false">
-
 
                     <FrameLayout
                         android:layout_width="0dp"
@@ -199,6 +256,7 @@
                             android:layout_height="67dp"
                             android:layout_gravity="center"
                             android:layout_marginLeft="13dp"
+                            android:tag="0"
                             android:background="@drawable/round_stroke_bbbbbb" />
 
                         <ImageView
@@ -219,6 +277,7 @@
                         <View
                             android:id="@+id/vChineseFood"
                             android:layout_width="67dp"
+                            android:tag="0"
                             android:layout_height="67dp"
                             android:layout_gravity="center"
                             android:background="@drawable/round_stroke_bbbbbb" />
@@ -243,6 +302,7 @@
                             android:layout_width="67dp"
                             android:layout_height="67dp"
                             android:layout_gravity="center"
+                            android:tag="0"
                             android:layout_marginRight="13dp"
                             android:background="@drawable/round_stroke_bbbbbb" />
 
@@ -276,7 +336,7 @@
                         android:lineSpacingExtra="5sp"
                         android:text="@string/filter_foodStyleText1"
                         android:textColor="#999999"
-                        android:textSize="14dp" />
+                        android:textSize="15dp" />
 
                     <TextView
                         android:id="@+id/tvChineseFood"
@@ -290,7 +350,7 @@
                         android:letterSpacing="-0.02"
                         android:lineSpacingExtra="5sp"
                         android:textColor="#999999"
-                        android:textSize="14dp" />
+                        android:textSize="15dp" />
 
                     <TextView
                         android:id="@+id/tvJapaneseFood"
@@ -305,7 +365,7 @@
                         android:letterSpacing="-0.02"
                         android:lineSpacingExtra="5sp"
                         android:textColor="#999999"
-                        android:textSize="14dp" />
+                        android:textSize="15dp" />
                 </LinearLayout>
 
 
@@ -313,13 +373,70 @@
                 <!-- row 2 -->
 
                 <LinearLayout
+                    android:id="@+id/llFoodDotsRow2"
+                    android:layout_width="match_parent"
+                    android:layout_height="6.7dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintTop_toBottomOf="@+id/llFoodTextRow1"
+                    android:layout_marginTop="13.3dp"
+                    android:baselineAligned="false">
+
+                    <LinearLayout
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="19.5dp"
+                        android:gravity="center">
+                        <View
+                            android:id="@+id/vFoodDot4"
+                            android:layout_width="6.7dp"
+                            android:layout_height="6.7dp"
+                            android:visibility="invisible"
+                            android:background="@drawable/circle_shape_mini_ff4f4f"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:baselineAligned="false">
+
+                        <View
+                            android:id="@+id/vFoodDot5"
+                            android:layout_width="6.7dp"
+                            android:layout_height="6.7dp"
+                            android:visibility="invisible"
+                            android:background="@drawable/circle_shape_mini_ff4f4f"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:gravity="center"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="19.5dp"
+                        android:baselineAligned="false">
+
+                        <View
+                            android:id="@+id/vFoodDot6"
+                            android:layout_width="6.7dp"
+                            android:visibility="invisible"
+                            android:layout_height="6.7dp"
+                            android:background="@drawable/circle_shape_mini_ff4f4f"/>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
                     android:id="@+id/llFoodRow2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="4dp"
                     android:gravity="center"
                     android:orientation="horizontal"
-                    app:layout_constraintTop_toBottomOf="@+id/llFoodTextRow1"
+                    app:layout_constraintTop_toBottomOf="@+id/llFoodDotsRow2"
                     android:baselineAligned="false">
 
 
@@ -331,6 +448,7 @@
                         <View
                             android:id="@+id/vWesternFood"
                             android:layout_width="67dp"
+                            android:tag="0"
                             android:layout_height="67dp"
                             android:layout_marginLeft="13dp"
                             android:layout_gravity="center"
@@ -354,6 +472,7 @@
                         <View
                             android:id="@+id/vSnackFood"
                             android:layout_width="67dp"
+                            android:tag="0"
                             android:layout_height="67dp"
                             android:layout_gravity="center"
                             android:background="@drawable/round_stroke_bbbbbb" />
@@ -376,6 +495,7 @@
                         <View
                             android:id="@+id/vEtcFood"
                             android:layout_width="67dp"
+                            android:tag="0"
                             android:layout_marginRight="13dp"
                             android:layout_height="67dp"
                             android:layout_gravity="center"
@@ -411,7 +531,7 @@
                         android:lineSpacingExtra="5sp"
                         android:text="@string/filter_foodStyleText4"
                         android:textColor="#999999"
-                        android:textSize="14dp" />
+                        android:textSize="15dp" />
 
                     <TextView
                         android:id="@+id/tvSnackFood"
@@ -425,7 +545,7 @@
                         android:letterSpacing="-0.02"
                         android:lineSpacingExtra="5sp"
                         android:textColor="#999999"
-                        android:textSize="14dp" />
+                        android:textSize="15dp" />
 
                     <TextView
                         android:id="@+id/tvEtcFood"
@@ -440,7 +560,7 @@
                         android:letterSpacing="-0.02"
                         android:lineSpacingExtra="5sp"
                         android:textColor="#999999"
-                        android:textSize="14dp" />
+                        android:textSize="15dp" />
                 </LinearLayout>
 
                 <!--가격대 섹션-->
@@ -448,7 +568,7 @@
                 <View
                     android:id="@+id/vPrice"
                     android:layout_width="match_parent"
-                    android:layout_height="0.33dp"
+                    android:layout_height="1dp"
                     android:layout_marginLeft="16dp"
                     android:layout_marginTop="20.5dp"
                     android:layout_marginRight="16dp"
@@ -466,23 +586,96 @@
                     android:includeFontPadding="false"
                     android:text="@string/filter_priceTypeText"
                     android:textColor="#222222"
-                    android:textSize="16dp"
+                    android:textSize="17dp"
                     android:letterSpacing="-0.02"
                     android:lineSpacingExtra="3.3sp"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/vPrice" />
 
+
+                <LinearLayout
+                    android:id="@+id/llPriceDotsRow"
+                    android:layout_width="match_parent"
+                    android:layout_height="6.7dp"
+                    android:orientation="horizontal"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    app:layout_constraintTop_toBottomOf="@+id/tvPriceType"
+                    android:layout_marginTop="13.3dp"
+                    android:baselineAligned="false">
+
+                    <LinearLayout
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:gravity="center">
+                        <View
+                            android:id="@+id/vPriceDot1"
+                            android:layout_width="6.7dp"
+                            android:visibility="invisible"
+                            android:layout_height="6.7dp"
+                            android:background="@drawable/circle_shape_mini_ff4f4f"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:baselineAligned="false">
+
+                        <View
+                            android:id="@+id/vPriceDot2"
+                            android:visibility="invisible"
+                            android:layout_width="6.7dp"
+                            android:layout_height="6.7dp"
+                            android:background="@drawable/circle_shape_mini_ff4f4f"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:gravity="center"
+                        android:layout_height="match_parent"
+                        android:baselineAligned="false">
+
+                        <View
+                            android:id="@+id/vPriceDot3"
+                            android:layout_width="6.7dp"
+                            android:layout_height="6.7dp"
+                            android:visibility="invisible"
+                            android:background="@drawable/circle_shape_mini_ff4f4f"/>
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:gravity="center"
+                        android:layout_height="match_parent"
+                        android:baselineAligned="false">
+
+                        <View
+                            android:id="@+id/vPriceDot4"
+                            android:visibility="invisible"
+                            android:layout_width="6.7dp"
+                            android:layout_height="6.7dp"
+                            android:background="@drawable/circle_shape_mini_ff4f4f"/>
+
+                    </LinearLayout>
+                </LinearLayout>
+                
                 <LinearLayout
                     android:id="@+id/llPriceRow"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="4dp"
                     android:gravity="center"
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="16dp"
                     android:orientation="horizontal"
-                    app:layout_constraintTop_toBottomOf="@+id/tvPriceType"
+                    app:layout_constraintTop_toBottomOf="@+id/llPriceDotsRow"
                     android:baselineAligned="false">
 
 
@@ -494,6 +687,7 @@
                         <View
                             android:id="@+id/vBelow10000"
                             android:layout_width="67dp"
+                            android:tag="0"
                             android:layout_height="67dp"
                             android:layout_gravity="center"
                             android:background="@drawable/circle_shape_bbbbbb" />
@@ -526,6 +720,7 @@
                         <View
                             android:id="@+id/vAbove10000"
                             android:layout_width="67dp"
+                            android:tag="0"
                             android:layout_height="67dp"
                             android:layout_gravity="center"
                             android:background="@drawable/circle_shape_bbbbbb" />
@@ -557,6 +752,7 @@
                         <View
                             android:id="@+id/vAbove20000"
                             android:layout_width="67dp"
+                            android:tag="0"
                             android:layout_height="67dp"
                             android:layout_gravity="center"
                             android:background="@drawable/circle_shape_bbbbbb" />
@@ -590,6 +786,7 @@
                             android:id="@+id/vAbove30000"
                             android:layout_width="67dp"
                             android:layout_height="67dp"
+                            android:tag="0"
                             android:layout_gravity="center"
                             android:background="@drawable/circle_shape_bbbbbb" />
 
@@ -633,11 +830,11 @@
             android:background="@drawable/round_button_ff4f4f"
             android:text="@string/filter_ButtonText"
             android:textColor="#ffffff"
-            android:textSize="14dp"
+            android:textSize="15dp"
             android:fontFamily="@font/notosans"
             android:includeFontPadding="false"
             android:textStyle="bold"
-            android:lineSpacingExtra="6.7sp"
+            android:lineSpacingExtra="7sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"

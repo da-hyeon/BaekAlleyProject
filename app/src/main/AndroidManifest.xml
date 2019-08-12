@@ -23,7 +23,6 @@
 
         <activity
             android:name=".ui.main.MainActivity"
-
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
             android:exported="true"
             android:launchMode="singleTop"
@@ -42,10 +41,8 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".ui.login.LoginActivity"
-
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
             android:exported="true"
             android:launchMode="singleTop"
@@ -53,9 +50,8 @@
             android:theme="@style/AppTheme.FullScreen.Transparent_Login"
             android:windowSoftInputMode="adjustResize"
             tools:replace="screenOrientation" />
-
         <activity
-            android:name=".ui.restaurant.restaurant_detail.RestaurantDetailActivity"
+            android:name=".ui.restaurant_detail.RestaurantDetailActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
             android:exported="true"
             android:launchMode="singleTop"
@@ -63,7 +59,6 @@
             android:theme="@style/AppTheme.FullScreen.Transparent"
             android:windowSoftInputMode="adjustResize"
             tools:replace="screenOrientation" />
-
         <activity
             android:name=".ui.filter.FilterActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
@@ -74,7 +69,14 @@
             android:windowSoftInputMode="adjustResize"
             tools:replace="screenOrientation" />
 
-
+        <activity android:name=".ui.search.SearchActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
+            android:exported="true"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.FullScreen.Transparent_Login"
+            android:windowSoftInputMode="adjustResize"
+            tools:replace="screenOrientation" />
     </application>
 
 </manifest>

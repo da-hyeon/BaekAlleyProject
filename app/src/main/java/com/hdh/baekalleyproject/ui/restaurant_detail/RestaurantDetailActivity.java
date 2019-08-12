@@ -1,4 +1,4 @@
-package com.hdh.baekalleyproject.ui.restaurant.restaurant_detail;
+package com.hdh.baekalleyproject.ui.restaurant_detail;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;

@@ -2,6 +2,7 @@ package com.hdh.baekalleyproject.ui.filter;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -18,6 +19,9 @@ public class FilterActivity extends BaseActivity implements FilterContract.View 
     private View[] mFoodTypeViews;
     private View[] mPriceTypeViews;
 
+    private View[] mFoodDotsViews;
+    private View[] mPriceDotsViews;
+
     private ImageView[] mFoodTypeImageViews;
     private ImageView[] mPriceTypeImageViews;
 
@@ -33,15 +37,19 @@ public class FilterActivity extends BaseActivity implements FilterContract.View 
         initData();
 
         //닫기 버튼 클릭
-        mBinding.vDismiss.setOnClickListener(v -> {
-            mPresenter.clickDismiss();
-        });
+        mBinding.vDismiss.setOnClickListener(v ->
+            mPresenter.clickDismiss()
+        );
+
+        mBinding.vReset.setOnClickListener(v ->
+            mPresenter.clickReset()
+        );
 
         //음식종류 클릭
         for (int i = 0; i < mFoodTypeViews.length; i++) {
             int index = i;
             mFoodTypeViews[i].setOnClickListener(v ->
-                    mPresenter.clickFoodType(mFoodTypeViews[index])
+                    mPresenter.clickFoodType(mFoodTypeViews[index], index)
             );
         }
 
@@ -49,7 +57,7 @@ public class FilterActivity extends BaseActivity implements FilterContract.View 
         for (int i = 0; i < mPriceTypeViews.length; i++) {
             int index = i;
             mPriceTypeViews[i].setOnClickListener(v ->
-                    mPresenter.clickPriceType(mFoodTypeViews[index])
+                    mPresenter.clickPriceType(mPriceTypeViews[index], index)
             );
         }
     }
@@ -74,6 +82,22 @@ public class FilterActivity extends BaseActivity implements FilterContract.View 
                 mBinding.vAbove10000,
                 mBinding.vAbove20000,
                 mBinding.vAbove30000
+        };
+
+        mFoodDotsViews = new View[]{
+                mBinding.vFoodDot1,
+                mBinding.vFoodDot2,
+                mBinding.vFoodDot3,
+                mBinding.vFoodDot4,
+                mBinding.vFoodDot5,
+                mBinding.vFoodDot6
+        };
+
+        mPriceDotsViews = new View[]{
+                mBinding.vPriceDot1,
+                mBinding.vPriceDot2,
+                mBinding.vPriceDot3,
+                mBinding.vPriceDot4
         };
 
         //ImageViews
@@ -110,12 +134,53 @@ public class FilterActivity extends BaseActivity implements FilterContract.View 
     }
 
     @Override
-    public void changeTintColorOfFoodType(View view, boolean state) {
-
+    public void changeTintColorOfFoodType(int index, boolean state) {
+        if (state) {
+            mFoodTypeViews[index].setBackground(ContextCompat.getDrawable(this, R.drawable.round_stroke_ff4f4f));
+            mFoodDotsViews[index].setVisibility(View.VISIBLE);
+            mFoodTypeImageViews[index].setColorFilter(getResources().getColor(R.color.colorPrimary));
+            mFoodTypeTextViews[index].setTextColor(getResources().getColor(R.color.colorPrimary));
+        } else {
+            mFoodTypeViews[index].setBackground(ContextCompat.getDrawable(this, R.drawable.round_stroke_bbbbbb));
+            mFoodTypeImageViews[index].setColorFilter(getResources().getColor(R.color.foodTextDefaultColor));
+            mFoodTypeTextViews[index].setTextColor(getResources().getColor(R.color.foodTextDefaultColor));
+            mFoodDotsViews[index].setVisibility(View.INVISIBLE);
+        }
     }
 
     @Override
-    public void changeTintColorOfPriceType(View view, boolean state) {
+    public void changeTintColorOfPriceType(int index, boolean state) {
+        if (state) {
+            mPriceTypeViews[index].setBackground(ContextCompat.getDrawable(this, R.drawable.circle_shape_ff4f4f));
+            mPriceDotsViews[index].setVisibility(View.VISIBLE);
+            mPriceTypeImageViews[index].setColorFilter(getResources().getColor(R.color.colorPrimary));
+            mPriceTypeTextViews[index].setTextColor(getResources().getColor(R.color.colorPrimary));
+        } else {
+            mPriceTypeViews[index].setBackground(ContextCompat.getDrawable(this, R.drawable.circle_shape_bbbbbb));
+            mPriceDotsViews[index].setVisibility(View.INVISIBLE);
+            mPriceTypeImageViews[index].setColorFilter(getResources().getColor(R.color.foodTextDefaultColor));
+            mPriceTypeTextViews[index].setTextColor(getResources().getColor(R.color.priceTextDefaultColor));
+        }
+    }
 
+    @Override
+    public void changeColorReset() {
+        for(int i = 0; i < mFoodTypeViews.length; i++){
+            if (!mFoodTypeViews[i].getTag().equals("0")) {
+                mFoodTypeViews[i].setTag("0");
+                changeTintColorOfFoodType(i, false);
+            }
+        }
+        for(int i = 0; i < mPriceTypeViews.length; i++) {
+            if (!mPriceTypeViews[i].getTag().equals("0")) {
+                mPriceTypeViews[i].setTag("0");
+                changeTintColorOfPriceType(i, false);
+            }
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        mPresenter.clickDismiss();
     }
 }

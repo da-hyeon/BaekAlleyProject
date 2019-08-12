@@ -16,6 +16,7 @@ import com.hdh.baekalleyproject.adapter.RestaurantListAdapter;
 import com.hdh.baekalleyproject.data.model.Event;
 import com.hdh.baekalleyproject.data.model.RestaurantList;
 import com.hdh.baekalleyproject.ui.filter.FilterActivity;
+import com.hdh.baekalleyproject.ui.search.SearchActivity;
 
 import java.util.ArrayList;
 
@@ -97,6 +98,6 @@ public class RestaurantPresenter implements RestaurantContract.Presenter{
      */
     @Override
     public void clickSearch() {
-
+        mView.moveActivity(new Intent(mContext , SearchActivity.class));
     }
 }

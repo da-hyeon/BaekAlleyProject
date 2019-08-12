@@ -3,7 +3,7 @@
     <data>
         <variable
             name="restaurnatDetailActivity"
-            type="com.hdh.baekalleyproject.ui.restaurant.restaurant_detail.RestaurantDetailActivity" />
+            type="com.hdh.baekalleyproject.ui.restaurant_detail.RestaurantDetailActivity" />
     </data>
     <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"

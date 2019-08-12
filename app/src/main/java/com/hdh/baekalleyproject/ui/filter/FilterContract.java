@@ -7,15 +7,18 @@ import com.hdh.baekalleyproject.ui.base.activity.BaseActivityContract;
 public interface FilterContract {
     interface View extends BaseActivityContract.View {
 
-        void changeTintColorOfFoodType(android.view.View view , boolean state);
-        void changeTintColorOfPriceType(android.view.View view , boolean state);
+        void changeTintColorOfFoodType(int index , boolean state);
+        void changeTintColorOfPriceType(int index  , boolean state);
+
+        void changeColorReset();
     }
     interface Presenter{
         void setAlleyView(RecyclerView recyclerView);
 
         void clickDismiss();
+        void clickReset();
 
-        void clickFoodType(android.view.View view);
-        void clickPriceType(android.view.View view);
+        void clickFoodType(android.view.View view , int index);
+        void clickPriceType(android.view.View view , int index);
     }
 }

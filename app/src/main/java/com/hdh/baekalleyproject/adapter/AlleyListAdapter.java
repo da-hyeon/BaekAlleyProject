@@ -2,10 +2,13 @@ package com.hdh.baekalleyproject.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
+import com.hdh.baekalleyproject.R;
 import com.hdh.baekalleyproject.data.model.Alley;
 import com.hdh.baekalleyproject.databinding.ItemFilterAlleyBinding;
 
@@ -23,11 +26,20 @@ public class AlleyListAdapter extends RecyclerView.Adapter<AlleyListAdapter.Rest
         RestaurantImageListViewHolder(ItemFilterAlleyBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
+
+            binding.vAlley.setOnClickListener(v1->{
+                int position = getAdapterPosition();
+                if(mAlleyList.get(position).getTag().equals("0")){
+                    mAlleyList.get(position).setTag("1");
+                } else {
+                    mAlleyList.get(position).setTag("0");
+                }
+                notifyItemChanged(position);
+            });
         }
     }
 
-    public AlleyListAdapter(ArrayList<Alley> mAlleyList, Context mContext) {
-        this.mAlleyList = mAlleyList;
+    public AlleyListAdapter( Context mContext) {
         this.mContext = mContext;
     }
 
@@ -48,15 +60,28 @@ public class AlleyListAdapter extends RecyclerView.Adapter<AlleyListAdapter.Rest
             holder.binding.tvAlley.setText(alley[1]);
         }
 
-        holder.binding.vAlley.setOnClickListener(v1->{
+        if (mAlleyList.get(position).getTag().equals("0")){
+            holder.binding.vAlley.setBackground(ContextCompat.getDrawable(mContext , R.drawable.round_stroke_bbbbbb));
+            holder.binding.tvArea.setTextColor(mContext.getResources().getColor(R.color.foodTextDefaultColor));
+            holder.binding.tvAlley.setTextColor(mContext.getResources().getColor(R.color.foodTextDefaultColor));
+            holder.binding.vDot.setVisibility(View.INVISIBLE);
 
-        });
-        //holder.binding.tvRestaurantAlley.setText(mRestaurantList.get(position).getRestaurantTime());
-//        holder.binding.tvRestaurantRepFood.setText(mRestaurantList.get(position).getRestaurantRepFood());
+        }
+        else {
+            holder.binding.vAlley.setBackground(ContextCompat.getDrawable(mContext , R.drawable.round_stroke_ff4f4f));
+            holder.binding.tvArea.setTextColor(mContext.getResources().getColor(R.color.colorPrimary));
+            holder.binding.tvAlley.setTextColor(mContext.getResources().getColor(R.color.colorPrimary));
+            holder.binding.vDot.setVisibility(View.VISIBLE);
+        }
+
     }
 
     @Override
     public int getItemCount() {
         return (mAlleyList != null ? mAlleyList.size() : 0);
+    }
+
+    public void setmAlleyList(ArrayList<Alley> mAlleyList) {
+        this.mAlleyList = mAlleyList;
     }
 }
