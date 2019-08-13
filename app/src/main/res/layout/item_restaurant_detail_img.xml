@@ -4,24 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <LinearLayout
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:background="#ffffff"
-        android:padding="5dp">
+        android:layout_width="168dp"
+        android:layout_height="164dp"
+        android:background="#ffffff">
 
-
-        <android.support.constraint.ConstraintLayout
-            android:id="@+id/clView"
+        <ImageView
+            android:id="@+id/ivRestaurantImage"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#ffffff">
-
-            <ImageView
-                android:id="@+id/ivRestaurantImage"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
-
-        </android.support.constraint.ConstraintLayout>
+            android:layout_marginRight="4dp"/>
 
     </LinearLayout>
 </layout>

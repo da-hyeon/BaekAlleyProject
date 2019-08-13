@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="searchActivity"
             type="com.hdh.baekalleyproject.ui.search.SearchActivity" />
@@ -18,71 +19,115 @@
             android:id="@+id/vSearch"
             android:layout_width="match_parent"
             android:layout_height="33.3dp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            android:layout_marginTop="9.3dp"
             android:layout_marginLeft="16dp"
+            android:layout_marginTop="9.3dp"
+            android:layout_marginRight="56dp"
             android:background="@drawable/round_button_f5f5f5"
-            android:layout_marginRight="56dp"/>
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/ivSearch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
             android:src="@drawable/icon_search"
-            app:layout_constraintLeft_toLeftOf="@+id/vSearch"
-            app:layout_constraintTop_toTopOf="@+id/vSearch"
             app:layout_constraintBottom_toBottomOf="@+id/vSearch"
-            android:layout_marginLeft="10dp"/>
+            app:layout_constraintLeft_toLeftOf="@+id/vSearch"
+            app:layout_constraintTop_toTopOf="@+id/vSearch" />
 
         <ImageView
+            android:visibility="gone"
             android:id="@+id/ivClear"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:src="@drawable/button_search_clear"
-            app:layout_constraintRight_toRightOf="@+id/vSearch"
-            app:layout_constraintLeft_toRightOf="@+id/etSearch"
             android:scaleType="center"
-            app:layout_constraintTop_toTopOf="@+id/vSearch"
+            android:src="@drawable/button_search_clear"
             app:layout_constraintBottom_toBottomOf="@+id/vSearch"
-            />
+            app:layout_constraintLeft_toRightOf="@+id/etSearch"
+            app:layout_constraintRight_toRightOf="@+id/vSearch"
+            app:layout_constraintTop_toTopOf="@+id/vSearch" />
 
         <EditText
             android:id="@+id/etSearch"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_constraintLeft_toRightOf="@+id/ivSearch"
-            app:layout_constraintTop_toTopOf="@+id/vSearch"
-            app:layout_constraintBottom_toBottomOf="@+id/vSearch"
-            app:layout_constraintRight_toRightOf="@+id/vSearch"
-            android:layout_marginRight="41.3dp"
             android:layout_marginLeft="10.3dp"
-            android:hint="식당 및 골목명으로 검색"
+            android:layout_marginRight="41.3dp"
+            android:background="@android:color/transparent"
             android:fontFamily="@font/notosans"
-            android:includeFontPadding="false"
-            android:textSize="15dp"
-            android:textColorHint="#999999"
-            android:textColor="#333333"
+            android:hint="식당 및 골목명으로 검색"
             android:imeOptions="actionSearch"
+            android:includeFontPadding="false"
             android:singleLine="true"
-            android:background="@android:color/transparent"/>
+            android:textColor="#333333"
+            android:textColorHint="#999999"
+            android:textSize="15dp"
+            app:layout_constraintBottom_toBottomOf="@+id/vSearch"
+            app:layout_constraintLeft_toRightOf="@+id/ivSearch"
+            app:layout_constraintRight_toRightOf="@+id/vSearch"
+            app:layout_constraintTop_toTopOf="@+id/vSearch" />
 
         <TextView
+            android:id="@+id/tvDismiss"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:gravity="center"
-            android:text="취소"
-            android:textSize="15dp"
-            android:textColor="#666666"
             android:letterSpacing="-0.03"
             android:lineSpacingExtra="7sp"
+            android:text="취소"
+            android:textColor="#666666"
+            android:textSize="15dp"
+            app:layout_constraintBottom_toBottomOf="@+id/vSearch"
             app:layout_constraintLeft_toRightOf="@+id/vSearch"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/vSearch"
-            app:layout_constraintBottom_toBottomOf="@+id/vSearch"/>
+            app:layout_constraintTop_toTopOf="@+id/vSearch" />
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="22dp"
+            android:layout_marginRight="30dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/vSearch">
+
+            <TextView
+                android:id="@+id/tvRecentSearches"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/notosans"
+                android:includeFontPadding="false"
+                android:letterSpacing="-0.03"
+                android:text="최근 검색어"
+                android:textColor="#999999"
+                android:textSize="13dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/notosans"
+                android:includeFontPadding="false"
+                android:letterSpacing="-0.03"
+                android:text="전체 삭제"
+                android:textColor="#666666"
+                android:textSize="12dp"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rvRecentTerm"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="14dp"
+                android:scrollbars="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvRecentSearches" />
 
 
-
+        </android.support.constraint.ConstraintLayout>
 
     </android.support.constraint.ConstraintLayout>
 </layout>

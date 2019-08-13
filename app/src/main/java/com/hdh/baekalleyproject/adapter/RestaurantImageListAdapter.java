@@ -17,6 +17,7 @@ public class RestaurantImageListAdapter extends RecyclerView.Adapter<RestaurantI
 
     private ArrayList<RestaurantImage> mRestaurantImageList;
     private Context mContext;
+    private final int IMG_SIZE;
 
     class RestaurantImageListViewHolder extends RecyclerView.ViewHolder {
 
@@ -31,6 +32,7 @@ public class RestaurantImageListAdapter extends RecyclerView.Adapter<RestaurantI
     public RestaurantImageListAdapter(ArrayList<RestaurantImage> mRestaurantImageList, Context mContext) {
         this.mRestaurantImageList = mRestaurantImageList;
         this.mContext = mContext;
+        IMG_SIZE = Math.round(164 * mContext.getResources().getDisplayMetrics().density);
     }
 
     @Override
@@ -43,7 +45,7 @@ public class RestaurantImageListAdapter extends RecyclerView.Adapter<RestaurantI
     public void onBindViewHolder(RestaurantImageListViewHolder holder, int position) {
         Glide.with(mContext)
                 .load(mRestaurantImageList.get(position).getRestaurantImageURL())
-                .apply(new RequestOptions().centerCrop().override(300,300))
+                .apply(new RequestOptions().centerCrop())
                 .into(holder.binding.ivRestaurantImage);
         //holder.binding.tvRestaurantAlley.setText(mRestaurantList.get(position).getRestaurantTime());
 //        holder.binding.tvRestaurantRepFood.setText(mRestaurantList.get(position).getRestaurantRepFood());

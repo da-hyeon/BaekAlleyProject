@@ -21,11 +21,6 @@ public class RestaurantFragment extends BaseFragment implements RestaurantContra
     private RestaurantContract.Presenter mPresenter;
     private FragmentRestaurantBinding mBinding;
 
-    public RestaurantFragment() {
-        // Required empty public constructor
-    }
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -48,18 +43,37 @@ public class RestaurantFragment extends BaseFragment implements RestaurantContra
         return mBinding.getRoot();
     }
 
+    /**
+     * 데이터 생성 및 초기화
+     */
     private void initData() {
 
     }
 
+    /**
+     * 재진입
+     */
     @Override
     public void onResume() {
         super.onResume();
         mPresenter.setView(mBinding.rvRestaurantList, mBinding.vpEvent, mBinding.tlDots);
     }
 
+    /**
+     * 일반 액티비티 이동
+     * @param intent
+     */
     @Override
     public void moveActivity(Intent intent) {
+        startActivity(intent);
+    }
+
+    /**
+     * 옵션 액티비티 이동
+     * @param intent
+     */
+    @Override
+    public void moveOptionActivity(Intent intent) {
         startActivity(intent);
         getActivity().overridePendingTransition(R.anim.slide_up, R.anim.stay);
     }

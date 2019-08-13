@@ -6,13 +6,13 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import com.hdh.baekalleyproject.R;
 import com.hdh.baekalleyproject.adapter.AlleyListAdapter;
 import com.hdh.baekalleyproject.data.model.Alley;
+import com.hdh.baekalleyproject.ui.base.activity.BaseActivityPresenter;
 
 import java.util.ArrayList;
 
-public class FilterPresenter implements FilterContract.Presenter {
+public class FilterPresenter extends BaseActivityPresenter implements FilterContract.Presenter {
     private FilterContract.View mView;
     private Context mContext;
     private Activity mActivity;
@@ -21,6 +21,7 @@ public class FilterPresenter implements FilterContract.Presenter {
     private AlleyListAdapter mAlleyListAdapter;
 
     public FilterPresenter(FilterContract.View mView, Context mContext, Activity mActivity) {
+        super(mView , mContext , mActivity);
         this.mView = mView;
         this.mContext = mContext;
         this.mActivity = mActivity;
@@ -53,15 +54,6 @@ public class FilterPresenter implements FilterContract.Presenter {
         recyclerView.setLayoutManager(linearLayoutManager);
         mAlleyListAdapter.setmAlleyList(mAlleyArrayList);
         recyclerView.setAdapter(mAlleyListAdapter);
-    }
-
-    /**
-     * 취소 클릭 이벤트 처리
-     * */
-    @Override
-    public void clickDismiss() {
-        mView.removeActivity();
-        mActivity.overridePendingTransition(R.anim.stay, R.anim.slide_down);
     }
 
     /**

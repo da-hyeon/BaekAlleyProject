@@ -38,7 +38,7 @@ public class FilterActivity extends BaseActivity implements FilterContract.View 
 
         //닫기 버튼 클릭
         mBinding.vDismiss.setOnClickListener(v ->
-            mPresenter.clickDismiss()
+            mPresenter.clickOptionDismiss()
         );
 
         mBinding.vReset.setOnClickListener(v ->
@@ -198,6 +198,6 @@ public class FilterActivity extends BaseActivity implements FilterContract.View 
      */
     @Override
     public void onBackPressed() {
-        mPresenter.clickDismiss();
+        mPresenter.clickOptionDismiss();
     }
 }

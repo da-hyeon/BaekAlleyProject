@@ -12,7 +12,7 @@ public interface FilterContract {
 
         void changeColorReset();
     }
-    interface Presenter{
+    interface Presenter extends BaseActivityContract.Presenter {
         void setAlleyView(RecyclerView recyclerView);
 
         void clickDismiss();

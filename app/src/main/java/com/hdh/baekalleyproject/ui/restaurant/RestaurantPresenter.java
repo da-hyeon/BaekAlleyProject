@@ -29,6 +29,9 @@ public class RestaurantPresenter implements RestaurantContract.Presenter{
     private RestaurantContract.View mView;
     private Context mContext;
     private FragmentManager mFragmentManager;
+    private RestaurantList restaurantList;
+    private RestaurantList restaurantList_get;
+
 
     private EventImageSliderAdapter mEventImageSliderAdapter;
 
@@ -51,7 +54,9 @@ public class RestaurantPresenter implements RestaurantContract.Presenter{
             @Override
             public void onResponse(@NonNull Call<RestaurantList> call, @NonNull Response<RestaurantList> response) {
                 if (response.isSuccessful()) {
-                    RestaurantList restaurantList = response.body();
+                    restaurantList = response.body();
+                    restaurantList_get = response.body();
+
                     if (restaurantList != null) {
 
                         GridLayoutManager mGridLayoutManager = new GridLayoutManager(mContext , 2);
@@ -90,7 +95,7 @@ public class RestaurantPresenter implements RestaurantContract.Presenter{
      */
     @Override
     public void clickFilter() {
-        mView.moveActivity(new Intent(mContext , FilterActivity.class));
+        mView.moveOptionActivity(new Intent(mContext , FilterActivity.class));
     }
 
     /**
@@ -98,6 +103,6 @@ public class RestaurantPresenter implements RestaurantContract.Presenter{
      */
     @Override
     public void clickSearch() {
-        mView.moveActivity(new Intent(mContext , SearchActivity.class));
+        mView.moveOptionActivity(new Intent(mContext , SearchActivity.class));
     }
 }

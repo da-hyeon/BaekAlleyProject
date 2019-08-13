@@ -15,7 +15,7 @@ public class RestaurantDetailPresenter implements RestaurantDetailContract.Prese
     private Context mContext;
     private Activity mActivity;
 
-    public RestaurantDetailPresenter(RestaurantDetailContract.View mView, Context mContext, Activity mActivity) {
+    RestaurantDetailPresenter(RestaurantDetailContract.View mView, Context mContext, Activity mActivity) {
         this.mView = mView;
         this.mContext = mContext;
         this.mActivity = mActivity;
@@ -24,15 +24,13 @@ public class RestaurantDetailPresenter implements RestaurantDetailContract.Prese
     @Override
     public void setView(RecyclerView recyclerView) {
         ArrayList<RestaurantImage> restaurantImages = new ArrayList<>();
-        restaurantImages.add(new RestaurantImage("http://leehwangco.cafe24.com/resources/shopImg/87fdcaa2e23d41bfb62b68cc28aaeca4.jpg"));
-        restaurantImages.add(new RestaurantImage("http://leehwangco.cafe24.com/resources/shopImg/87fdcaa2e23d41bfb62b68cc28aaeca4.jpg"));
-        restaurantImages.add(new RestaurantImage("http://leehwangco.cafe24.com/resources/shopImg/87fdcaa2e23d41bfb62b68cc28aaeca4.jpg"));
-        restaurantImages.add(new RestaurantImage("http://leehwangco.cafe24.com/resources/shopImg/87fdcaa2e23d41bfb62b68cc28aaeca4.jpg"));
-        restaurantImages.add(new RestaurantImage("http://leehwangco.cafe24.com/resources/shopImg/87fdcaa2e23d41bfb62b68cc28aaeca4.jpg"));
-        restaurantImages.add(new RestaurantImage("http://leehwangco.cafe24.com/resources/shopImg/87fdcaa2e23d41bfb62b68cc28aaeca4.jpg"));
-        restaurantImages.add(new RestaurantImage("http://leehwangco.cafe24.com/resources/shopImg/87fdcaa2e23d41bfb62b68cc28aaeca4.jpg"));
-        restaurantImages.add(new RestaurantImage("http://leehwangco.cafe24.com/resources/shopImg/87fdcaa2e23d41bfb62b68cc28aaeca4.jpg"));
-        restaurantImages.add(new RestaurantImage("http://leehwangco.cafe24.com/resources/shopImg/87fdcaa2e23d41bfb62b68cc28aaeca4.jpg"));
+        restaurantImages.add(new RestaurantImage("http://leehwangco.cafe24.com/resources/shopImg/26ea50b1a63a4bcead135ab00d7bc1f9.jpg"));
+        restaurantImages.add(new RestaurantImage("http://leehwangco.cafe24.com/resources/shopImg/26ea50b1a63a4bcead135ab00d7bc1f9.jpg"));
+        restaurantImages.add(new RestaurantImage("http://leehwangco.cafe24.com/resources/shopImg/26ea50b1a63a4bcead135ab00d7bc1f9.jpg"));
+        restaurantImages.add(new RestaurantImage("http://leehwangco.cafe24.com/resources/shopImg/26ea50b1a63a4bcead135ab00d7bc1f9.jpg"));
+        restaurantImages.add(new RestaurantImage("http://leehwangco.cafe24.com/resources/shopImg/26ea50b1a63a4bcead135ab00d7bc1f9.jpg"));
+        restaurantImages.add(new RestaurantImage("http://leehwangco.cafe24.com/resources/shopImg/26ea50b1a63a4bcead135ab00d7bc1f9.jpg"));
+        restaurantImages.add(new RestaurantImage("http://leehwangco.cafe24.com/resources/shopImg/26ea50b1a63a4bcead135ab00d7bc1f9.jpg"));
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mContext);
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);

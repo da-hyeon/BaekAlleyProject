@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 public interface RestaurantContract {
     interface View{
         void moveActivity(Intent intent);
+        void moveOptionActivity(Intent intent);
     }
     interface Presenter{
         void setView(RecyclerView recyclerView , ViewPager viewPager, TabLayout tabLayout);

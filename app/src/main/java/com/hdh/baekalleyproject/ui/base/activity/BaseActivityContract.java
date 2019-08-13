@@ -6,6 +6,7 @@ public interface BaseActivityContract {
     }
 
     interface Presenter{
-
+        void clickDismiss();
+        void clickOptionDismiss();
     }
 }
