@@ -10,8 +10,11 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.MultiTransformation;
+import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.request.RequestOptions;
 import com.hdh.baekalleyproject.data.model.Restaurant;
+import com.hdh.baekalleyproject.data.util.CustomRoundedCornersTransformation;
 import com.hdh.baekalleyproject.databinding.ItemRestaurantBinding;
 import com.hdh.baekalleyproject.ui.restaurant_detail.RestaurantDetailActivity;
 
@@ -21,6 +24,7 @@ public class RestaurantListAdapter extends RecyclerView.Adapter<RestaurantListAd
 
     private ArrayList<Restaurant> mRestaurantList;
     private Context mContext;
+    private final int IMG_SIZE;
 
     class RestaurantListViewHolder extends RecyclerView.ViewHolder {
 
@@ -35,6 +39,7 @@ public class RestaurantListAdapter extends RecyclerView.Adapter<RestaurantListAd
     public RestaurantListAdapter(ArrayList<Restaurant> mRestaurantList, Context mContext) {
         this.mRestaurantList = mRestaurantList;
         this.mContext = mContext;
+        IMG_SIZE = Math.round(8 * mContext.getResources().getDisplayMetrics().density);
     }
 
     @Override
@@ -48,14 +53,17 @@ public class RestaurantListAdapter extends RecyclerView.Adapter<RestaurantListAd
     public void onBindViewHolder(RestaurantListViewHolder holder, int position) {
         Glide.with(mContext)
                 .load(mRestaurantList.get(position).getRestaurantImageURL())
-                .apply(new RequestOptions().centerCrop())
+                .apply(new RequestOptions().transform(new MultiTransformation(new CenterCrop(), new CustomRoundedCornersTransformation(mContext, IMG_SIZE, 0, CustomRoundedCornersTransformation.CornerType.ALL))))
                 .into(holder.binding.ivRestaurantImage);
-        holder.binding.ivRestaurantImage.setClipToOutline(true);
+
+        //holder.binding.ivRestaurantImage.setClipToOutline(true);
 
         holder.binding.tvRestaurantRank.setText((position + 1) + ".");
         holder.binding.tvRestaurantName.setText(" "+mRestaurantList.get(position).getRestaurantName());
-        //holder.binding.tvRestaurantAlley.setText(mRestaurantList.get(position).getRestaurantTime());
-//        holder.binding.tvRestaurantRepFood.setText(mRestaurantList.get(position).getRestaurantRepFood());
+        holder.binding.tvRestaurantAlley.setText(mRestaurantList.get(position).getRestaurantAlley());
+        holder.binding.tvRestaurantNOV.setText(" "+mRestaurantList.get(position).getRestaurantNOV());
+        holder.binding.tvRestaurantReviewNOV.setText(" "+mRestaurantList.get(position).getRestaurantReviewNOV());
+
         holder.binding.llRestaurant.setOnClickListener(v1->{
             Intent intent = new Intent(mContext , RestaurantDetailActivity.class);
             mContext.startActivity(intent);

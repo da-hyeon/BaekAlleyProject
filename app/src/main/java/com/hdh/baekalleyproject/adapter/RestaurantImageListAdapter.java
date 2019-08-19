@@ -7,8 +7,11 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.MultiTransformation;
+import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.request.RequestOptions;
 import com.hdh.baekalleyproject.data.model.RestaurantImage;
+import com.hdh.baekalleyproject.data.util.CustomRoundedCornersTransformation;
 import com.hdh.baekalleyproject.databinding.ItemRestaurantDetailImgBinding;
 
 import java.util.ArrayList;
@@ -32,7 +35,7 @@ public class RestaurantImageListAdapter extends RecyclerView.Adapter<RestaurantI
     public RestaurantImageListAdapter(ArrayList<RestaurantImage> mRestaurantImageList, Context mContext) {
         this.mRestaurantImageList = mRestaurantImageList;
         this.mContext = mContext;
-        IMG_SIZE = Math.round(164 * mContext.getResources().getDisplayMetrics().density);
+        IMG_SIZE = Math.round(8 * mContext.getResources().getDisplayMetrics().density);
     }
 
     @Override
@@ -45,7 +48,7 @@ public class RestaurantImageListAdapter extends RecyclerView.Adapter<RestaurantI
     public void onBindViewHolder(RestaurantImageListViewHolder holder, int position) {
         Glide.with(mContext)
                 .load(mRestaurantImageList.get(position).getRestaurantImageURL())
-                .apply(new RequestOptions().centerCrop())
+                .apply(new RequestOptions().transform(new MultiTransformation(new CenterCrop(), new CustomRoundedCornersTransformation(mContext, IMG_SIZE, 0, CustomRoundedCornersTransformation.CornerType.ALL))))
                 .into(holder.binding.ivRestaurantImage);
         //holder.binding.tvRestaurantAlley.setText(mRestaurantList.get(position).getRestaurantTime());
 //        holder.binding.tvRestaurantRepFood.setText(mRestaurantList.get(position).getRestaurantRepFood());

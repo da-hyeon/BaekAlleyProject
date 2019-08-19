@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class RestaurantList {
 
-    @SerializedName("rstrnList")
+    @SerializedName("list")
     ArrayList<Restaurant> restaurantList;
 
     public ArrayList<Restaurant> getRestaurantList() {

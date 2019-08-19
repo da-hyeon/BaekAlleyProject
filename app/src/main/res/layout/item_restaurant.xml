@@ -79,36 +79,49 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvRestaurantRank" />
 
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_see_main"
+                android:layout_marginTop="2dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tvRestaurantNOV"
+                app:layout_constraintBottom_toBottomOf="@+id/tvRestaurantNOV"/>
             <TextView
                 android:id="@+id/tvRestaurantNOV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textStyle="normal"
-                android:drawableLeft="@drawable/ic_visibility_gray_24dp"
-                android:gravity="center"
                 android:fontFamily="@font/notosans"
                 android:includeFontPadding="false"
-                android:text="106.462"
+                android:text="106,462"
                 android:textColor="#999999"
+                android:layout_marginLeft="16.7dp"
                 android:textSize="11dp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvRestaurantAlley" />
 
-            <TextView
-                android:id="@+id/tvRestaurantNOR"
+            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textStyle="normal"
+                android:src="@drawable/icon_review_small_main"
+                app:layout_constraintLeft_toRightOf="@+id/tvRestaurantNOV"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="1dp"
+                app:layout_constraintTop_toTopOf="@+id/tvRestaurantReviewNOV"
+                app:layout_constraintBottom_toBottomOf="@+id/tvRestaurantReviewNOV"/>
+
+            <TextView
+                android:id="@+id/tvRestaurantReviewNOV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:fontFamily="@font/notosans"
                 android:includeFontPadding="false"
-                android:drawableLeft="@drawable/ic_mode_edit_gray_24dp"
-                android:gravity="center"
                 android:letterSpacing="-0.05"
                 android:lineSpacingExtra="6dp"
-                android:text="49"
+                android:text="100"
                 android:textColor="#999999"
-                android:textSize="12dp"
-                android:layout_marginLeft="10dp"
+                android:textSize="11dp"
+                android:layout_marginLeft="21.7dp"
                 app:layout_constraintLeft_toRightOf="@+id/tvRestaurantNOV"
                 app:layout_constraintTop_toBottomOf="@+id/tvRestaurantAlley" />
 
@@ -119,7 +132,6 @@
                 android:fontFamily="@font/notosans"
                 android:includeFontPadding="false"
                 android:text="4.8"
-                android:textStyle="normal"
                 android:textColor="#ff4f4f"
                 android:textSize="22dp"
                 android:letterSpacing="-0.01"
@@ -132,8 +144,6 @@
                 android:id="@+id/tvRestaurantRepFood"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textStyle="normal"
-                android:gravity="center"
                 android:fontFamily="@font/notosans"
                 android:includeFontPadding="false"
                 android:text="대표메뉴 : 닭계장"
@@ -142,7 +152,7 @@
                 android:letterSpacing="-0.05"
                 android:lineSpacingExtra="6dp"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvRestaurantNOR" />
+                app:layout_constraintTop_toBottomOf="@+id/tvRestaurantReviewNOV" />
         </android.support.constraint.ConstraintLayout>
 
     </LinearLayout>

@@ -4,70 +4,67 @@ import com.google.gson.annotations.SerializedName;
 
 public class Restaurant {
 
-    @SerializedName("RSTRN_CD")
+    @SerializedName("rt_idx")
     private String restaurantID;
 
-    @SerializedName("RSTRN_NM")
+    @SerializedName("rt_nm")
     private String restaurantName;
-
-    @SerializedName("RSTRN_HOURS")
-    private String restaurantTime;
 
     @SerializedName("RSTRN_REP_FOOD")
     private String restaurantRepFood;
 
-    @SerializedName("RSTRN_IMG_URL")
+    @SerializedName("ri_url")
     private String restaurantImageURL;
 
-    @SerializedName("RSTRN_VALID")
-    private String restaurantValid;
+    @SerializedName("at_nm")
+    private String restaurantArea;
+
+    @SerializedName("cg_nm")
+    private String restaurantFoodType;
+
+    @SerializedName("rt_nov")
+    private String restaurantNOV;
+
+    @SerializedName("ay_nm")
+    private String restaurantAlley;
+
+    @SerializedName("rev_nov")
+    private String restaurantReviewNOV;
 
 
     public String getRestaurantID() {
         return restaurantID;
     }
 
-    public void setRestaurantID(String restaurantID) {
-        this.restaurantID = restaurantID;
-    }
-
     public String getRestaurantName() {
         return restaurantName;
-    }
-
-    public void setRestaurantName(String restaurantName) {
-        this.restaurantName = restaurantName;
-    }
-
-    public String getRestaurantTime() {
-        return restaurantTime;
-    }
-
-    public void setRestaurantTime(String restaurantTime) {
-        this.restaurantTime = restaurantTime;
     }
 
     public String getRestaurantRepFood() {
         return restaurantRepFood;
     }
 
-    public void setRestaurantRepFood(String restaurantRepFood) {
-        this.restaurantRepFood = restaurantRepFood;
-    }
-
     public String getRestaurantImageURL() {
         return restaurantImageURL;
     }
 
-    public void setRestaurantImageURL(String restaurantImageURL) {
-        this.restaurantImageURL = restaurantImageURL;
+    public String getRestaurantArea() {
+        return restaurantArea;
     }
 
-    public String getRestaurantValid() {
-        return restaurantValid;
+    public String getRestaurantFoodType() {
+        return restaurantFoodType;
     }
 
-    public void setRestaurantValid(String restaurantValid) {
-        this.restaurantValid = restaurantValid;
+    public String getRestaurantNOV() {
+        return restaurantNOV;
+    }
+
+    public String getRestaurantAlley() {
+        return restaurantAlley;
+    }
+
+    public String getRestaurantReviewNOV() {
+        return restaurantReviewNOV;
     }
 }

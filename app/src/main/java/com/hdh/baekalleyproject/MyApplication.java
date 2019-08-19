@@ -38,7 +38,7 @@ public class MyApplication extends Application {
 
     private Activity mActivity;
 
-    private static final String BASE_URL = "http://leehwangco.cafe24.com/";
+    private static final String BASE_URL = "http://dutchkor.cafe24.com/";
 
     @Override
     public void onCreate() {
