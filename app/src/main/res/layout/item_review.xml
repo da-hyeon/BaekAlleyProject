@@ -91,6 +91,7 @@
             android:includeFontPadding="false"
             android:maxLines="3"
             android:ellipsize="end"
+            android:textColor="#333333"
             android:textSize="14dp"/>
 
         <ImageView

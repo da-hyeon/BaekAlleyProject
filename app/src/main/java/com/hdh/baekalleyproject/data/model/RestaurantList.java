@@ -12,8 +12,4 @@ public class RestaurantList {
     public ArrayList<Restaurant> getRestaurantList() {
         return restaurantList;
     }
-
-    public void setRestaurantList(ArrayList<Restaurant> restaurantList) {
-        this.restaurantList = restaurantList;
-    }
 }

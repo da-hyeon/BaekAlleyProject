@@ -2,19 +2,30 @@ package com.hdh.baekalleyproject.data.util;
 
 
 import com.hdh.baekalleyproject.Constants;
+import com.hdh.baekalleyproject.data.model.RestaurantDetail;
 import com.hdh.baekalleyproject.data.model.RestaurantList;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Query;
 
 public interface ServerAPI {
 
     /**
      *
-     * 은행 목록가져오기
+     * 식당 목록가져오기
      */
     @GET(Constants.SELECT_RESTAURANT)
     Call<RestaurantList> getRestaurantList();
+
+
+    /**
+     * 식당 디테일 정보 가져오기
+     * @param restaurantID 식당 ID
+     * @return
+     */
+    @GET(Constants.SELECT_RESTAURANT_DETAIL)
+    Call<RestaurantDetail> getRestaurantDetail(@Query("rt_idx") String restaurantID);
 
 //
 //    /**

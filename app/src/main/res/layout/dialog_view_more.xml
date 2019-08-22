@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout  xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/clDialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="8dp">
+
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/clTop"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:alpha="0.95"
+            android:background="@drawable/round_top_ffffff"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:id="@+id/llGo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="13.3dp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/icon_likeit" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="7.7dp"
+                    android:fontFamily="@font/notosans"
+                    android:includeFontPadding="false"
+                    android:text="가야쥬"
+                    android:textColor="#333333"
+                    android:textSize="16dp" />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/vLine1"
+                android:layout_width="0dp"
+                android:layout_height="0.33dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="13.3dp"
+                android:layout_marginRight="16dp"
+                android:background="#999999"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/llGo" />
+
+            <TextView
+                android:id="@+id/tvWriteReview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="7.7dp"
+                android:layout_marginTop="11.2dp"
+                android:fontFamily="@font/notosans"
+                android:includeFontPadding="false"
+                android:text="리뷰작성"
+                android:textColor="#333333"
+                android:textSize="16dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/vLine1" />
+
+            <View
+                android:id="@+id/vLine2"
+                android:layout_width="0dp"
+                android:layout_height="0.33dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="15.2dp"
+                android:layout_marginRight="16dp"
+                android:background="#999999"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvWriteReview" />
+
+            <TextView
+                android:id="@+id/tvCall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="7.7dp"
+                android:layout_marginTop="11.2dp"
+                android:fontFamily="@font/notosans"
+                android:includeFontPadding="false"
+                android:text="전화하기"
+                android:textColor="#333333"
+                android:textSize="16dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/vLine2" />
+
+            <View
+                android:id="@+id/vLine3"
+                android:layout_width="0dp"
+                android:layout_height="0.33dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="15.2dp"
+                android:layout_marginRight="16dp"
+                android:background="#999999"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvCall" />
+
+            <TextView
+                android:id="@+id/tvAddressCopy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="7.7dp"
+                android:layout_marginTop="11.2dp"
+                android:layout_marginBottom="16dp"
+                android:fontFamily="@font/notosans"
+                android:includeFontPadding="false"
+                android:text="주소복사"
+                android:textColor="#333333"
+                android:textSize="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/vLine3" />
+
+        </android.support.constraint.ConstraintLayout>
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/clBottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:alpha="0.95"
+            android:background="@drawable/round_bottom_ffffff"
+            app:layout_constraintTop_toBottomOf="@+id/clTop">
+
+            <TextView
+                android:id="@+id/tvDismiss"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="7.7dp"
+                android:layout_marginTop="13dp"
+                android:layout_marginBottom="13dp"
+                android:fontFamily="@font/notosans"
+                android:includeFontPadding="false"
+                android:text="닫기"
+                android:textColor="#ff4f4f"
+                android:textSize="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </android.support.constraint.ConstraintLayout>
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

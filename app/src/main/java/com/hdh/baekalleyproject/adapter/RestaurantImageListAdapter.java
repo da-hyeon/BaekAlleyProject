@@ -47,7 +47,7 @@ public class RestaurantImageListAdapter extends RecyclerView.Adapter<RestaurantI
     @Override
     public void onBindViewHolder(RestaurantImageListViewHolder holder, int position) {
         Glide.with(mContext)
-                .load(mRestaurantImageList.get(position).getRestaurantImageURL())
+                .load(mRestaurantImageList.get(position).getImageURL())
                 .apply(new RequestOptions().transform(new MultiTransformation(new CenterCrop(), new CustomRoundedCornersTransformation(mContext, IMG_SIZE, 0, CustomRoundedCornersTransformation.CornerType.ALL))))
                 .into(holder.binding.ivRestaurantImage);
         //holder.binding.tvRestaurantAlley.setText(mRestaurantList.get(position).getRestaurantTime());

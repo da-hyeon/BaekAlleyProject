@@ -178,7 +178,7 @@
                         android:src="@drawable/icon_questionmark"
                         app:layout_constraintLeft_toLeftOf="@+id/tvRanking"
                         app:layout_constraintRight_toRightOf="@+id/tvRanking"
-                        app:layout_constraintTop_toTopOf="@+id/tvGo" />
+                        app:layout_constraintTop_toTopOf="@+id/tvNumberOfLike" />
 
                     <ImageView
                         android:id="@+id/ivNOV"
@@ -193,7 +193,7 @@
                         app:layout_constraintBottom_toBottomOf="@+id/vDivider1"/>
 
                     <TextView
-                        android:id="@+id/tvViewCount"
+                        android:id="@+id/tvNumberOfView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
@@ -211,25 +211,25 @@
                         android:layout_width="1dp"
                         android:layout_height="15dp"
                         android:background="#dddddd"
-                        app:layout_constraintBottom_toBottomOf="@+id/tvViewCount"
-                        app:layout_constraintLeft_toRightOf="@+id/tvViewCount"
-                        app:layout_constraintRight_toLeftOf="@+id/ivReviewNOV"
-                        app:layout_constraintTop_toTopOf="@+id/tvViewCount" />
+                        app:layout_constraintBottom_toBottomOf="@+id/tvNumberOfView"
+                        app:layout_constraintLeft_toRightOf="@+id/tvNumberOfView"
+                        app:layout_constraintRight_toLeftOf="@+id/ivNumberOfReview"
+                        app:layout_constraintTop_toTopOf="@+id/tvNumberOfView" />
 
                     <ImageView
-                        android:id="@+id/ivReviewNOV"
+                        android:id="@+id/ivNumberOfReview"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@drawable/icon_review_small_main"
                         android:layout_marginLeft="16dp"
                         android:tint="#666666"
                         android:layout_marginTop="2dp"
-                        app:layout_constraintLeft_toRightOf="@+id/tvViewCount"
+                        app:layout_constraintLeft_toRightOf="@+id/tvNumberOfView"
                         app:layout_constraintTop_toTopOf="@+id/vDivider1"
                         app:layout_constraintBottom_toBottomOf="@+id/vDivider1"/>
 
                     <TextView
-                        android:id="@+id/tvReview"
+                        android:id="@+id/tvNumberOfReview"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="2dp"
@@ -238,22 +238,22 @@
                         android:text="54"
                         android:textColor="#666666"
                         android:textSize="13dp"
-                        app:layout_constraintLeft_toRightOf="@+id/ivReviewNOV"
-                        app:layout_constraintTop_toTopOf="@+id/tvViewCount" />
+                        app:layout_constraintLeft_toRightOf="@+id/ivNumberOfReview"
+                        app:layout_constraintTop_toTopOf="@+id/tvNumberOfView" />
 
                     <View
                         android:id="@+id/vDivider2"
                         android:layout_width="1dp"
                         android:layout_height="15dp"
                         android:background="#dddddd"
-                        app:layout_constraintBottom_toBottomOf="@+id/tvViewCount"
-                        app:layout_constraintLeft_toRightOf="@+id/tvReview"
-                        app:layout_constraintRight_toLeftOf="@+id/ivGoSmall"
-                        app:layout_constraintTop_toTopOf="@+id/tvViewCount" />
+                        app:layout_constraintBottom_toBottomOf="@+id/tvNumberOfView"
+                        app:layout_constraintLeft_toRightOf="@+id/tvNumberOfReview"
+                        app:layout_constraintRight_toLeftOf="@+id/ivNumberOfLike"
+                        app:layout_constraintTop_toTopOf="@+id/tvNumberOfView" />
 
 
                     <ImageView
-                        android:id="@+id/ivGoSmall"
+                        android:id="@+id/ivNumberOfLike"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@drawable/icon_likeit_small"
@@ -261,9 +261,10 @@
                         android:layout_marginTop="2dp"
                         app:layout_constraintTop_toTopOf="@+id/vDivider2"
                         app:layout_constraintBottom_toBottomOf="@+id/vDivider2"
-                        app:layout_constraintLeft_toRightOf="@+id/tvReview"/>
+                        app:layout_constraintLeft_toRightOf="@+id/tvNumberOfReview"/>
+
                     <TextView
-                        android:id="@+id/tvGo"
+                        android:id="@+id/tvNumberOfLike"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/notosans"
@@ -272,8 +273,8 @@
                         android:textColor="#666666"
                         android:textSize="13dp"
                         android:layout_marginLeft="2dp"
-                        app:layout_constraintLeft_toRightOf="@+id/ivGoSmall"
-                        app:layout_constraintTop_toTopOf="@+id/tvViewCount" />
+                        app:layout_constraintLeft_toRightOf="@+id/ivNumberOfLike"
+                        app:layout_constraintTop_toTopOf="@+id/tvNumberOfView" />
 
 
                     <android.support.constraint.Guideline
@@ -297,7 +298,7 @@
                         android:background="@drawable/round_button_f5f5f5"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toRightOf="@+id/gl50"
-                        app:layout_constraintTop_toBottomOf="@+id/tvViewCount" />
+                        app:layout_constraintTop_toBottomOf="@+id/tvNumberOfView" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -316,7 +317,7 @@
                             android:src="@drawable/icon_likeit" />
 
                         <TextView
-                            android:id="@+id/tvGoText"
+                            android:id="@+id/tvNumberOfLikeText"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/notosans"
@@ -338,7 +339,7 @@
                         android:background="@drawable/round_button_f5f5f5"
                         app:layout_constraintLeft_toLeftOf="@+id/gl50"
                         app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/tvViewCount" />
+                        app:layout_constraintTop_toBottomOf="@+id/tvNumberOfView" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -524,6 +525,7 @@
                         app:layout_constraintTop_toTopOf="@+id/tvRestaurantInfo" />
 
                     <TextView
+                        android:id="@+id/tvUpdate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/notosans"
@@ -539,7 +541,7 @@
                         app:layout_constraintTop_toTopOf="@+id/vUpdate" />
 
                     <TextView
-                        android:id="@+id/tvTime"
+                        android:id="@+id/tvBusinessHoursText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
@@ -554,7 +556,7 @@
                         app:layout_constraintTop_toBottomOf="@+id/tvRestaurantInfo" />
 
                     <TextView
-                        android:id="@+id/tvBusinessHorus"
+                        android:id="@+id/tvBusinessHours"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="16dp"
@@ -566,9 +568,10 @@
                         android:textColor="#333333"
                         android:textSize="16dp"
                         app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/tvTime" />
+                        app:layout_constraintTop_toTopOf="@+id/tvBusinessHoursText" />
 
                     <TextView
+                        
                         android:id="@+id/tvBreakTimeText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -581,7 +584,7 @@
                         android:textColor="#333333"
                         android:textSize="16dp"
                         app:layout_constraintLeft_toLeftOf="@+id/tvRestaurantInfo"
-                        app:layout_constraintTop_toBottomOf="@+id/tvBusinessHorus" />
+                        app:layout_constraintTop_toBottomOf="@+id/tvBusinessHours" />
 
                     <TextView
                         android:id="@+id/tvBreakTime"
@@ -598,6 +601,37 @@
                         app:layout_constraintRight_toRightOf="parent"
                         app:layout_constraintTop_toTopOf="@+id/tvBreakTimeText" />
 
+<!---->
+                    <TextView
+                        android:id="@+id/tvLastOrderText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6.7dp"
+                        android:fontFamily="@font/notosans"
+                        android:includeFontPadding="false"
+                        android:letterSpacing="-0.03"
+                        android:lineSpacingExtra="7.7sp"
+                        android:text="마지막 주문"
+                        android:textColor="#333333"
+                        android:textSize="16dp"
+                        app:layout_constraintLeft_toLeftOf="@+id/tvRestaurantInfo"
+                        app:layout_constraintTop_toBottomOf="@+id/tvBreakTime" />
+
+                    <TextView
+                        android:id="@+id/tvLastOrderTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="16dp"
+                        android:fontFamily="@font/notosans"
+                        android:includeFontPadding="false"
+                        android:letterSpacing="-0.03"
+                        android:lineSpacingExtra="7.7sp"
+                        android:text="월~금 : 11:00 ~ 21:00\n토~일 : 11:00 ~ 21:00"
+                        android:textColor="#333333"
+                        android:textSize="16dp"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/tvLastOrderText" />
+                    <!---->
                     <TextView
                         android:id="@+id/tvHolidayText"
                         android:layout_width="wrap_content"
@@ -611,7 +645,7 @@
                         android:textColor="#333333"
                         android:textSize="16dp"
                         app:layout_constraintLeft_toLeftOf="@+id/tvRestaurantInfo"
-                        app:layout_constraintTop_toBottomOf="@+id/tvBreakTime" />
+                        app:layout_constraintTop_toBottomOf="@+id/tvLastOrderTime" />
 
                     <TextView
                         android:id="@+id/tvHoliday"
@@ -747,7 +781,7 @@
 
                     <!--리뷰-->
                     <TextView
-                        android:id="@+id/tvReviewText"
+                        android:id="@+id/tvNumberOfReviewText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="리뷰"
@@ -768,7 +802,7 @@
                         android:layout_height="131.3dp"
                         android:layout_marginLeft="8dp"
                         android:layout_marginRight="8dp"
-                        app:layout_constraintTop_toBottomOf="@+id/tvReviewText"
+                        app:layout_constraintTop_toBottomOf="@+id/tvNumberOfReviewText"
                         android:layout_marginTop="12dp"
                         android:background="@drawable/round_button_f9f9f9"/>
 

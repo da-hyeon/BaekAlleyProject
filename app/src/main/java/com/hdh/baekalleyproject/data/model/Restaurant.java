@@ -23,13 +23,22 @@ public class Restaurant {
     private String restaurantFoodType;
 
     @SerializedName("rt_nov")
-    private String restaurantNOV;
+    private String restaurantNumberOfView;
 
     @SerializedName("ay_nm")
     private String restaurantAlley;
 
     @SerializedName("rev_nov")
-    private String restaurantReviewNOV;
+    private String restaurantNumberOfReview;
+
+    @SerializedName("rt_update")
+    private String restaurantUpdate;
+
+    @SerializedName("rt_dtl_adres")
+    private String restaurantAddress;
+
+    @SerializedName("like_nov")
+    private String restaurantNumberOfLike;
 
 
     public String getRestaurantID() {
@@ -56,15 +65,27 @@ public class Restaurant {
         return restaurantFoodType;
     }
 
-    public String getRestaurantNOV() {
-        return restaurantNOV;
+    public String getRestaurantNumberOfView() {
+        return restaurantNumberOfView;
     }
 
     public String getRestaurantAlley() {
         return restaurantAlley;
     }
 
-    public String getRestaurantReviewNOV() {
-        return restaurantReviewNOV;
+    public String getRestaurantNumberOfReview() {
+        return restaurantNumberOfReview;
+    }
+
+    public String getRestaurantUpdate() {
+        return restaurantUpdate;
+    }
+
+    public String getRestaurantAddress() {
+        return restaurantAddress;
+    }
+
+    public String getRestaurantNumberOfLike() {
+        return restaurantNumberOfLike;
     }
 }

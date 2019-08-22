@@ -13,6 +13,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.MultiTransformation;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.request.RequestOptions;
+import com.hdh.baekalleyproject.Constants;
 import com.hdh.baekalleyproject.data.model.Restaurant;
 import com.hdh.baekalleyproject.data.util.CustomRoundedCornersTransformation;
 import com.hdh.baekalleyproject.databinding.ItemRestaurantBinding;
@@ -33,6 +34,13 @@ public class RestaurantListAdapter extends RecyclerView.Adapter<RestaurantListAd
         RestaurantListViewHolder(ItemRestaurantBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
+
+            binding.llRestaurant.setOnClickListener(v1->{
+                Intent intent = new Intent(mContext , RestaurantDetailActivity.class);
+                intent.putExtra(Constants.RESTAURANT_ID, mRestaurantList.get(getAdapterPosition()).getRestaurantID());
+                mContext.startActivity(intent);
+            });
+
         }
     }
 
@@ -61,14 +69,8 @@ public class RestaurantListAdapter extends RecyclerView.Adapter<RestaurantListAd
         holder.binding.tvRestaurantRank.setText((position + 1) + ".");
         holder.binding.tvRestaurantName.setText(" "+mRestaurantList.get(position).getRestaurantName());
         holder.binding.tvRestaurantAlley.setText(mRestaurantList.get(position).getRestaurantAlley());
-        holder.binding.tvRestaurantNOV.setText(" "+mRestaurantList.get(position).getRestaurantNOV());
-        holder.binding.tvRestaurantReviewNOV.setText(" "+mRestaurantList.get(position).getRestaurantReviewNOV());
-
-        holder.binding.llRestaurant.setOnClickListener(v1->{
-            Intent intent = new Intent(mContext , RestaurantDetailActivity.class);
-            mContext.startActivity(intent);
-        });
-
+        holder.binding.tvRestaurantNOV.setText(" "+mRestaurantList.get(position).getRestaurantNumberOfView());
+        holder.binding.tvRestaurantReviewNOV.setText(" "+mRestaurantList.get(position).getRestaurantNumberOfReview());
 
     }
 
