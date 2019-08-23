@@ -27,7 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="2.5dp"
             android:background="@drawable/drop_shadow"
-            app:layout_constraintTop_toBottomOf="@+id/vToolbar"></View>
+            app:layout_constraintTop_toBottomOf="@+id/vToolbar"/>
 
         <View
             android:id="@+id/vDismiss"
@@ -93,6 +93,16 @@
         <!---->
         <!---->
         <!---->
+
+        <View
+            android:id="@+id/vTasteGood"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toTopOf="@+id/ivTasteGood"
+            app:layout_constraintBottom_toBottomOf="@+id/tvTasteGood"
+            app:layout_constraintLeft_toLeftOf="@+id/ivTasteGood"
+            app:layout_constraintRight_toRightOf="@+id/ivTasteGood"/>
+
         <ImageView
             android:id="@+id/ivTasteGood"
             android:layout_width="wrap_content"
@@ -117,6 +127,16 @@
             app:layout_constraintRight_toRightOf="@+id/ivTasteGood"
             app:layout_constraintTop_toBottomOf="@+id/ivTasteGood" />
 
+
+        <View
+            android:id="@+id/vTasteGreat"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toTopOf="@+id/ivTasteGreat"
+            app:layout_constraintBottom_toBottomOf="@+id/tvTasteGreat"
+            app:layout_constraintLeft_toLeftOf="@+id/ivTasteGreat"
+            app:layout_constraintRight_toRightOf="@+id/ivTasteGreat"/>
+
         <ImageView
             android:id="@+id/ivTasteGreat"
             android:layout_width="wrap_content"
@@ -140,6 +160,16 @@
             app:layout_constraintLeft_toLeftOf="@+id/ivTasteGreat"
             app:layout_constraintRight_toRightOf="@+id/ivTasteGreat"
             app:layout_constraintTop_toBottomOf="@+id/ivTasteGreat" />
+
+
+        <View
+            android:id="@+id/vTasteBad"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toTopOf="@+id/ivTasteBad"
+            app:layout_constraintBottom_toBottomOf="@+id/tvTasteBad"
+            app:layout_constraintLeft_toLeftOf="@+id/ivTasteBad"
+            app:layout_constraintRight_toRightOf="@+id/ivTasteBad"/>
 
         <ImageView
             android:id="@+id/ivTasteBad"
@@ -185,10 +215,11 @@
             android:layout_marginRight="16dp"
             android:background="#ffffff"
             android:fontFamily="@font/notosans"
+            android:inputType="text"
             android:hint="무엇을 드셨나요?(방문할 분들을 위해 정확하게 입력해주세요)"
             android:includeFontPadding="false"
             android:singleLine="true"
-            android:textColor="#333333"
+            android:textColor="#17b1c4"
             android:textColorHint="#999999"
             android:textSize="12dp"
             app:layout_constraintTop_toBottomOf="@+id/vLine1" />
@@ -214,10 +245,11 @@
             android:background="#ffffff"
             android:fontFamily="@font/notosans"
             android:hint="제목(최대 20자)"
+            android:inputType="text"
             android:includeFontPadding="false"
             android:maxLength="20"
             android:singleLine="true"
-            android:textColor="#333333"
+            android:textColor="#222222"
             android:textColorHint="#999999"
             android:textSize="15dp"
             android:textStyle="bold"

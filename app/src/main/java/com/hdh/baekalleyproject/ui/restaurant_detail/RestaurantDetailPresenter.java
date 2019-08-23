@@ -22,6 +22,8 @@ import com.hdh.baekalleyproject.data.model.Review;
 import com.hdh.baekalleyproject.ui.base.activity.BaseActivityPresenter;
 import com.hdh.baekalleyproject.ui.dialog.share.ShareDialog;
 import com.hdh.baekalleyproject.ui.dialog.view_more.ViewMoreDialog;
+import com.hdh.baekalleyproject.ui.modify_info.ModifyInfoActivity;
+import com.hdh.baekalleyproject.ui.review_write.ReviewWriteActivity;
 import com.naver.maps.geometry.LatLng;
 import com.naver.maps.geometry.LatLngBounds;
 import com.naver.maps.map.CameraPosition;
@@ -135,7 +137,9 @@ public class RestaurantDetailPresenter extends BaseActivityPresenter implements 
      */
     @Override
     public void clickShare() {
-        new ShareDialog(mContext).show();
+        ShareDialog shareDialog = new ShareDialog(mContext);
+        shareDialog.setRestaurantData(mRestaurantDetail.getRestaurant().get(0));
+        shareDialog.show();
     }
 
     /**
@@ -162,8 +166,8 @@ public class RestaurantDetailPresenter extends BaseActivityPresenter implements 
      * 가야쥬 클릭 이벤트 처리
      */
     @Override
-    public void clickGo() {
-
+    public void clickNumberOfLikeText(boolean state) {
+        mView.changeNumberOfLikeText(!state);
     }
 
     /**
@@ -171,7 +175,8 @@ public class RestaurantDetailPresenter extends BaseActivityPresenter implements 
      */
     @Override
     public void clickWriteReview() {
-
+        Intent intent = new Intent(mContext , ReviewWriteActivity.class);
+        mView.moveActivity(intent);
     }
 
     /**
@@ -203,7 +208,8 @@ public class RestaurantDetailPresenter extends BaseActivityPresenter implements 
      */
     @Override
     public void clickWrongInfo() {
-
+        Intent intent = new Intent(mContext , ModifyInfoActivity.class);
+        mView.moveActivity(intent);
     }
 
     /**

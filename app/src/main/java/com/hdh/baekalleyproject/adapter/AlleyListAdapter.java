@@ -73,7 +73,6 @@ public class AlleyListAdapter extends RecyclerView.Adapter<AlleyListAdapter.Rest
             holder.binding.tvAlley.setTextColor(mContext.getResources().getColor(R.color.colorPrimary));
             holder.binding.vDot.setVisibility(View.VISIBLE);
         }
-
     }
 
     @Override

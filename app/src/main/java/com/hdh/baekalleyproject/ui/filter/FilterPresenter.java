@@ -2,22 +2,27 @@ package com.hdh.baekalleyproject.ui.filter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 
+import com.hdh.baekalleyproject.MyApplication;
 import com.hdh.baekalleyproject.adapter.AlleyListAdapter;
-import com.hdh.baekalleyproject.data.model.Alley;
+import com.hdh.baekalleyproject.data.model.AlleyList;
 import com.hdh.baekalleyproject.ui.base.activity.BaseActivityPresenter;
 
-import java.util.ArrayList;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class FilterPresenter extends BaseActivityPresenter implements FilterContract.Presenter {
     private FilterContract.View mView;
     private Context mContext;
     private Activity mActivity;
 
-    private ArrayList<Alley> mAlleyArrayList;
+    private AlleyList mAlleyArrayList;
     private AlleyListAdapter mAlleyListAdapter;
 
     public FilterPresenter(FilterContract.View mView, Context mContext, Activity mActivity) {
@@ -25,35 +30,44 @@ public class FilterPresenter extends BaseActivityPresenter implements FilterCont
         this.mView = mView;
         this.mContext = mContext;
         this.mActivity = mActivity;
-        mAlleyArrayList = new ArrayList<>();
         mAlleyListAdapter = new AlleyListAdapter(mContext);
     }
 
     @Override
     public void setAlleyView(RecyclerView recyclerView) {
 
-        mAlleyArrayList.add(new Alley("이화여대 삼거리꽃길"));
-        mAlleyArrayList.add(new Alley("이태원 해방촌 신흥시장"));
-        mAlleyArrayList.add(new Alley("인천 신포국제시장 청년몰"));
-        mAlleyArrayList.add(new Alley("인천 신포국제시장 청년몰"));
-        mAlleyArrayList.add(new Alley("인천 신포국제시장 청년몰"));
-        mAlleyArrayList.add(new Alley("인천 신포국제시장 청년몰"));
-        mAlleyArrayList.add(new Alley("인천 신포국제시장 청년몰"));
-        mAlleyArrayList.add(new Alley("인천 신포국제시장 청년몰"));
-        mAlleyArrayList.add(new Alley("인천 신포국제시장 청년몰"));
-        mAlleyArrayList.add(new Alley("인천 신포국제시장 청년몰"));
-        mAlleyArrayList.add(new Alley("인천 신포국제시장 청년몰"));
-        mAlleyArrayList.add(new Alley("인천 신포국제시장 청년몰"));
-        mAlleyArrayList.add(new Alley("인천 신포국제시장 청년몰"));
-        mAlleyArrayList.add(new Alley("인천 신포국제시장 청년몰"));
-        mAlleyArrayList.add(new Alley("인천 신포국제시장 청년몰"));
 
+        Call<AlleyList> getAlleyList = MyApplication
+                .getRestAdapter()
+                .getAlleyList();
 
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mContext);
-        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        recyclerView.setLayoutManager(linearLayoutManager);
-        mAlleyListAdapter.setmAlleyList(mAlleyArrayList);
-        recyclerView.setAdapter(mAlleyListAdapter);
+        getAlleyList.enqueue(new Callback<AlleyList>() {
+            @Override
+            public void onResponse(@NonNull Call<AlleyList> call, @NonNull Response<AlleyList> response) {
+                if (response.isSuccessful()) {
+                    mAlleyArrayList = response.body();
+
+                    if (mAlleyArrayList != null) {
+                        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mContext);
+                        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+                        recyclerView.setLayoutManager(linearLayoutManager);
+                        mAlleyListAdapter.setmAlleyList(mAlleyArrayList.getAlleyArrayList());
+                        recyclerView.setAdapter(mAlleyListAdapter);
+
+                    } else {
+                        //mView.showFailDialog("실패" , "데이터 로딩 실패");
+                        Log.d("실패", "데이터 로딩 실패");
+                        mView.removeActivity();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<AlleyList> call, @NonNull Throwable t) {
+                Log.d("error" , t.getMessage());
+                Log.d("error" , t.getLocalizedMessage());
+            }
+        });
     }
 
     /**
@@ -62,12 +76,12 @@ public class FilterPresenter extends BaseActivityPresenter implements FilterCont
     @Override
     public void clickReset() {
         mView.changeColorReset();
-        for(int i = 0 ; i < mAlleyArrayList.size(); i++) {
-            if (!mAlleyArrayList.get(i).getTag().equals("0")) {
-                mAlleyArrayList.get(i).setTag("0");
+        for(int i = 0 ; i < mAlleyArrayList.getAlleyArrayList().size(); i++) {
+            if (!mAlleyArrayList.getAlleyArrayList().get(i).getTag().equals("0")) {
+                mAlleyArrayList.getAlleyArrayList().get(i).setTag("0");
             }
         }
-        mAlleyListAdapter.setmAlleyList(mAlleyArrayList);
+        mAlleyListAdapter.setmAlleyList(mAlleyArrayList.getAlleyArrayList());
         mAlleyListAdapter.notifyDataSetChanged();
     }
 

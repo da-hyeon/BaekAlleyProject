@@ -38,13 +38,13 @@ public class RestaurantDetailActivity extends BaseActivity implements Restaurant
         });
 
         //가야쥬 클릭
-        mBinding.vGo.setOnClickListener(v -> {
-
+        mBinding.vNumberOfLikeButton.setOnClickListener(v -> {
+            mPresenter.clickNumberOfLikeText(mBinding.tvNumberOfLikeButton.getCurrentTextColor() == ContextCompat.getColor(this , R.color.colorPrimary));
         });
 
         //리뷰쓰기 클릭
         mBinding.vWriteReview.setOnClickListener(v -> {
-
+            mPresenter.clickWriteReview();
         });
 
         //맵 클릭
@@ -64,7 +64,7 @@ public class RestaurantDetailActivity extends BaseActivity implements Restaurant
 
         //잘못된 정보알림 클릭
         mBinding.vWrongInfo.setOnClickListener(v -> {
-
+            mPresenter.clickWrongInfo();
         });
 
         //맛있네유 클릭
@@ -108,13 +108,13 @@ public class RestaurantDetailActivity extends BaseActivity implements Restaurant
     }
 
     @Override
-    public void changeGo(boolean state) {
+    public void changeNumberOfLikeText(boolean state) {
         if (state) {
-            mBinding.ivGo.setImageResource(R.drawable.icon_likeit_on);
-            mBinding.tvNumberOfLikeText.setTextColor(ContextCompat.getColor(this, R.color.colorPrimary));
+            mBinding.ivNumberOfLikeButton.setImageResource(R.drawable.icon_likeit_on);
+            mBinding.tvNumberOfLikeButton.setTextColor(ContextCompat.getColor(this, R.color.colorPrimary));
         } else {
-            mBinding.ivGo.setImageResource(R.drawable.icon_likeit);
-            mBinding.tvNumberOfLikeText.setTextColor(ContextCompat.getColor(this, R.color.goTextDefaultColor));
+            mBinding.ivNumberOfLikeButton.setImageResource(R.drawable.icon_likeit);
+            mBinding.tvNumberOfLikeButton.setTextColor(ContextCompat.getColor(this, R.color.goTextDefaultColor));
         }
     }
 
@@ -230,5 +230,15 @@ public class RestaurantDetailActivity extends BaseActivity implements Restaurant
     public void hideHoliday() {
         mBinding.tvHolidayText.setVisibility(View.GONE);
         mBinding.tvHoliday.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void changeGoColor(boolean status) {
+        if (status) {
+            mBinding.ivNumberOfLikeButton.setColorFilter(ContextCompat.getColor(this , R.color.colorPrimary));
+            mBinding.tvNumberOfLikeButton.setTextColor(ContextCompat.getColor(this , R.color.colorPrimary));
+        } else {
+            mBinding.ivNumberOfLikeButton.setColorFilter(null);
+        }
     }
 }

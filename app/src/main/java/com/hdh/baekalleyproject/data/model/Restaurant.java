@@ -10,7 +10,7 @@ public class Restaurant {
     @SerializedName("rt_nm")
     private String restaurantName;
 
-    @SerializedName("RSTRN_REP_FOOD")
+    @SerializedName("mn_nm")
     private String restaurantRepFood;
 
     @SerializedName("ri_url")
@@ -39,6 +39,9 @@ public class Restaurant {
 
     @SerializedName("like_nov")
     private String restaurantNumberOfLike;
+
+    @SerializedName("avrg_Price")
+    private String restaurantPriceRange;
 
 
     public String getRestaurantID() {
@@ -87,5 +90,9 @@ public class Restaurant {
 
     public String getRestaurantNumberOfLike() {
         return restaurantNumberOfLike;
+    }
+
+    public String getRestaurantPriceRange() {
+        return restaurantPriceRange;
     }
 }

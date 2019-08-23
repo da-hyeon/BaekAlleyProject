@@ -9,4 +9,5 @@
     <color name="foodTextDefaultColor">#bbbbbb</color>
     <color name="priceTextDefaultColor">#666666</color>
     <color name="goTextDefaultColor">#333333</color>
+    <color name="wrongInfoTextDefaultColor">#999999</color>
 </resources>

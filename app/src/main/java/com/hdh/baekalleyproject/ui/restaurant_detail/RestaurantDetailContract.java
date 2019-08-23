@@ -9,7 +9,7 @@ import com.naver.maps.map.MapView;
 public interface RestaurantDetailContract {
     interface View extends BaseActivityContract.View {
 
-        void changeGo(boolean state);
+        void changeNumberOfLikeText(boolean state);
 
         void setRestaurantAlley(String alley);
         void setRestaurantName(String name);
@@ -34,6 +34,8 @@ public interface RestaurantDetailContract {
         void hideBreakTime();
         void hideLastOrderTime();
         void hideHoliday();
+
+        void changeGoColor(boolean status);
     }
     interface Presenter extends BaseActivityContract.Presenter{
         void mapAsync(MapView map);
@@ -41,7 +43,7 @@ public interface RestaurantDetailContract {
 
         void clickShare();
         void clickMore();
-        void clickGo();
+        void clickNumberOfLikeText(boolean state);
         void clickWriteReview();
         void clickMap();
         void clickCall();

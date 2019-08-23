@@ -11,16 +11,16 @@ import com.hdh.baekalleyproject.databinding.ItemReviewBinding;
 
 import java.util.ArrayList;
 
-public class RestaurantReviewListAdapter extends RecyclerView.Adapter<RestaurantReviewListAdapter.RestaurantMenuListViewHolder> {
+public class RestaurantReviewListAdapter extends RecyclerView.Adapter<RestaurantReviewListAdapter.RestaurantReviewListViewHolder> {
 
     private ArrayList<Review> mRestaurantReviewList;
     private Context mContext;
 
-    class RestaurantMenuListViewHolder extends RecyclerView.ViewHolder {
+    class RestaurantReviewListViewHolder extends RecyclerView.ViewHolder {
 
         private ItemReviewBinding binding;
 
-        RestaurantMenuListViewHolder(ItemReviewBinding binding) {
+        RestaurantReviewListViewHolder(ItemReviewBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
         }
@@ -32,13 +32,13 @@ public class RestaurantReviewListAdapter extends RecyclerView.Adapter<Restaurant
     }
 
     @Override
-    public RestaurantReviewListAdapter.RestaurantMenuListViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new RestaurantReviewListAdapter.RestaurantMenuListViewHolder(ItemReviewBinding.inflate(LayoutInflater.from(parent.getContext()) , parent , false));
+    public RestaurantReviewListAdapter.RestaurantReviewListViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        return new RestaurantReviewListAdapter.RestaurantReviewListViewHolder(ItemReviewBinding.inflate(LayoutInflater.from(parent.getContext()) , parent , false));
     }
 
     @SuppressLint("SetTextI18n")
     @Override
-    public void onBindViewHolder(RestaurantReviewListAdapter.RestaurantMenuListViewHolder holder, int position) {
+    public void onBindViewHolder(RestaurantReviewListAdapter.RestaurantReviewListViewHolder holder, int position) {
         //holder.binding.tvMenuName.setText(mRestaurantReviewList.get(position).getMenuName());
        // holder.binding.tvMenuPrice.setText(mRestaurantReviewList.get(position).getMenuPrice());
     }

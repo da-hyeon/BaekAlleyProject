@@ -2,6 +2,7 @@ package com.hdh.baekalleyproject.data.util;
 
 
 import com.hdh.baekalleyproject.Constants;
+import com.hdh.baekalleyproject.data.model.AlleyList;
 import com.hdh.baekalleyproject.data.model.RestaurantDetail;
 import com.hdh.baekalleyproject.data.model.RestaurantList;
 
@@ -12,8 +13,7 @@ import retrofit2.http.Query;
 public interface ServerAPI {
 
     /**
-     *
-     * 식당 목록가져오기
+     * 식당 전체목록 가져오기
      */
     @GET(Constants.SELECT_RESTAURANT)
     Call<RestaurantList> getRestaurantList();
@@ -27,6 +27,11 @@ public interface ServerAPI {
     @GET(Constants.SELECT_RESTAURANT_DETAIL)
     Call<RestaurantDetail> getRestaurantDetail(@Query("rt_idx") String restaurantID);
 
+    /**
+     * 골목 전체목록 가져오기
+     */
+    @GET(Constants.SELECT_ALLEY)
+    Call<AlleyList> getAlleyList();
 //
 //    /**
 //     * 로그인 요청

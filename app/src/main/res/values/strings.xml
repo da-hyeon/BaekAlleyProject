@@ -32,7 +32,12 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <string name="kakao_app_key">54ac5b0fdca5539ebebfb19d7a766090</string>
+    <string name="kakao_scheme">kakao54ac5b0fdca5539ebebfb19d7a766090</string>
+    <string name="kakaolink_host">kakaolink</string>
+
     <string name="naver_client_key">648j61yfzo</string>
 
+    <string name="facebook_app_id">677083682794750</string>
+    <string name="fb_login_protocol_scheme">fb677083682794750</string>
 
 </resources>

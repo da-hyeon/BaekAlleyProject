@@ -71,6 +71,7 @@ public class RestaurantListAdapter extends RecyclerView.Adapter<RestaurantListAd
         holder.binding.tvRestaurantAlley.setText(mRestaurantList.get(position).getRestaurantAlley());
         holder.binding.tvRestaurantNOV.setText(" "+mRestaurantList.get(position).getRestaurantNumberOfView());
         holder.binding.tvRestaurantReviewNOV.setText(" "+mRestaurantList.get(position).getRestaurantNumberOfReview());
+        holder.binding.tvRestaurantRepFood.setText("대표메뉴 : " + mRestaurantList.get(position).getRestaurantRepFood());
 
     }
 
