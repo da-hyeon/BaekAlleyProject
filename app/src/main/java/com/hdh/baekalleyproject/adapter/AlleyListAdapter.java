@@ -80,7 +80,11 @@ public class AlleyListAdapter extends RecyclerView.Adapter<AlleyListAdapter.Rest
         return (mAlleyList != null ? mAlleyList.size() : 0);
     }
 
-    public void setmAlleyList(ArrayList<Alley> mAlleyList) {
+    public void setAlleyList(ArrayList<Alley> mAlleyList) {
         this.mAlleyList = mAlleyList;
+    }
+
+    public ArrayList<Alley> getAlleyList() {
+        return mAlleyList;
     }
 }

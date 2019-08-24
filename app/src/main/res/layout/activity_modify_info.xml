@@ -175,6 +175,7 @@
                     android:layout_height="0dp"
                     android:fontFamily="@font/notosans"
                     android:includeFontPadding="false"
+                    android:scrollbars="vertical"
                     android:textColor="#333333"
                     android:textSize="15dp"
                     android:textColorHint="#999999"/>

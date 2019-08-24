@@ -3,32 +3,31 @@ package com.hdh.baekalleyproject.adapter;
 import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.support.annotation.NonNull;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.view.PagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 import com.hdh.baekalleyproject.R;
-import com.hdh.baekalleyproject.data.model.Event;
-import com.hdh.baekalleyproject.databinding.ItemEventImgBinding;
+import com.hdh.baekalleyproject.databinding.ItemRestaurantImgBinding;
 
 import java.util.ArrayList;
 
-public class EventImageSliderAdapter extends PagerAdapter {
+public class RestaurantImageSliderAdapter extends PagerAdapter {
 
     private Context mContext;
-    private ArrayList<Event> mEventArrayList;
-    private FragmentManager mFragmentManager;
+    private ArrayList<String> mImageArrayList;
 
-    public EventImageSliderAdapter(Context mContext, FragmentManager mFragmentManager) {
+    public RestaurantImageSliderAdapter(Context mContext) {
         this.mContext = mContext;
-        this.mFragmentManager = mFragmentManager;
     }
 
     @Override
     public int getCount() {
-        return mEventArrayList.size();
+        return mImageArrayList.size();
     }
 
     @Override
@@ -40,12 +39,13 @@ public class EventImageSliderAdapter extends PagerAdapter {
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
 
-        ItemEventImgBinding mBinding = DataBindingUtil.inflate(LayoutInflater.from(mContext), R.layout.item_event_img, container, false);
+        ItemRestaurantImgBinding mBinding = DataBindingUtil.inflate(LayoutInflater.from(mContext), R.layout.item_restaurant_img, container, false);
         mBinding.getRoot().setTag(position);
 
-        if (mEventArrayList.size() > 0) {
-            mBinding.ivEventImage.setImageDrawable(mContext.getResources().getDrawable(R.drawable.mainbanner_1));
-        }
+        Glide.with(mContext)
+                .load(mImageArrayList.get(position))
+                .apply(new RequestOptions().centerCrop().override(500,500).diskCacheStrategy(DiskCacheStrategy.RESOURCE))
+                .into(mBinding.pvPhoto);
 
         container.addView(mBinding.getRoot());
         return mBinding.getRoot();
@@ -56,7 +56,7 @@ public class EventImageSliderAdapter extends PagerAdapter {
         container.invalidate();
     }
 
-    public void setmEventArrayList(ArrayList<Event> mEventArrayList) {
-        this.mEventArrayList = mEventArrayList;
+    public void setmImageArrayList(ArrayList<String> mImageArrayList) {
+        this.mImageArrayList = mImageArrayList;
     }
 }

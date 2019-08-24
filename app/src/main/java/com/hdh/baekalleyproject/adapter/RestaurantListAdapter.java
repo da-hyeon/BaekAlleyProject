@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.MultiTransformation;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.request.RequestOptions;
 import com.hdh.baekalleyproject.Constants;
@@ -61,7 +62,7 @@ public class RestaurantListAdapter extends RecyclerView.Adapter<RestaurantListAd
     public void onBindViewHolder(RestaurantListViewHolder holder, int position) {
         Glide.with(mContext)
                 .load(mRestaurantList.get(position).getRestaurantImageURL())
-                .apply(new RequestOptions().transform(new MultiTransformation(new CenterCrop(), new CustomRoundedCornersTransformation(mContext, IMG_SIZE, 0, CustomRoundedCornersTransformation.CornerType.ALL))))
+                .apply(new RequestOptions().transform(new MultiTransformation(new CenterCrop(), new CustomRoundedCornersTransformation(mContext, IMG_SIZE, 0, CustomRoundedCornersTransformation.CornerType.ALL))).override(450,450).diskCacheStrategy(DiskCacheStrategy.RESOURCE))
                 .into(holder.binding.ivRestaurantImage);
 
         //holder.binding.ivRestaurantImage.setClipToOutline(true);

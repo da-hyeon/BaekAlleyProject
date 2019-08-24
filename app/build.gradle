@@ -83,8 +83,13 @@ dependencies {
     }
 
     //fb sdk compile
-    implementation ('com.facebook.android:facebook-login:4.42.0') {
+    implementation('com.facebook.android:facebook-login:4.42.0') {
         exclude group: 'com.android.support'
     }
+    implementation('com.facebook.android:facebook-share:4.42.0') {
+        exclude group: 'com.android.support'
+    }
+
+    implementation 'com.github.chrisbanes:PhotoView:2.1.3'
 
 }

@@ -4,6 +4,8 @@ import android.content.Intent;
 
 public interface BaseActivityContract {
     interface View{
+        void isPermissionCheck();
+
         void removeActivity();
         void moveActivity(Intent intent);
     }

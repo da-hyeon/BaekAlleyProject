@@ -38,6 +38,7 @@ public class MainActivity extends BaseActivity implements MainActivityContract.V
      * 데이터 초기화 및 생성
      */
     private void initData() {
+        isPermissionCheck();
         mPresenter.setData(mBinding.vpView, mBinding.tlMenu);
     }
 }

@@ -79,11 +79,11 @@ public class RestaurantDetailPresenter extends BaseActivityPresenter implements 
         String restaurantID = intent.getStringExtra(Constants.RESTAURANT_ID);
 
 
-        Call<RestaurantDetail> eventOnGoingList = MyApplication
+        Call<RestaurantDetail> getRestaurantDetails = MyApplication
                 .getRestAdapter()
-                .getRestaurantDetail(restaurantID);
+                .getRestaurantDetails(restaurantID);
 
-        eventOnGoingList.enqueue(new Callback<RestaurantDetail>() {
+        getRestaurantDetails.enqueue(new Callback<RestaurantDetail>() {
             @Override
             public void onResponse(@NonNull Call<RestaurantDetail> call, @NonNull Response<RestaurantDetail> response) {
                 if (response.isSuccessful()) {
@@ -137,7 +137,7 @@ public class RestaurantDetailPresenter extends BaseActivityPresenter implements 
      */
     @Override
     public void clickShare() {
-        ShareDialog shareDialog = new ShareDialog(mContext);
+        ShareDialog shareDialog = new ShareDialog(mContext , mActivity);
         shareDialog.setRestaurantData(mRestaurantDetail.getRestaurant().get(0));
         shareDialog.show();
     }
@@ -158,7 +158,9 @@ public class RestaurantDetailPresenter extends BaseActivityPresenter implements 
         viewMoreDialog.getWindow().setGravity(Gravity.BOTTOM);
         viewMoreDialog.show();*/
 
-        new ViewMoreDialog(mContext).show();
+        ViewMoreDialog viewMoreDialog = new ViewMoreDialog(mContext);
+        viewMoreDialog.setRestaurantData(mRestaurantDetail.getRestaurant().get(0));
+        viewMoreDialog.show();
 
     }
 

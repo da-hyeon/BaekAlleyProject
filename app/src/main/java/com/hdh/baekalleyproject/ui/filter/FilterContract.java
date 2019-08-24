@@ -1,6 +1,7 @@
 package com.hdh.baekalleyproject.ui.filter;
 
 import android.support.v7.widget.RecyclerView;
+import android.widget.TextView;
 
 import com.hdh.baekalleyproject.ui.base.activity.BaseActivityContract;
 
@@ -20,5 +21,7 @@ public interface FilterContract {
 
         void clickFoodType(android.view.View view , int index);
         void clickPriceType(android.view.View view , int index);
+
+        void clickSelectionComplete(TextView[] foodTypeTextViews , TextView[] priceTypeTextViews);
     }
 }

@@ -85,6 +85,7 @@ public class RestaurantPresenter implements RestaurantContract.Presenter{
         eventArrayList.add(new Event("http://leehwangco.cafe24.com/resources/shopImg/mainbanner_1.png"));
 
         mEventImageSliderAdapter.setmEventArrayList(eventArrayList);
+
         viewPager.setAdapter(mEventImageSliderAdapter);
         tabLayout.setupWithViewPager(viewPager , true);
 

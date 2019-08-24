@@ -38,11 +38,11 @@ public class FilterActivity extends BaseActivity implements FilterContract.View 
 
         //닫기 버튼 클릭
         mBinding.vDismiss.setOnClickListener(v ->
-            mPresenter.clickOptionDismiss()
+                mPresenter.clickOptionDismiss()
         );
 
         mBinding.vReset.setOnClickListener(v ->
-            mPresenter.clickReset()
+                mPresenter.clickReset()
         );
 
         //음식종류 클릭
@@ -60,6 +60,10 @@ public class FilterActivity extends BaseActivity implements FilterContract.View 
                     mPresenter.clickPriceType(mPriceTypeViews[index], index)
             );
         }
+
+        mBinding.btComplete.setOnClickListener(v ->
+            mPresenter.clickSelectionComplete(mFoodTypeTextViews, mPriceTypeTextViews)
+        );
     }
 
     private void initData() {
@@ -135,6 +139,7 @@ public class FilterActivity extends BaseActivity implements FilterContract.View 
 
     /**
      * 음식종류 색상 변경하기
+     *
      * @param index 변경할 배열의 index
      * @param state true - 선택 , false - 선택안함
      */
@@ -155,6 +160,7 @@ public class FilterActivity extends BaseActivity implements FilterContract.View 
 
     /**
      * 가격대 색상 변경하기
+     *
      * @param index 변경할 배열의 index
      * @param state true - 선택 , false - 선택안함
      */
@@ -178,14 +184,14 @@ public class FilterActivity extends BaseActivity implements FilterContract.View 
      */
     @Override
     public void changeColorReset() {
-        for(int i = 0; i < mFoodTypeViews.length; i++){
+        for (int i = 0; i < mFoodTypeViews.length; i++) {
             if (!mFoodTypeViews[i].getTag().equals("0")) {
                 mFoodTypeViews[i].setTag("0");
                 changeTintColorOfFoodType(i, false);
             }
         }
 
-        for(int i = 0; i < mPriceTypeViews.length; i++) {
+        for (int i = 0; i < mPriceTypeViews.length; i++) {
             if (!mPriceTypeViews[i].getTag().equals("0")) {
                 mPriceTypeViews[i].setTag("0");
                 changeTintColorOfPriceType(i, false);

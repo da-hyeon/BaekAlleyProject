@@ -6,8 +6,13 @@ import com.hdh.baekalleyproject.data.model.AlleyList;
 import com.hdh.baekalleyproject.data.model.RestaurantDetail;
 import com.hdh.baekalleyproject.data.model.RestaurantList;
 
+import java.util.ArrayList;
+
 import retrofit2.Call;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 public interface ServerAPI {
@@ -21,17 +26,44 @@ public interface ServerAPI {
 
     /**
      * 식당 디테일 정보 가져오기
+     *
      * @param restaurantID 식당 ID
-     * @return
+     * @return 식당 디테일 정보
      */
     @GET(Constants.SELECT_RESTAURANT_DETAIL)
-    Call<RestaurantDetail> getRestaurantDetail(@Query("rt_idx") String restaurantID);
+    Call<RestaurantDetail> getRestaurantDetails(@Query("rt_idx") String restaurantID);
 
     /**
      * 골목 전체목록 가져오기
      */
     @GET(Constants.SELECT_ALLEY)
     Call<AlleyList> getAlleyList();
+
+
+    /**
+     * 필터 요청
+     *
+     * @param ayOption 골목 선택 : 1 , 미선택 : 0
+     * @param cgOption 음식종류 선택 : 1 , 미선택 : 0
+     * @param PriceOption 가격대 선택 : 1 , 미선택 : 0
+     * @param ay_nm 선택한 골목 리스트
+     * @param cg_nm 선택한 음식종류 리스트
+     * @param avrg_Price 선택한 가격대 리스트
+     * @param optionCount 선택한 필터의 카테고리 갯수
+     * @return 식당 리스트
+     */
+    @FormUrlEncoded
+    @POST(Constants.REQUEST_FILTER_ITEM)
+    Call<RestaurantList> setFilter(
+            @Field("ayOption") int ayOption,
+            @Field("cgOption") int cgOption,
+            @Field("priceOption") int PriceOption,
+            @Field("ay_nm") ArrayList<String> ay_nm,
+            @Field("cg_nm") ArrayList<String> cg_nm ,
+            @Field("avrg_Price") ArrayList<String> avrg_Price,
+            @Field("optionCount") int optionCount);
+
+
 //
 //    /**
 //     * 로그인 요청

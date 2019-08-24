@@ -5,6 +5,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
         android:name=".MyApplication"
@@ -17,7 +18,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.FullScreen.Transparent"
         android:usesCleartextTraffic="true">
-
+        <activity android:name=".ui.photo.PhotoActivity"></activity>
 
         <meta-data
             android:name="com.kakao.sdk.AppKey"
@@ -25,11 +26,14 @@
         <meta-data
             android:name="com.naver.maps.map.CLIENT_ID"
             android:value="@string/naver_client_key" />
-
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
 
+        <provider
+            android:name="com.facebook.FacebookContentProvider"
+            android:authorities="com.facebook.app.FacebookContentProvider{677083682794750}"
+            android:exported="true" />
 
         <activity
             android:name=".ui.main.MainActivity"
@@ -54,7 +58,6 @@
                 <data
                     android:host="@string/kakaolink_host"
                     android:scheme="@string/kakao_scheme" />
-
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
@@ -112,7 +115,6 @@
             android:theme="@style/AppTheme.FullScreen.Transparent"
             android:windowSoftInputMode="adjustResize"
             tools:replace="screenOrientation" />
-
     </application>
 
 </manifest>
