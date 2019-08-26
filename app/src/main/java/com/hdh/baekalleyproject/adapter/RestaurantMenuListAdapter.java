@@ -45,7 +45,7 @@ public class RestaurantMenuListAdapter extends RecyclerView.Adapter<RestaurantMe
 
     @Override
     public int getItemCount() {
-        return (mRestaurantMenuList != null ? mRestaurantMenuList.size() : 0);
+        return mRestaurantMenuList.size();
     }
 
 }

@@ -2,7 +2,9 @@ package com.hdh.baekalleyproject.data.model;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Restaurant {
+import java.io.Serializable;
+
+public class Restaurant implements Serializable {
 
     @SerializedName("rt_idx")
     private String restaurantID;
@@ -94,5 +96,24 @@ public class Restaurant {
 
     public String getRestaurantPriceRange() {
         return restaurantPriceRange;
+    }
+
+    @Override
+    public String toString() {
+        return "Restaurant{" +
+                "restaurantID='" + restaurantID + '\'' +
+                ", restaurantName='" + restaurantName + '\'' +
+                ", restaurantRepFood='" + restaurantRepFood + '\'' +
+                ", restaurantImageURL='" + restaurantImageURL + '\'' +
+                ", restaurantArea='" + restaurantArea + '\'' +
+                ", restaurantFoodType='" + restaurantFoodType + '\'' +
+                ", restaurantNumberOfView='" + restaurantNumberOfView + '\'' +
+                ", restaurantAlley='" + restaurantAlley + '\'' +
+                ", restaurantNumberOfReview='" + restaurantNumberOfReview + '\'' +
+                ", restaurantUpdate='" + restaurantUpdate + '\'' +
+                ", restaurantAddress='" + restaurantAddress + '\'' +
+                ", restaurantNumberOfLike='" + restaurantNumberOfLike + '\'' +
+                ", restaurantPriceRange='" + restaurantPriceRange + '\'' +
+                '}';
     }
 }

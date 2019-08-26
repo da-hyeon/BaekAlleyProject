@@ -26,7 +26,7 @@ public class RestaurantFragment extends BaseFragment implements RestaurantContra
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_restaurant, container, false);
-        mPresenter = new RestaurantPresenter(this, getContext(), getFragmentManager());
+        mPresenter = new RestaurantPresenter(this, getContext(), getActivity(), getFragmentManager());
 
         initData();
 
@@ -43,11 +43,12 @@ public class RestaurantFragment extends BaseFragment implements RestaurantContra
         return mBinding.getRoot();
     }
 
+
     /**
      * 데이터 생성 및 초기화
      */
     private void initData() {
-
+        mPresenter.setView(mBinding.rvRestaurantList, mBinding.vpEvent, mBinding.tlDots);
     }
 
     /**
@@ -56,11 +57,12 @@ public class RestaurantFragment extends BaseFragment implements RestaurantContra
     @Override
     public void onResume() {
         super.onResume();
-        mPresenter.setView(mBinding.rvRestaurantList, mBinding.vpEvent, mBinding.tlDots);
+
     }
 
     /**
      * 일반 액티비티 이동
+     *
      * @param intent
      */
     @Override
@@ -70,11 +72,32 @@ public class RestaurantFragment extends BaseFragment implements RestaurantContra
 
     /**
      * 옵션 액티비티 이동
+     *
      * @param intent
      */
     @Override
     public void moveOptionActivity(Intent intent) {
         startActivity(intent);
         getActivity().overridePendingTransition(R.anim.slide_up, R.anim.stay);
+    }
+
+    @Override
+    public void moveOptionActivityForResult(Intent intent, int requestCode) {
+        startActivityForResult(intent, requestCode);
+        getActivity().overridePendingTransition(R.anim.slide_up, R.anim.stay);
+    }
+
+    /**
+     * 필터에서 전달받은 데이터 처리
+     *
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == 0) {
+            mPresenter.setRestaurantFilterList(data);
+        }
     }
 }

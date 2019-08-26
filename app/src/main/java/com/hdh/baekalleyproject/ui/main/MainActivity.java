@@ -31,7 +31,6 @@ public class MainActivity extends BaseActivity implements MainActivityContract.V
         mMyInfoFragment = new MyInfoFragment();
 
         initData();
-
     }
 
     /**

@@ -19,6 +19,7 @@ import javax.net.ssl.SSLSession;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
+import io.realm.Realm;
 import okhttp3.JavaNetCookieJar;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -45,6 +46,7 @@ public class MyApplication extends Application {
         super.onCreate();
         appInstance = this;
         KakaoSDK.init(new KakaoSDKAdapter());
+        Realm.init(this);
     }
 
     /**

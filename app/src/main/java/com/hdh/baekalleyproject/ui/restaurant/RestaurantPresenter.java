@@ -1,5 +1,6 @@
 package com.hdh.baekalleyproject.ui.restaurant;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -10,6 +11,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
+import com.hdh.baekalleyproject.Constants;
 import com.hdh.baekalleyproject.MyApplication;
 import com.hdh.baekalleyproject.adapter.EventImageSliderAdapter;
 import com.hdh.baekalleyproject.adapter.RestaurantListAdapter;
@@ -28,18 +30,24 @@ public class RestaurantPresenter implements RestaurantContract.Presenter{
 
     private RestaurantContract.View mView;
     private Context mContext;
+    private Activity mActivity;
     private FragmentManager mFragmentManager;
+
     private RestaurantList restaurantList;
     private RestaurantList restaurantList_get;
+
+    private RestaurantListAdapter mRestaurantListAdapter;
 
 
     private EventImageSliderAdapter mEventImageSliderAdapter;
 
-    RestaurantPresenter(RestaurantContract.View mView, Context mContext , FragmentManager mFragmentManager) {
+    RestaurantPresenter(RestaurantContract.View mView, Context mContext , Activity mActivity , FragmentManager mFragmentManager) {
         this.mView = mView;
         this.mContext = mContext;
+        this.mActivity = mActivity;
         this.mFragmentManager = mFragmentManager;
         mEventImageSliderAdapter = new EventImageSliderAdapter(mContext , mFragmentManager);
+        mRestaurantListAdapter = new RestaurantListAdapter(mContext);
     }
 
 
@@ -60,9 +68,10 @@ public class RestaurantPresenter implements RestaurantContract.Presenter{
                     if (restaurantList != null) {
 
                         GridLayoutManager mGridLayoutManager = new GridLayoutManager(mContext , 2);
-
                         recyclerView.setLayoutManager(mGridLayoutManager);
-                        recyclerView.setAdapter(new RestaurantListAdapter( restaurantList.getRestaurantList() , mContext));
+
+                        mRestaurantListAdapter.setRestaurantList(restaurantList.getRestaurantList());
+                        recyclerView.setAdapter(mRestaurantListAdapter);
 
                     } else {
                         //mView.showFailDialog("실패" , "데이터 로딩 실패");
@@ -91,12 +100,20 @@ public class RestaurantPresenter implements RestaurantContract.Presenter{
 
     }
 
+    @Override
+    public void setRestaurantFilterList(Intent intent) {
+        restaurantList = (RestaurantList) intent.getSerializableExtra(Constants.RESTAURANT_FILTER_LIST);
+        mRestaurantListAdapter.setRestaurantList(restaurantList.getRestaurantList());
+        mRestaurantListAdapter.notifyDataSetChanged();
+    }
+
     /**
      * 필터 버튼 클릭 이벤트 처리
      */
     @Override
     public void clickFilter() {
-        mView.moveOptionActivity(new Intent(mContext , FilterActivity.class));
+        Intent intent = new Intent(mContext , FilterActivity.class);
+        mView.moveOptionActivityForResult(intent , 0);
     }
 
     /**

@@ -11,6 +11,7 @@ public class Constants {
     public static final String RESTAURANT_IMAGES = "restaurantImages";
     public static final String RESTAURANT_IMAGE_CLICK_POSITION = "restaurantImageClickPosition";
 
+    public static final String RESTAURANT_FILTER_LIST = "restaurantFilterList";
     /**
      * LOG TAG
      */

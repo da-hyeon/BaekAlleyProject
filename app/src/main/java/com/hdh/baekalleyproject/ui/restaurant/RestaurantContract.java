@@ -9,10 +9,12 @@ public interface RestaurantContract {
     interface View{
         void moveActivity(Intent intent);
         void moveOptionActivity(Intent intent);
+        void moveOptionActivityForResult(Intent intent  , int requestCode);
     }
     interface Presenter{
         void setView(RecyclerView recyclerView , ViewPager viewPager, TabLayout tabLayout);
 
+        void setRestaurantFilterList(Intent intent);
         void clickFilter();
         void clickSearch();
     }

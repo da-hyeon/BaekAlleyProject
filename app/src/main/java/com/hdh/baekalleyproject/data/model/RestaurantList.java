@@ -2,9 +2,10 @@ package com.hdh.baekalleyproject.data.model;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class RestaurantList {
+public class RestaurantList implements Serializable {
 
     @SerializedName("list")
     ArrayList<Restaurant> restaurantList;

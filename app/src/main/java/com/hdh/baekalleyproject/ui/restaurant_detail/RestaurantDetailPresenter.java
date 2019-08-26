@@ -1,6 +1,8 @@
 package com.hdh.baekalleyproject.ui.restaurant_detail;
 
 import android.app.Activity;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.location.Address;
@@ -9,6 +11,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.hdh.baekalleyproject.Constants;
 import com.hdh.baekalleyproject.MyApplication;
@@ -37,6 +40,7 @@ import com.naver.maps.map.overlay.OverlayImage;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -139,6 +143,8 @@ public class RestaurantDetailPresenter extends BaseActivityPresenter implements 
     public void clickShare() {
         ShareDialog shareDialog = new ShareDialog(mContext , mActivity);
         shareDialog.setRestaurantData(mRestaurantDetail.getRestaurant().get(0));
+        Objects.requireNonNull(shareDialog.getWindow()).getAttributes().windowAnimations = R.style.dialogAnimation;
+
         shareDialog.show();
     }
 
@@ -160,6 +166,7 @@ public class RestaurantDetailPresenter extends BaseActivityPresenter implements 
 
         ViewMoreDialog viewMoreDialog = new ViewMoreDialog(mContext);
         viewMoreDialog.setRestaurantData(mRestaurantDetail.getRestaurant().get(0));
+        Objects.requireNonNull(viewMoreDialog.getWindow()).getAttributes().windowAnimations = R.style.dialogAnimation;
         viewMoreDialog.show();
 
     }
@@ -202,7 +209,15 @@ public class RestaurantDetailPresenter extends BaseActivityPresenter implements 
      */
     @Override
     public void clickAddressCopy() {
-
+        //클립보드
+        ClipboardManager clipboardManager = (ClipboardManager) mContext.getSystemService(Context.CLIPBOARD_SERVICE);
+        ClipData clipData = ClipData.newPlainText(Constants.RESTAURANT_ADDRESS ,mRestaurantDetail.getRestaurant().get(0).getRestaurantAddress());
+        if (clipboardManager != null) {
+            clipboardManager.setPrimaryClip(clipData);
+            Toast.makeText(mContext, "클립보드에 주소가 복사되었습니다.", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(mContext, "주소 복사에 실패했습니다.", Toast.LENGTH_SHORT).show();
+        }
     }
 
     /**
@@ -301,10 +316,12 @@ public class RestaurantDetailPresenter extends BaseActivityPresenter implements 
         Geocoder geocoder = new Geocoder(mContext);
         String address = "";
         //주소 입력
-        if (mRestaurantDetail.getRestaurant() != null) {
-            address = mRestaurantDetail.getRestaurant().get(0).getRestaurantAddress();
-        }
 
+        if(mRestaurantDetail != null) {
+            if (mRestaurantDetail.getRestaurant() != null) {
+                address = mRestaurantDetail.getRestaurant().get(0).getRestaurantAddress();
+            }
+        }
         double lat = 0 , lon = 0;
 
         List<Address> list = null;

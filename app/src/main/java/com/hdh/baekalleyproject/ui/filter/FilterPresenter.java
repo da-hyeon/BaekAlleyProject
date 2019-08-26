@@ -2,6 +2,7 @@ package com.hdh.baekalleyproject.ui.filter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import com.hdh.baekalleyproject.Constants;
 import com.hdh.baekalleyproject.MyApplication;
 import com.hdh.baekalleyproject.R;
 import com.hdh.baekalleyproject.adapter.AlleyListAdapter;
@@ -127,7 +129,7 @@ public class FilterPresenter extends BaseActivityPresenter implements FilterCont
      * 선택완료 클릭 이벤트 처리
      */
     @Override
-    public void clickSelectionComplete(TextView[] foodTypeTextViews , TextView[] priceTypeTextViews) {
+    public void clickSelectionComplete(TextView[] foodTypeTextViews, TextView[] priceTypeTextViews) {
 
         int selectedAlleyCount;                //선택된 골목 개수
         int selectedFoodTypeCount;             //선택된 음식종류 개수
@@ -138,7 +140,7 @@ public class FilterPresenter extends BaseActivityPresenter implements FilterCont
         int selectedCategoriesCount = 0;    //선택된 카테고리 개수
 
         //선택된 골목 세팅
-        for (Alley alley : mAlleyListAdapter.getAlleyList()){
+        for (Alley alley : mAlleyListAdapter.getAlleyList()) {
             if (alley.getTag().equals("0"))
                 continue;
 
@@ -147,43 +149,43 @@ public class FilterPresenter extends BaseActivityPresenter implements FilterCont
         selectedAlleyCount = selectedAlleyList.size();
 
         //선택된 음식종류 세팅
-        setSelected(foodTypeTextViews , selectedFoodTypeList);
+        setSelected(foodTypeTextViews, selectedFoodTypeList);
         selectedFoodTypeCount = selectedFoodTypeList.size();
 
 
         //선택된 가격대 세팅
-        setSelected(priceTypeTextViews , selectedPriceRangeList);
+        setSelected(priceTypeTextViews, selectedPriceRangeList);
         selectedPriceRangeCount = selectedPriceRangeList.size();
 
-        if (selectedAlleyCount > 0){
-            selectedCategoriesCount ++;
+        if (selectedAlleyCount > 0) {
+            selectedCategoriesCount++;
         }
-        if (selectedFoodTypeCount > 0){
-            selectedCategoriesCount ++;
+        if (selectedFoodTypeCount > 0) {
+            selectedCategoriesCount++;
         }
-        if (selectedPriceRangeCount > 0){
-            selectedCategoriesCount ++;
+        if (selectedPriceRangeCount > 0) {
+            selectedCategoriesCount++;
         }
 
-        Log.d("info-선택된 골목 개수" , selectedAlleyCount+"");
-        Log.d("info-선택된 음식종류 개수" , selectedFoodTypeCount+"");
-        Log.d("info-선택된 가격대 개수" , selectedPriceRangeCount+"");
+        Log.d("info-선택된 골목 개수", selectedAlleyCount + "");
+        Log.d("info-선택된 음식종류 개수", selectedFoodTypeCount + "");
+        Log.d("info-선택된 가격대 개수", selectedPriceRangeCount + "");
 
-        Log.d("info-선택된 골목 리스트" , Arrays.toString(selectedAlleyList.toArray()));
-        Log.d("info-선택된 음식종류 리스트" , Arrays.toString(selectedFoodTypeList.toArray()));
-        Log.d("info-선택된 가격대 리스트" , Arrays.toString(selectedPriceRangeList.toArray()));
+        Log.d("info-선택된 골목 리스트", Arrays.toString(selectedAlleyList.toArray()));
+        Log.d("info-선택된 음식종류 리스트", Arrays.toString(selectedFoodTypeList.toArray()));
+        Log.d("info-선택된 가격대 리스트", Arrays.toString(selectedPriceRangeList.toArray()));
 
-        Log.d("info-선택된 카테고리 개수" , selectedCategoriesCount+"");
+        Log.d("info-선택된 카테고리 개수", selectedCategoriesCount + "");
 
         Call<RestaurantList> getRestaurantDetails = MyApplication
                 .getRestAdapter()
                 .setFilter(
-                        selectedAlleyCount ,
-                        selectedFoodTypeCount ,
-                        selectedPriceRangeCount ,
-                        selectedAlleyList ,
-                        selectedFoodTypeList ,
-                        selectedPriceRangeList ,
+                        selectedAlleyCount,
+                        selectedFoodTypeCount,
+                        selectedPriceRangeCount,
+                        selectedAlleyList,
+                        selectedFoodTypeList,
+                        selectedPriceRangeList,
                         selectedCategoriesCount);
 
         getRestaurantDetails.enqueue(new Callback<RestaurantList>() {
@@ -193,11 +195,15 @@ public class FilterPresenter extends BaseActivityPresenter implements FilterCont
                     mRestaurantList = response.body();
 
                     if (mRestaurantList != null) {
-
+                        if (response.code() == 200) {
+                            Intent intent = new Intent();
+                            intent.putExtra(Constants.RESTAURANT_FILTER_LIST, mRestaurantList);
+                            mActivity.setResult(0, intent);
+                            clickOptionDismiss();
+                        }
                     } else {
                         //mView.showFailDialog("실패" , "데이터 로딩 실패");
                         Log.d("실패", "데이터 로딩 실패");
-                        mView.removeActivity();
                     }
                 }
             }
@@ -210,7 +216,7 @@ public class FilterPresenter extends BaseActivityPresenter implements FilterCont
         });
     }
 
-    private void setSelected(TextView[] textViews , ArrayList<String> arrayList){
+    private void setSelected(TextView[] textViews, ArrayList<String> arrayList) {
         for (TextView textView : textViews) {
             if (!(textView.getCurrentTextColor() == ContextCompat.getColor(mContext, R.color.colorPrimary)))
                 continue;
