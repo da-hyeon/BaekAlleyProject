@@ -15,7 +15,8 @@ public interface SearchContract {
         void hideClearButton();
     }
     interface Presenter extends BaseActivityContract.Presenter{
-        void setView(RecyclerView recyclerView);
+        void setRecentSearchView(RecyclerView recyclerView);
+        void loadRestaurantList(RecyclerView restaurantListView);
         void enteringText(CharSequence charSequence);
 
         void clickClearButton();

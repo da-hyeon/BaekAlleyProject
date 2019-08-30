@@ -48,7 +48,7 @@ public class RestaurantFragment extends BaseFragment implements RestaurantContra
      * 데이터 생성 및 초기화
      */
     private void initData() {
-        mPresenter.setView(mBinding.rvRestaurantList, mBinding.vpEvent, mBinding.tlDots);
+
     }
 
     /**
@@ -57,7 +57,7 @@ public class RestaurantFragment extends BaseFragment implements RestaurantContra
     @Override
     public void onResume() {
         super.onResume();
-
+        mPresenter.setView(mBinding.rvRestaurantList, mBinding.vpEvent, mBinding.tlDots);
     }
 
     /**
@@ -87,17 +87,4 @@ public class RestaurantFragment extends BaseFragment implements RestaurantContra
         getActivity().overridePendingTransition(R.anim.slide_up, R.anim.stay);
     }
 
-    /**
-     * 필터에서 전달받은 데이터 처리
-     *
-     * @param requestCode
-     * @param resultCode
-     * @param data
-     */
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode == 0) {
-            mPresenter.setRestaurantFilterList(data);
-        }
-    }
 }

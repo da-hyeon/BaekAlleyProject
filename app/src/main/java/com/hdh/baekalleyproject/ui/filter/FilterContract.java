@@ -15,6 +15,8 @@ public interface FilterContract {
     }
     interface Presenter extends BaseActivityContract.Presenter {
         void setAlleyView(RecyclerView recyclerView);
+        void setSelectSavedFoodType(android.view.View[] savedFoodTypeViews ,TextView[] savedFoodTypeTextViews);
+        void setSelectSavedPriceRange(android.view.View[] savedPriceRangeViews ,TextView[] savedPriceRangeTextViews);
 
         void clickDismiss();
         void clickReset();

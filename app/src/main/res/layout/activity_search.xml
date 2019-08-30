@@ -84,6 +84,8 @@
             app:layout_constraintTop_toTopOf="@+id/vSearch" />
 
         <android.support.constraint.ConstraintLayout
+            android:id="@+id/clSavedView"
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginLeft="30dp"
@@ -126,6 +128,48 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvRecentSearches" />
 
+        </android.support.constraint.ConstraintLayout>
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="25.7dp"
+            android:layout_marginRight="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/vSearch">
+
+            <TextView
+                android:id="@+id/tvInputText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:text="&quot;포방터시장&quot;"
+                android:textColor="#ff4f4f"
+                android:textSize="15dp"
+                android:fontFamily="@font/notosans"
+                android:includeFontPadding="false"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="으로 검색한 결과"
+                android:textSize="15dp"
+                android:textColor="#999999"
+                android:fontFamily="@font/notosans"
+                android:includeFontPadding="false"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toRightOf="@+id/tvInputText"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rvRestaurantList"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="18dp"
+                app:layout_constraintTop_toBottomOf="@+id/tvInputText"
+                app:layout_constraintBottom_toBottomOf="parent"
+                tools:targetApi="lollipop" />
 
         </android.support.constraint.ConstraintLayout>
 

@@ -14,7 +14,6 @@ public interface RestaurantContract {
     interface Presenter{
         void setView(RecyclerView recyclerView , ViewPager viewPager, TabLayout tabLayout);
 
-        void setRestaurantFilterList(Intent intent);
         void clickFilter();
         void clickSearch();
     }

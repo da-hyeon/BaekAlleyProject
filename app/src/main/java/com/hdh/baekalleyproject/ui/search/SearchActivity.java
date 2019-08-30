@@ -57,7 +57,8 @@ public class SearchActivity extends BaseActivity implements SearchContract.View 
      * 데이터 생성 및 초기화
      */
     private void initData() {
-        mPresenter.setView(mBinding.rvRecentTerm);
+        mPresenter.setRecentSearchView(mBinding.rvRecentTerm);
+        mPresenter.loadRestaurantList(mBinding.rvRestaurantList);
     }
 
     /**

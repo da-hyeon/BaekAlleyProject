@@ -37,6 +37,8 @@ public class AlleyListAdapter extends RecyclerView.Adapter<AlleyListAdapter.Rest
                 notifyItemChanged(position);
             });
         }
+
+
     }
 
     public AlleyListAdapter( Context mContext) {
@@ -86,5 +88,17 @@ public class AlleyListAdapter extends RecyclerView.Adapter<AlleyListAdapter.Rest
 
     public ArrayList<Alley> getAlleyList() {
         return mAlleyList;
+    }
+
+    public void setSelectedItem(ArrayList<String> selectedItemList){
+        for (int i = 0 ; i < mAlleyList.size(); i++){
+            for(int j = 0 ; j < selectedItemList.size(); j++){
+                if (mAlleyList.get(i).getAlleyName().equals(selectedItemList.get(j))){
+                    mAlleyList.get(i).setTag("1");
+                    break;
+                }
+            }
+        }
+        notifyDataSetChanged();
     }
 }
