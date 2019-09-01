@@ -42,7 +42,7 @@ public class MainTabPagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public int getCount() {
-        return fragmentTitleList.length;
+        return fragmentTitleList != null ? fragmentTitleList.length : 0;
     }
 
     @Override

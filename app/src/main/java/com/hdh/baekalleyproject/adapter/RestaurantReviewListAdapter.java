@@ -45,7 +45,7 @@ public class RestaurantReviewListAdapter extends RecyclerView.Adapter<Restaurant
 
     @Override
     public int getItemCount() {
-        return (mRestaurantReviewList != null ? mRestaurantReviewList.size() : 0);
+        return mRestaurantReviewList != null ? mRestaurantReviewList.size() : 0;
     }
 
 }

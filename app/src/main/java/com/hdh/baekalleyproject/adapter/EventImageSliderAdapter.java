@@ -28,7 +28,7 @@ public class EventImageSliderAdapter extends PagerAdapter {
 
     @Override
     public int getCount() {
-        return mEventArrayList.size();
+        return mEventArrayList != null ? mEventArrayList.size() : 0;
     }
 
     @Override

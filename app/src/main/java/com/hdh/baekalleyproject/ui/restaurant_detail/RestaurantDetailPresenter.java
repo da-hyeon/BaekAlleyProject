@@ -53,6 +53,8 @@ public class RestaurantDetailPresenter extends BaseActivityPresenter implements 
 
     private RestaurantDetail mRestaurantDetail;
 
+    private double[] mLatLon;
+
     RestaurantDetailPresenter(RestaurantDetailContract.View mView, Context mContext, Activity mActivity) {
         super(mView , mContext , mActivity);
         this.mView = mView;
@@ -99,14 +101,18 @@ public class RestaurantDetailPresenter extends BaseActivityPresenter implements 
                         imageViewerLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
                         rvImageView.setLayoutManager(imageViewerLayoutManager);
                         rvImageView.setAdapter(new RestaurantImageListAdapter( mRestaurantDetail.getRestaurantImageList() , mContext));
-
+                        setRecyclerViewAnimation(rvImageView);
 
                         LinearLayoutManager menuViewerLayoutManager = new LinearLayoutManager(mContext);
                         menuViewerLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
                         rvMenuView.setLayoutManager(menuViewerLayoutManager);
                         rvMenuView.setAdapter(new RestaurantMenuListAdapter( mRestaurantDetail.getRestaurantMenuList() , mContext));
 
-                        setView();
+                        if (response.code() == 200){
+                            mLatLon = setMapLocation();
+                            setView();
+                        }
+
                     } else {
                         //mView.showFailDialog("실패" , "데이터 로딩 실패");
                         Log.d("실패", "데이터 로딩 실패");
@@ -353,17 +359,20 @@ public class RestaurantDetailPresenter extends BaseActivityPresenter implements 
     @Override
     public void onMapReady(@NonNull NaverMap naverMap) {
 
-        double[] latlon = setMapLocation();
+        //double[] latlon = setMapLocation();
         //위도와 경도 을 지정
-        LatLng location = new LatLng(latlon[0], latlon[1]);
-        Marker marker = new Marker();
-        marker.setPosition(location);
-        marker.setMap(naverMap);
-        marker.setIcon(OverlayImage.fromResource(R.drawable.icon_restaurant_spot));
+        if (mLatLon != null) {
+            LatLng location = new LatLng(mLatLon[0], mLatLon[1]);
+            Marker marker = new Marker();
+            marker.setPosition(location);
 
-        // 카메라 위치와 줌 조절(숫자가 클수록 확대)
-        CameraPosition cameraPosition = new CameraPosition(location, 17);
-        naverMap.setCameraPosition(cameraPosition);
+            marker.setMap(naverMap);
+            marker.setIcon(OverlayImage.fromResource(R.drawable.icon_restaurant_spot));
+
+            // 카메라 위치와 줌 조절(숫자가 클수록 확대)
+            CameraPosition cameraPosition = new CameraPosition(location, 17);
+            naverMap.setCameraPosition(cameraPosition);
+        }
 
         // 줌 범위 제한
         naverMap.setMinZoom(5.0);   //최소
@@ -385,4 +394,5 @@ public class RestaurantDetailPresenter extends BaseActivityPresenter implements 
         uiSettings.setTiltGesturesEnabled(false);
 
     }
+
 }

@@ -27,7 +27,7 @@ public class RestaurantImageSliderAdapter extends PagerAdapter {
 
     @Override
     public int getCount() {
-        return mImageArrayList.size();
+        return mImageArrayList != null ? mImageArrayList.size() : 0;
     }
 
     @Override

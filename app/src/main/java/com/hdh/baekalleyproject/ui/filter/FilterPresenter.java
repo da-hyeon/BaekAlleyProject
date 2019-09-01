@@ -244,10 +244,11 @@ public class FilterPresenter extends BaseActivityPresenter implements FilterCont
                 selectedFoodTypeList ,
                 selectedPriceRangeList);
 
-       //선택필터가 변경되었을때만 저장하기.
-       if (!filterSelectedItem.toString().equals(mFilterSelectedItem.toString())){
-           saveFilter(filterSelectedItem);
-       }
+//       //선택필터가 변경되었을때만 저장하기.
+//       if (!filterSelectedItem.toString().equals(mFilterSelectedItem.toString())){
+//
+//       }
+        saveFilter(filterSelectedItem);
         clickOptionDismiss();
     }
 

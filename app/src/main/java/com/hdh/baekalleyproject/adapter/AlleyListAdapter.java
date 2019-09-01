@@ -79,7 +79,7 @@ public class AlleyListAdapter extends RecyclerView.Adapter<AlleyListAdapter.Rest
 
     @Override
     public int getItemCount() {
-        return (mAlleyList != null ? mAlleyList.size() : 0);
+        return mAlleyList != null ? mAlleyList.size() : 0;
     }
 
     public void setAlleyList(ArrayList<Alley> mAlleyList) {

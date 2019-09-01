@@ -11,11 +11,15 @@ public class Constants {
     public static final String RESTAURANT_IMAGES = "restaurantImages";
     public static final String RESTAURANT_IMAGE_CLICK_POSITION = "restaurantImageClickPosition";
 
+    public static final String MAIN_ADAPTER = "mainAdapter";
+    public static final String FILTER_ADAPTER = "filterAdapter";
+
     /**
      * SharedPreference
      */
     public static final String FILTER_SAVE_DATA = "filterSaveData";
     public static final String SEARCH_SAVE_DATA = "searchSaveData";
+
     /**
      * LOG TAG
      */

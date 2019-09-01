@@ -11,10 +11,12 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
 import com.google.gson.Gson;
+import com.hdh.baekalleyproject.Constants;
 import com.hdh.baekalleyproject.MyApplication;
 import com.hdh.baekalleyproject.adapter.RecentSearchTermListAdapter;
 import com.hdh.baekalleyproject.adapter.RestaurantListAdapter;
 import com.hdh.baekalleyproject.data.model.RecentSearchTerm;
+import com.hdh.baekalleyproject.data.model.Restaurant;
 import com.hdh.baekalleyproject.data.model.RestaurantList;
 import com.hdh.baekalleyproject.ui.base.activity.BaseActivityPresenter;
 
@@ -33,10 +35,13 @@ public class SearchPresenter extends BaseActivityPresenter implements SearchCont
     private Activity mActivity;
 
     private RestaurantList mRestaurantList;
+    private ArrayList<Restaurant> mRestaurantSearchList;
     private RestaurantListAdapter mRestaurantListAdapter;
 
     private SharedPreferences mPrefs;
     private Gson mGson;
+
+    private RecyclerView mSearchListView;
 
     SearchPresenter(SearchContract.View mView, Context mContext, Activity mActivity) {
         super(mView, mContext, mActivity);
@@ -44,9 +49,9 @@ public class SearchPresenter extends BaseActivityPresenter implements SearchCont
         this.mContext = mContext;
         this.mActivity = mActivity;
         PADDING_SIZE = Math.round(4 * mContext.getResources().getDisplayMetrics().density);
-        mRestaurantList = new RestaurantList();
+        mRestaurantSearchList = new ArrayList<>();
 
-        mRestaurantListAdapter = new RestaurantListAdapter(mContext);
+        mRestaurantListAdapter = new RestaurantListAdapter(mContext , Constants.FILTER_ADAPTER);
         mPrefs = PreferenceManager.getDefaultSharedPreferences(mContext);
         mGson = new Gson();
     }
@@ -68,14 +73,25 @@ public class SearchPresenter extends BaseActivityPresenter implements SearchCont
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(new RecentSearchTermListAdapter(recentSearchTermArrayList, mContext));
+
+
+    }
+
+    @Override
+    public void setRestaurantList(RecyclerView restaurantListView) {
+        GridLayoutManager mGridLayoutManager = new GridLayoutManager(mContext, 2);
+        restaurantListView.setLayoutManager(mGridLayoutManager);
+
+        restaurantListView.setAdapter(mRestaurantListAdapter);
+        mSearchListView = restaurantListView;
+
     }
 
     /**
-     * Restaurant List 받아오기
-     * @param restaurantListView
+     * 서버에 Restaurant List 요청
      */
     @Override
-    public void loadRestaurantList(RecyclerView restaurantListView) {
+    public void loadRestaurantList() {
         Call<RestaurantList> getRestaurantList = MyApplication
                 .getRestAdapter()
                 .getRestaurantList();
@@ -83,20 +99,11 @@ public class SearchPresenter extends BaseActivityPresenter implements SearchCont
         getRestaurantList.enqueue(new Callback<RestaurantList>() {
             @Override
             public void onResponse(@NonNull Call<RestaurantList> call, @NonNull Response<RestaurantList> response) {
-                if (response.isSuccessful()) {
-                    if (response.code() == 200) {
-                        if (response.body() != null) {
-                            mRestaurantList = response.body();
-
-                            GridLayoutManager mGridLayoutManager = new GridLayoutManager(mContext , 2);
-                            restaurantListView.setLayoutManager(mGridLayoutManager);
-
-                            restaurantListView.setAdapter(mRestaurantListAdapter);
-                        }
-                    } else {
-                        //mView.showFailDialog("실패" , "데이터 로딩 실패");
-                        Log.d("실패", "데이터 로딩 실패");
-                    }
+                if (response.body() != null) {
+                    mRestaurantList = response.body();
+                } else {
+                    //mView.showFailDialog("실패" , "데이터 로딩 실패");
+                    Log.d("실패", "데이터 로딩 실패");
                 }
             }
 
@@ -114,11 +121,49 @@ public class SearchPresenter extends BaseActivityPresenter implements SearchCont
         if (charSequence.length() != 0) {
             mView.changeTextPadding(PADDING_SIZE);
             mView.showClearButton();
+            mRestaurantSearchList.clear();
+
+            if (mRestaurantList != null && mRestaurantList.getRestaurantList() != null) {
+                Log.d("restaurantInfo" , mRestaurantList.getRestaurantList().get(0).toString());
+                for (Restaurant restaurant : mRestaurantList.getRestaurantList()) {
+                    //식당 이름으로 검색
+                    if (restaurant.getRestaurantAlley().contains(charSequence.toString())) {
+                        mRestaurantSearchList.add(restaurant);
+                    }
+                    //골목으로 검색
+                    else if (restaurant.getRestaurantName().contains(charSequence.toString())) {
+                        mRestaurantSearchList.add(restaurant);
+                    }
+                    //메뉴로 검색
+                    else if (restaurant.getRestaurantRepFood().contains(charSequence.toString())) {
+                        mRestaurantSearchList.add(restaurant);
+                    }
+                }
+
+            }
+            mRestaurantListAdapter.setRestaurantList(mRestaurantSearchList);
+            setRecyclerViewAnimation(mSearchListView);
+
+
+            if (mRestaurantSearchList.size() == 0) {
+                mView.hideSearchedView();
+                mView.hideSearchView();
+                mView.showSearchFailedView();
+                mView.changeSearchedFailedText("\"" + charSequence.toString() + "\"에 해당되는\n식당 및 골목을 찾지 못했습니다.");
+            } else {
+                mView.showSearchView();
+                mView.hideSearchedView();
+                mView.hideSearchFailedView();
+                mView.changeSearchText(charSequence.toString());
+            }
         }
         //입력값 없음
         else {
             mView.changeTextPadding(0);
             mView.hideClearButton();
+            mView.showSearchedView();
+            mView.hideSearchView();
+            mView.hideSearchFailedView();
         }
     }
 

@@ -58,7 +58,8 @@ public class SearchActivity extends BaseActivity implements SearchContract.View 
      */
     private void initData() {
         mPresenter.setRecentSearchView(mBinding.rvRecentTerm);
-        mPresenter.loadRestaurantList(mBinding.rvRestaurantList);
+        mPresenter.setRestaurantList(mBinding.rvRestaurantList);
+        mPresenter.loadRestaurantList();
     }
 
     /**
@@ -87,6 +88,24 @@ public class SearchActivity extends BaseActivity implements SearchContract.View 
     }
 
     /**
+     * SearchedFailedText 변경하기
+     * @param text 입력값
+     */
+    @Override
+    public void changeSearchedFailedText(String text) {
+        mBinding.tvSearchFailed.setText(text);
+    }
+
+    /**
+     * SearchText 변경하기
+     * @param text
+     */
+    @Override
+    public void changeSearchText(String text) {
+        mBinding.tvInputText.setText("\""+ text +"\"" );
+    }
+
+    /**
      * 클리어 버튼 보여주기
      */
     @Override
@@ -95,10 +114,59 @@ public class SearchActivity extends BaseActivity implements SearchContract.View 
     }
 
     /**
+     * 검색한 목록 뷰 보여주기
+     */
+    @Override
+    public void showSearchedView() {
+        mBinding.clSearched.setVisibility(View.VISIBLE);
+    }
+
+    /**
+     * 검색 목록 뷰 보여주기
+     */
+    @Override
+    public void showSearchView() {
+        mBinding.clSearch.setVisibility(View.VISIBLE);
+    }
+
+    /**
+     * 검색 실패 뷰 보여주기
+     */
+    @Override
+    public void showSearchFailedView() {
+        mBinding.clSearchedFailed.setVisibility(View.VISIBLE);
+
+    }
+
+    /**
      * 클리어 버튼 숨기기
      */
     @Override
     public void hideClearButton() {
         mBinding.ivClear.setVisibility(View.GONE);
+    }
+
+    /**
+     * 검색한 목록 뷰 숨기기
+     */
+    @Override
+    public void hideSearchedView() {
+        mBinding.clSearched.setVisibility(View.GONE);
+    }
+
+    /**
+     * 검색 목록 뷰 숨기기
+     */
+    @Override
+    public void hideSearchView() {
+        mBinding.clSearch.setVisibility(View.GONE);
+    }
+
+    /**
+     * 검색 실패 뷰 숨기기
+     */
+    @Override
+    public void hideSearchFailedView() {
+        mBinding.clSearchedFailed.setVisibility(View.GONE);
     }
 }

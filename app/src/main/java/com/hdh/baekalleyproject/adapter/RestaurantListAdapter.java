@@ -27,6 +27,7 @@ public class RestaurantListAdapter extends RecyclerView.Adapter<RestaurantListAd
     private ArrayList<Restaurant> mRestaurantList;
     private Context mContext;
     private final int IMG_SIZE;
+    private final String mTag;
 
     class RestaurantListViewHolder extends RecyclerView.ViewHolder {
 
@@ -40,13 +41,18 @@ public class RestaurantListAdapter extends RecyclerView.Adapter<RestaurantListAd
                 Intent intent = new Intent(mContext, RestaurantDetailActivity.class);
                 intent.putExtra(Constants.RESTAURANT_ID, mRestaurantList.get(getAdapterPosition()).getRestaurantID());
                 mContext.startActivity(intent);
+
+                if (mTag.equals(Constants.FILTER_ADAPTER)){
+
+                }
             });
 
         }
     }
 
-    public RestaurantListAdapter(Context mContext) {
+    public RestaurantListAdapter(Context mContext , String tag) {
         this.mContext = mContext;
+        this.mTag = tag;
         IMG_SIZE = Math.round(8 * mContext.getResources().getDisplayMetrics().density);
     }
 
@@ -77,7 +83,7 @@ public class RestaurantListAdapter extends RecyclerView.Adapter<RestaurantListAd
 
     @Override
     public int getItemCount() {
-        return mRestaurantList.size();
+        return mRestaurantList != null ? mRestaurantList.size() : 0;
     }
 
     public void setRestaurantList(ArrayList<Restaurant> mRestaurantList) {

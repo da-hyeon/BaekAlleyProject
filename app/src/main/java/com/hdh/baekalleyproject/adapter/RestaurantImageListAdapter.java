@@ -73,7 +73,7 @@ public class RestaurantImageListAdapter extends RecyclerView.Adapter<RestaurantI
 
     @Override
     public int getItemCount() {
-        return (mRestaurantImageList != null ? mRestaurantImageList.size() : 0);
+        return mRestaurantImageList != null ? mRestaurantImageList.size() : 0;
     }
 
 
