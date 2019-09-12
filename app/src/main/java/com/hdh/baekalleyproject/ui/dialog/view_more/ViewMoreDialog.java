@@ -113,7 +113,10 @@ public class ViewMoreDialog extends Dialog {
      * 리뷰작성 클릭 이벤트 처리
      */
     private void clickWriteReview() {
-        mContext.startActivity(new Intent(mContext, ReviewWriteActivity.class));
+        Intent intent = new Intent(mContext, ReviewWriteActivity.class);
+        intent.putExtra(Constants.RESTAURANT_ID, Integer.parseInt(mRestaurant.getRestaurantID()));
+        mContext.startActivity(intent);
+
         dismiss();
     }
 

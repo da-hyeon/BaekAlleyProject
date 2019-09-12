@@ -15,19 +15,31 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.request.RequestOptions;
 import com.hdh.baekalleyproject.Constants;
+import com.hdh.baekalleyproject.data.model.RecentSearchTerm;
 import com.hdh.baekalleyproject.data.model.Restaurant;
 import com.hdh.baekalleyproject.data.util.CustomRoundedCornersTransformation;
 import com.hdh.baekalleyproject.databinding.ItemRestaurantBinding;
 import com.hdh.baekalleyproject.ui.restaurant_detail.RestaurantDetailActivity;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
+
+import io.realm.Realm;
 
 public class RestaurantListAdapter extends RecyclerView.Adapter<RestaurantListAdapter.RestaurantListViewHolder> {
 
     private ArrayList<Restaurant> mRestaurantList;
     private Context mContext;
     private final int IMG_SIZE;
+    private final int IMG_CORNER_RADIUS;
     private final String mTag;
+
+    private Realm mRealm;
+    private RecentSearchTerm mRecentSearchTermList;
+    private String currentText;
 
     class RestaurantListViewHolder extends RecyclerView.ViewHolder {
 
@@ -42,18 +54,31 @@ public class RestaurantListAdapter extends RecyclerView.Adapter<RestaurantListAd
                 intent.putExtra(Constants.RESTAURANT_ID, mRestaurantList.get(getAdapterPosition()).getRestaurantID());
                 mContext.startActivity(intent);
 
-                if (mTag.equals(Constants.FILTER_ADAPTER)){
+                if (mTag.equals(Constants.FILTER_ADAPTER)) {
+                    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.KOREA);
+                    Date currentTime = new Date();
+                    String time = formatter.format(currentTime);
+                    try {
+                        currentTime = formatter.parse(time);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
 
+                    saveFilter(currentTime);
+                    //mRecentSearchTermList.getRecentSearchTermList().add(new RecentSearchTerm(currentText, currentTime));
+                    //saveFilter(mRecentSearchTermList);
                 }
             });
 
         }
     }
 
-    public RestaurantListAdapter(Context mContext , String tag) {
+    public RestaurantListAdapter(Context mContext, String mTag) {
         this.mContext = mContext;
-        this.mTag = tag;
-        IMG_SIZE = Math.round(8 * mContext.getResources().getDisplayMetrics().density);
+        this.mTag = mTag;
+        IMG_CORNER_RADIUS = Math.round(8 * mContext.getResources().getDisplayMetrics().density);
+        IMG_SIZE = Math.round(156 * mContext.getResources().getDisplayMetrics().density);
+        mRealm = Realm.getDefaultInstance();
     }
 
     @Override
@@ -67,7 +92,7 @@ public class RestaurantListAdapter extends RecyclerView.Adapter<RestaurantListAd
     public void onBindViewHolder(RestaurantListViewHolder holder, int position) {
         Glide.with(mContext)
                 .load(mRestaurantList.get(position).getRestaurantImageURL())
-                .apply(new RequestOptions().transform(new MultiTransformation(new CenterCrop(), new CustomRoundedCornersTransformation(mContext, IMG_SIZE, 0, CustomRoundedCornersTransformation.CornerType.ALL))).override(450, 450).diskCacheStrategy(DiskCacheStrategy.RESOURCE))
+                .apply(new RequestOptions().transform(new MultiTransformation(new CenterCrop(), new CustomRoundedCornersTransformation(mContext, IMG_CORNER_RADIUS, 0, CustomRoundedCornersTransformation.CornerType.ALL))).override(IMG_SIZE, IMG_SIZE).diskCacheStrategy(DiskCacheStrategy.RESOURCE))
                 .into(holder.binding.ivRestaurantImage);
 
         //holder.binding.ivRestaurantImage.setClipToOutline(true);
@@ -88,5 +113,23 @@ public class RestaurantListAdapter extends RecyclerView.Adapter<RestaurantListAd
 
     public void setRestaurantList(ArrayList<Restaurant> mRestaurantList) {
         this.mRestaurantList = mRestaurantList;
+    }
+
+    public void setCurrentText(String currentText) {
+        this.currentText = currentText;
+    }
+
+    /**
+     * 검색어 저장하기
+     */
+    private void saveFilter(Date currentTime) {
+        mRealm.beginTransaction();
+        Number number = mRealm.where(RecentSearchTerm.class).max("id");
+        long id = number == null ? 0 : number.longValue() + 1;
+
+        mRecentSearchTermList = mRealm.createObject(RecentSearchTerm.class , (int)id);
+        mRecentSearchTermList.setRecentSearchTerm(currentText);
+        mRecentSearchTermList.setDate(currentTime);
+        mRealm.commitTransaction();
     }
 }

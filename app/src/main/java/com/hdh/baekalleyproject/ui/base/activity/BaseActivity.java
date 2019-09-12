@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.Toast;
 
 public class BaseActivity extends AppCompatActivity implements BaseActivityContract.View {
 
@@ -21,6 +22,11 @@ public class BaseActivity extends AppCompatActivity implements BaseActivityContr
     @Override
     public void moveActivity(Intent intent) {
         startActivity(intent);
+    }
+
+    @Override
+    public void showToast(String content) {
+        Toast.makeText(this, content, Toast.LENGTH_SHORT).show();
     }
 
     /**
@@ -57,5 +63,11 @@ public class BaseActivity extends AppCompatActivity implements BaseActivityContr
                         PERMISSION);
             }
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+      //  Session.getCurrentSession().removeCallback(callback);
     }
 }

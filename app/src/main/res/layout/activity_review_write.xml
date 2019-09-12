@@ -77,9 +77,10 @@
             app:layout_constraintTop_toTopOf="@id/vToolbar" />
 
         <TextView
+            android:id="@+id/tvRegistrationReview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="16dp"
+            android:padding="16dp"
             android:fontFamily="@font/notosans"
             android:includeFontPadding="false"
             android:text="등록하기"
@@ -215,10 +216,8 @@
             android:layout_marginRight="16dp"
             android:background="#ffffff"
             android:fontFamily="@font/notosans"
-            android:inputType="text"
             android:hint="무엇을 드셨나요?(방문할 분들을 위해 정확하게 입력해주세요)"
             android:includeFontPadding="false"
-            android:singleLine="true"
             android:textColor="#17b1c4"
             android:textColorHint="#999999"
             android:textSize="12dp"

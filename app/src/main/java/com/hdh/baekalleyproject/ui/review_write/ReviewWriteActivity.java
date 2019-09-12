@@ -18,12 +18,12 @@ public class ReviewWriteActivity extends BaseActivity implements ReviewWriteCont
         super.onCreate(savedInstanceState);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_review_write);
         mBinding.setReviewWriteActivity(this);
-        mPresenter = new ReviewWritePresenter(this, this, this);
+        mPresenter = new ReviewWritePresenter(this, this, this , getIntent());
 
         initData();
 
         //식당정보 클릭
-        mBinding.vDismiss.setOnClickListener(v->
+        mBinding.vDismiss.setOnClickListener(v ->
                 mPresenter.clickDismiss()
         );
 
@@ -41,6 +41,18 @@ public class ReviewWriteActivity extends BaseActivity implements ReviewWriteCont
         mBinding.vTasteBad.setOnClickListener(v ->
                 mPresenter.clickTasteBad()
         );
+
+        //리뷰등록 클릭
+        mBinding.tvRegistrationReview.setOnClickListener(v -> {
+            mPresenter.clickRegistrationReview(
+                    mBinding.ivTasteGreat.getColorFilter() != null,
+                    mBinding.ivTasteGood.getColorFilter() != null,
+                    mBinding.ivTasteBad.getColorFilter() != null,
+                    mBinding.etTitle.getText().toString(),
+                    mBinding.etFoodKind.getText().toString(),
+                    mBinding.etContent.getText().toString());
+
+        });
 
     }
 

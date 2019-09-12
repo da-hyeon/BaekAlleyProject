@@ -87,7 +87,9 @@ public class RestaurantDetailActivity extends BaseActivity implements Restaurant
      * 데이터 생성 및 초기화
      */
     private void initData() {
-        mPresenter.setView(getIntent() , mBinding.rvRestaurantImageList, mBinding.rvRestaurantMenuList, mBinding.rvReviewList);
+        mPresenter.setRecyclerView( mBinding.rvRestaurantImageList, mBinding.rvRestaurantMenuList, mBinding.rvReviewList);
+
+        //mPresenter.setView(getIntent() , mBinding.rvRestaurantImageList, mBinding.rvRestaurantMenuList, mBinding.rvReviewList);
 
         //fragment로 진행 시 밑의 부분 주석 해제
        /* MapFragment mapFragment = (MapFragment) getSupportFragmentManager().findFragmentById(R.id.map_fragment);
@@ -97,10 +99,15 @@ public class RestaurantDetailActivity extends BaseActivity implements Restaurant
             getSupportFragmentManager().beginTransaction().add(R.id.map_fragment, mapFragment).commit();
         }*/
 
-       mPresenter.mapAsync(mBinding.mvMap);
+       //mPresenter.mapAsync(mBinding.mvMap);
     }
 
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mPresenter.setView(getIntent());
+        mPresenter.mapAsync(mBinding.mvMap);
+    }
 
     @Override
     public void onBackPressed() {
@@ -125,6 +132,7 @@ public class RestaurantDetailActivity extends BaseActivity implements Restaurant
 
     @Override
     public void setRestaurantName(String name) {
+        mBinding.tvTitle.setText(name);
         mBinding.tvRestaurantName.setText(name);
     }
 

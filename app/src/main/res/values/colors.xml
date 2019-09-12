@@ -4,10 +4,12 @@
     <color name="colorPrimaryDark">#000000</color>
     <color name="colorAccent">#D81B60</color>
 
-
     <color name="whiteTransparency">#CCFFFFFF</color>
     <color name="foodTextDefaultColor">#bbbbbb</color>
     <color name="priceTextDefaultColor">#666666</color>
     <color name="goTextDefaultColor">#333333</color>
     <color name="wrongInfoTextDefaultColor">#999999</color>
+
+    <color name="textColor_666666">#666666</color>
+    <color name="textColor_ff4f4f">#ff4f4f</color>
 </resources>

@@ -21,10 +21,11 @@ import com.hdh.baekalleyproject.adapter.RestaurantMenuListAdapter;
 import com.hdh.baekalleyproject.adapter.RestaurantReviewListAdapter;
 import com.hdh.baekalleyproject.data.model.Restaurant;
 import com.hdh.baekalleyproject.data.model.RestaurantDetail;
-import com.hdh.baekalleyproject.data.model.Review;
+import com.hdh.baekalleyproject.data.model.UserInformation;
 import com.hdh.baekalleyproject.ui.base.activity.BaseActivityPresenter;
 import com.hdh.baekalleyproject.ui.dialog.share.ShareDialog;
 import com.hdh.baekalleyproject.ui.dialog.view_more.ViewMoreDialog;
+import com.hdh.baekalleyproject.ui.login.LoginActivity;
 import com.hdh.baekalleyproject.ui.modify_info.ModifyInfoActivity;
 import com.hdh.baekalleyproject.ui.review_write.ReviewWriteActivity;
 import com.naver.maps.geometry.LatLng;
@@ -38,7 +39,6 @@ import com.naver.maps.map.overlay.Marker;
 import com.naver.maps.map.overlay.OverlayImage;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -46,7 +46,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class RestaurantDetailPresenter extends BaseActivityPresenter implements RestaurantDetailContract.Presenter , OnMapReadyCallback {
+public class RestaurantDetailPresenter extends BaseActivityPresenter implements RestaurantDetailContract.Presenter, OnMapReadyCallback {
     private RestaurantDetailContract.View mView;
     private Context mContext;
     private Activity mActivity;
@@ -55,11 +55,24 @@ public class RestaurantDetailPresenter extends BaseActivityPresenter implements 
 
     private double[] mLatLon;
 
+    private UserInformation mUserInformation;
+
+    private RestaurantImageListAdapter mRestaurantImageListAdapter;
+    private RestaurantMenuListAdapter mRestaurantMenuListAdapter;
+    private RestaurantReviewListAdapter mRestaurantReviewListAdapter;
+
+
     RestaurantDetailPresenter(RestaurantDetailContract.View mView, Context mContext, Activity mActivity) {
-        super(mView , mContext , mActivity);
+        super(mView, mContext, mActivity);
         this.mView = mView;
         this.mContext = mContext;
         this.mActivity = mActivity;
+
+        mUserInformation = MyApplication.getUserInformationInstance();
+
+        mRestaurantImageListAdapter = new RestaurantImageListAdapter(mContext);
+        mRestaurantMenuListAdapter = new RestaurantMenuListAdapter(mContext);
+        mRestaurantReviewListAdapter = new RestaurantReviewListAdapter(mContext , mActivity);
     }
 
 
@@ -72,74 +85,99 @@ public class RestaurantDetailPresenter extends BaseActivityPresenter implements 
     }
 
     /**
-     * 뷰 세팅
-     * @param intent 이전 액티비티에서 전달받은 데이터
-     * @param rvImageView 이미지 뷰
-     * @param rvMenuView 메뉴 뷰
+     * RecyclerView 세팅
+     *
+     * @param rvImageView  이미지 뷰
+     * @param rvMenuView   메뉴 뷰
      * @param rvReviewView 리뷰 뷰
      */
     @Override
-    public void setView(Intent intent , RecyclerView rvImageView , RecyclerView rvMenuView , RecyclerView rvReviewView) {
+    public void setRecyclerView(RecyclerView rvImageView, RecyclerView rvMenuView, RecyclerView rvReviewView) {
+
+        LinearLayoutManager imageViewerLayoutManager = new LinearLayoutManager(mContext);
+        imageViewerLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        rvImageView.setLayoutManager(imageViewerLayoutManager);
+        rvImageView.setAdapter(mRestaurantImageListAdapter);
+
+        LinearLayoutManager menuViewerLayoutManager = new LinearLayoutManager(mContext);
+        menuViewerLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        rvMenuView.setLayoutManager(menuViewerLayoutManager);
+        rvMenuView.setAdapter(mRestaurantMenuListAdapter);
+
+        LinearLayoutManager reviewViewerLayoutManager = new LinearLayoutManager(mContext);
+        reviewViewerLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        rvReviewView.setLayoutManager(reviewViewerLayoutManager);
+        rvReviewView.setAdapter(mRestaurantReviewListAdapter);
+
+        setRecyclerViewAnimation(rvImageView);
+    }
+
+
+    /**
+     * 뷰 세팅
+     *
+     * @param intent 이전 액티비티에서 전달받은 데이터
+     */
+    @Override
+    public void setView(Intent intent) {
+
+        String userID = "0";
+
+        if (mUserInformation != null) {
+            userID = mUserInformation.getId();
+        }
 
         //전달받은 식당정보 받기
         String restaurantID = intent.getStringExtra(Constants.RESTAURANT_ID);
 
+        if (restaurantID == null || restaurantID.equals("")) {
+            Log.d("restaurantID Null", restaurantID);
+        } else {
+            Log.d("restaurantID Not Null", restaurantID);
 
-        Call<RestaurantDetail> getRestaurantDetails = MyApplication
-                .getRestAdapter()
-                .getRestaurantDetails(restaurantID);
+            Call<RestaurantDetail> getRestaurantDetails = MyApplication
+                    .getRestAdapter()
+                    .getRestaurantDetail(
+                            restaurantID,
+                            userID);
 
-        getRestaurantDetails.enqueue(new Callback<RestaurantDetail>() {
-            @Override
-            public void onResponse(@NonNull Call<RestaurantDetail> call, @NonNull Response<RestaurantDetail> response) {
-                if (response.isSuccessful()) {
-                    mRestaurantDetail = response.body();
+            getRestaurantDetails.enqueue(new Callback<RestaurantDetail>() {
+                @Override
+                public void onResponse(@NonNull Call<RestaurantDetail> call, @NonNull Response<RestaurantDetail> response) {
+                    if (response.isSuccessful()) {
+                        mRestaurantDetail = response.body();
 
-                    if (mRestaurantDetail != null) {
+                        if (mRestaurantDetail != null) {
 
-                        LinearLayoutManager imageViewerLayoutManager = new LinearLayoutManager(mContext);
-                        imageViewerLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-                        rvImageView.setLayoutManager(imageViewerLayoutManager);
-                        rvImageView.setAdapter(new RestaurantImageListAdapter( mRestaurantDetail.getRestaurantImageList() , mContext));
-                        setRecyclerViewAnimation(rvImageView);
+                            mRestaurantImageListAdapter.setRestaurantImageList(mRestaurantDetail.getRestaurantImageList());
+                            mRestaurantMenuListAdapter.setRestaurantMenuList(mRestaurantDetail.getRestaurantMenuList());
+                            mRestaurantReviewListAdapter.setRestaurantReviewList(mRestaurantDetail.getReviewList());
 
-                        LinearLayoutManager menuViewerLayoutManager = new LinearLayoutManager(mContext);
-                        menuViewerLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-                        rvMenuView.setLayoutManager(menuViewerLayoutManager);
-                        rvMenuView.setAdapter(new RestaurantMenuListAdapter( mRestaurantDetail.getRestaurantMenuList() , mContext));
+                            mRestaurantImageListAdapter.notifyDataSetChanged();
+                            mRestaurantMenuListAdapter.notifyDataSetChanged();
+                            mRestaurantReviewListAdapter.notifyDataSetChanged();
 
-                        if (response.code() == 200){
-                            mLatLon = setMapLocation();
-                            setView();
+                            if (response.code() == 200) {
+                                mLatLon = setMapLocation();
+                                setRestaurantInformationView();
+                            }
+
+                        } else {
+                            //mView.showFailDialog("실패" , "데이터 로딩 실패");
+                            Log.d("실패", "데이터 로딩 실패");
+                            mView.removeActivity();
                         }
-
-                    } else {
-                        //mView.showFailDialog("실패" , "데이터 로딩 실패");
-                        Log.d("실패", "데이터 로딩 실패");
-                        mView.removeActivity();
                     }
                 }
-            }
 
-            @Override
-            public void onFailure(@NonNull Call<RestaurantDetail> call, @NonNull Throwable t) {
-                Log.d("error" , t.getMessage());
-                Log.d("error" , t.getLocalizedMessage());
-            }
-        });
+                @Override
+                public void onFailure(@NonNull Call<RestaurantDetail> call, @NonNull Throwable t) {
+                    Log.d("error", t.getMessage());
+                    Log.d("error", t.getLocalizedMessage());
+                }
+            });
 
-        ArrayList<Review> reviewArrayList = new ArrayList<>();
-        reviewArrayList.add(new Review());
-        reviewArrayList.add(new Review());
-        reviewArrayList.add(new Review());
-        reviewArrayList.add(new Review());
-        reviewArrayList.add(new Review());
-
-        LinearLayoutManager linearLayoutManager2 = new LinearLayoutManager(mContext);
-        linearLayoutManager2.setOrientation(LinearLayoutManager.VERTICAL);
-        rvReviewView.setLayoutManager(linearLayoutManager2);
-        rvReviewView.setAdapter(new RestaurantReviewListAdapter( reviewArrayList , mContext));
-
+        }
     }
 
     /**
@@ -147,7 +185,7 @@ public class RestaurantDetailPresenter extends BaseActivityPresenter implements 
      */
     @Override
     public void clickShare() {
-        ShareDialog shareDialog = new ShareDialog(mContext , mActivity);
+        ShareDialog shareDialog = new ShareDialog(mContext, mActivity);
         shareDialog.setRestaurantData(mRestaurantDetail.getRestaurant().get(0));
         Objects.requireNonNull(shareDialog.getWindow()).getAttributes().windowAnimations = R.style.dialogAnimation;
 
@@ -182,7 +220,41 @@ public class RestaurantDetailPresenter extends BaseActivityPresenter implements 
      */
     @Override
     public void clickNumberOfLikeText(boolean state) {
-        mView.changeNumberOfLikeText(!state);
+
+        //로그인일 때
+        if (mUserInformation != null) {
+            Call<String> requestRegisterAndDeleteWillGo = MyApplication
+                    .getRestAdapter()
+                    .requestRegistrationAndDeleteWillGo(
+                            mRestaurantDetail.getRestaurant().get(0).getRestaurantID(),
+                            mUserInformation.getId());
+
+            requestRegisterAndDeleteWillGo.enqueue(new Callback<String>() {
+                @Override
+                public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {
+                    if (response.code() == 200) {
+                        mView.changeNumberOfLikeText(!state);
+                        //받은 데이터 뿌려주기
+                        mView.setRestaurantNumberOfLike(response.body());
+                    } else {
+                        //mView.showFailDialog("실패" , "데이터 로딩 실패");
+                        Log.d("실패", "데이터 로딩 실패");
+                    }
+                }
+
+                @Override
+                public void onFailure(@NonNull Call<String> call, @NonNull Throwable t) {
+                    Log.d("error", t.getMessage());
+                    Log.d("error", t.getLocalizedMessage());
+                }
+            });
+        }
+        //비로그인일 때
+        else {
+            Intent intent = new Intent(mContext, LoginActivity.class);
+            mView.moveActivity(intent);
+            mView.removeActivity();
+        }
     }
 
     /**
@@ -190,7 +262,8 @@ public class RestaurantDetailPresenter extends BaseActivityPresenter implements 
      */
     @Override
     public void clickWriteReview() {
-        Intent intent = new Intent(mContext , ReviewWriteActivity.class);
+        Intent intent = new Intent(mContext, ReviewWriteActivity.class);
+        intent.putExtra(Constants.RESTAURANT_ID, Integer.parseInt(mRestaurantDetail.getRestaurant().get(0).getRestaurantID()));
         mView.moveActivity(intent);
     }
 
@@ -217,7 +290,7 @@ public class RestaurantDetailPresenter extends BaseActivityPresenter implements 
     public void clickAddressCopy() {
         //클립보드
         ClipboardManager clipboardManager = (ClipboardManager) mContext.getSystemService(Context.CLIPBOARD_SERVICE);
-        ClipData clipData = ClipData.newPlainText(Constants.RESTAURANT_ADDRESS ,mRestaurantDetail.getRestaurant().get(0).getRestaurantAddress());
+        ClipData clipData = ClipData.newPlainText(Constants.RESTAURANT_ADDRESS, mRestaurantDetail.getRestaurant().get(0).getRestaurantAddress());
         if (clipboardManager != null) {
             clipboardManager.setPrimaryClip(clipData);
             Toast.makeText(mContext, "클립보드에 주소가 복사되었습니다.", Toast.LENGTH_SHORT).show();
@@ -231,7 +304,7 @@ public class RestaurantDetailPresenter extends BaseActivityPresenter implements 
      */
     @Override
     public void clickWrongInfo() {
-        Intent intent = new Intent(mContext , ModifyInfoActivity.class);
+        Intent intent = new Intent(mContext, ModifyInfoActivity.class);
         mView.moveActivity(intent);
     }
 
@@ -262,7 +335,7 @@ public class RestaurantDetailPresenter extends BaseActivityPresenter implements 
     /**
      * 식당정보 뷰 세팅
      */
-    private void setView(){
+    private void setRestaurantInformationView() {
         Restaurant restaurant = mRestaurantDetail.getRestaurant().get(0);
 
         mView.setRestaurantAlley(restaurant.getRestaurantAlley());
@@ -310,12 +383,20 @@ public class RestaurantDetailPresenter extends BaseActivityPresenter implements 
             mView.hideHoliday();
         }
 
+        if (mRestaurantDetail.getWillGoClickStatus() != null &&
+                !mRestaurantDetail.getWillGoClickStatus().equals("0")) {
+            mView.changeNumberOfLikeText(true);
+        } else {
+            mView.changeNumberOfLikeText(false);
+        }
+
         mView.setPrice(mRestaurantDetail.getRestaurantPrice().get(0).getPrice());
     }
 
     /**
      * 주소를 위도 경도로 변환
-     * @return 위도,경도 Array
+     *
+     * @return 위도, 경도 Array
      */
     private double[] setMapLocation() {
 
@@ -323,25 +404,25 @@ public class RestaurantDetailPresenter extends BaseActivityPresenter implements 
         String address = "";
         //주소 입력
 
-        if(mRestaurantDetail != null) {
+        if (mRestaurantDetail != null) {
             if (mRestaurantDetail.getRestaurant() != null) {
                 address = mRestaurantDetail.getRestaurant().get(0).getRestaurantAddress();
             }
         }
-        double lat = 0 , lon = 0;
+        double lat = 0, lon = 0;
 
         List<Address> list = null;
 
         try {
-            list = geocoder.getFromLocationName(address,10);
+            list = geocoder.getFromLocationName(address, 10);
         } catch (IOException e) {
             e.printStackTrace();
-            Log.e(Constants.MAP_ERROR_TAG,"입출력 오류 - 서버에서 주소변환시 에러발생");
+            Log.e(Constants.MAP_ERROR_TAG, "입출력 오류 - 서버에서 주소변환시 에러발생");
         }
 
         if (list != null) {
             if (list.size() == 0) {
-                Log.e(Constants.MAP_ERROR_TAG,"해당되는 주소 정보는 없습니다");
+                Log.e(Constants.MAP_ERROR_TAG, "해당되는 주소 정보는 없습니다");
             } else {
                 // 해당되는 주소로 인텐트 날리기
                 Address addr = list.get(0);
@@ -350,7 +431,7 @@ public class RestaurantDetailPresenter extends BaseActivityPresenter implements 
             }
         }
 
-        return new double[]{lat , lon};
+        return new double[]{lat, lon};
     }
 
     /**
@@ -394,5 +475,15 @@ public class RestaurantDetailPresenter extends BaseActivityPresenter implements 
         uiSettings.setTiltGesturesEnabled(false);
 
     }
+
+//    /**
+//     * 저장된 유저 정보 불러오기
+//     */
+//    private void loadUser() {
+//        String json = mPrefs.getString(Constants.USER_SAVE_DATA, null);
+//        if (json != null) {
+//            mUserInformation = mGson.fromJson(json, UserInformation.class);
+//        }
+//    }
 
 }

@@ -39,6 +39,8 @@
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:letterSpacing="-0.03"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
             android:lineSpacingExtra="6.7dp"
             android:maxLines="1"
             android:text="이화여대 삼거리 꽃길"

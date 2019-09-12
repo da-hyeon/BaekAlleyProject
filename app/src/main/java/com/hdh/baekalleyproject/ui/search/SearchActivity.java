@@ -53,6 +53,12 @@ public class SearchActivity extends BaseActivity implements SearchContract.View 
         });
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mPresenter.loadSearchedData();
+    }
+
     /**
      * 데이터 생성 및 초기화
      */
@@ -74,8 +80,8 @@ public class SearchActivity extends BaseActivity implements SearchContract.View 
      * 입력 초기화
      */
     @Override
-    public void inputInitialization() {
-        mBinding.etSearch.setText("");
+    public void changeSearchTerm(String searchTerm) {
+        mBinding.etSearch.setText(searchTerm);
     }
 
     /**
@@ -139,6 +145,14 @@ public class SearchActivity extends BaseActivity implements SearchContract.View 
     }
 
     /**
+     * 전체삭제 버튼 보이기
+     */
+    @Override
+    public void showDeleteAll() {
+        mBinding.tvDeleteAll.setVisibility(View.VISIBLE);
+    }
+
+    /**
      * 클리어 버튼 숨기기
      */
     @Override
@@ -168,5 +182,13 @@ public class SearchActivity extends BaseActivity implements SearchContract.View 
     @Override
     public void hideSearchFailedView() {
         mBinding.clSearchedFailed.setVisibility(View.GONE);
+    }
+
+    /**
+     * 전체삭제 버튼 숨기기
+     */
+    @Override
+    public void hideDeleteAll() {
+        mBinding.tvDeleteAll.setVisibility(View.GONE);
     }
 }

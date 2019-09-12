@@ -5,6 +5,7 @@ import com.hdh.baekalleyproject.Constants;
 import com.hdh.baekalleyproject.data.model.AlleyList;
 import com.hdh.baekalleyproject.data.model.RestaurantDetail;
 import com.hdh.baekalleyproject.data.model.RestaurantList;
+import com.hdh.baekalleyproject.data.model.UserInformation;
 
 import java.util.ArrayList;
 
@@ -13,7 +14,6 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
-import retrofit2.http.Query;
 
 public interface ServerAPI {
 
@@ -30,8 +30,11 @@ public interface ServerAPI {
      * @param restaurantID 식당 ID
      * @return 식당 디테일 정보
      */
-    @GET(Constants.SELECT_RESTAURANT_DETAIL)
-    Call<RestaurantDetail> getRestaurantDetails(@Query("rt_idx") String restaurantID);
+    @FormUrlEncoded
+    @POST(Constants.SELECT_RESTAURANT_DETAIL)
+    Call<RestaurantDetail> getRestaurantDetail(
+            @Field("rt_idx") String restaurantID ,
+            @Field("mb_idx") String userID);
 
     /**
      * 골목 전체목록 가져오기
@@ -64,6 +67,84 @@ public interface ServerAPI {
             @Field("optionCount") int optionCount);
 
 
+    /**
+     * 회원 가입 요청 (카카오)
+     *
+     * @param userEmail 회원 email
+     * @param userName 회원 이름
+     * @param userImageURL 회원의 프로필 이미지 URL
+     * @param userAppVersion 회원이 설치한 앱의 버전
+     * @param userDeviceCode 회원의 기기코드
+     * @param userNotificationConsentStatus 회원의 알림수신여부
+     * @return UserInformation
+     */
+    @FormUrlEncoded
+    @POST(Constants.REQUEST_REGISTRATION_KAKAO)
+    Call<UserInformation> requestRegistrationKAKAO(
+            @Field("mb_id") String userEmail,
+            @Field("mb_nm") String userName,
+            @Field("mb_img") String userImageURL,
+            @Field("mb_version") String userAppVersion ,
+            @Field("mb_push_code") String userDeviceCode ,
+            @Field("mb_ntyn") String userNotificationConsentStatus);
+
+    /**
+     * 로그인 로그 등록 요청
+     *
+     * @param email 사용자의 email
+     */
+    @FormUrlEncoded
+    @POST(Constants.REQUEST_REGISTRATION_LOGIN_LOG)
+    Call<Void> requestRegistrationLoginLog(
+            @Field("mb_id") String email);
+
+    /**
+     * 가야쥬 등록,삭제 요청
+     * @param restaurantID 식당 ID
+     * @param userEmail 회원 email
+     * @return rstrn_like 가야쥬 개수
+     *
+     */
+    @FormUrlEncoded
+    @POST(Constants.REQUEST_REGISTRATION_AND_DELETE_WILL_GO)
+    Call<String> requestRegistrationAndDeleteWillGo(
+            @Field("rt_idx") String restaurantID ,
+            @Field("mb_idx") String userEmail );
+
+    /**
+     * 리뷰 등록 요청
+     *
+     * @param reviewTitle 리뷰 제목
+     * @param reviewContents 리뷰 내용
+     * @param selectedTasteScore 선택한 맛의 점수
+     * @param selectedTasteType 선택한 맛의 타입
+     * @param restaurantID 식당 ID
+     * @param userEmail 회원 email
+     * @return
+     */
+    @FormUrlEncoded
+    @POST(Constants.REQUEST_REGISTRATION_REVIEW)
+    Call<Void> requestRegistrationReview(
+            @Field("rw_title") String reviewTitle ,
+            @Field("rw_menu") String reviewMenu ,
+            @Field("rw_contents") String reviewContents ,
+            @Field("rw_score") double selectedTasteScore ,
+            @Field("rw_type") String selectedTasteType ,
+            @Field("rt_idx") int restaurantID ,
+            @Field("mb_idx") int userEmail );
+
+    /**
+     * 리뷰 좋아요 등록,삭제 요청
+     * @param restaurantID 식당 ID
+     * @param userEmail 회원 email
+     * @return rev_count  - 좋아요 개수
+     */
+    @FormUrlEncoded
+    @POST(Constants.REQUEST_REGISTRATION_REVIEW_LIKE)
+    Call<String> requestRegistrationReviewLike(
+            @Field("rt_idx") String restaurantID ,
+            @Field("mb_idx") String userEmail ,
+            @Field("rw_idx") String reviewID);
 //
 //    /**
 //     * 로그인 요청

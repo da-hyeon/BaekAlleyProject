@@ -26,8 +26,7 @@ public class RestaurantMenuListAdapter extends RecyclerView.Adapter<RestaurantMe
         }
     }
 
-    public RestaurantMenuListAdapter(ArrayList<RestaurantMenu> mRestaurantMenuList, Context mContext) {
-        this.mRestaurantMenuList = mRestaurantMenuList;
+    public RestaurantMenuListAdapter( Context mContext) {
         this.mContext = mContext;
     }
 
@@ -40,7 +39,7 @@ public class RestaurantMenuListAdapter extends RecyclerView.Adapter<RestaurantMe
     @Override
     public void onBindViewHolder(RestaurantMenuListAdapter.RestaurantMenuListViewHolder holder, int position) {
         holder.binding.tvMenuName.setText(mRestaurantMenuList.get(position).getMenuName());
-        holder.binding.tvMenuPrice.setText(mRestaurantMenuList.get(position).getMenuPrice());
+        holder.binding.tvMenuPrice.setText(toNumFormat(mRestaurantMenuList.get(position).getMenuPrice())+"원");
     }
 
     @Override
@@ -48,4 +47,13 @@ public class RestaurantMenuListAdapter extends RecyclerView.Adapter<RestaurantMe
         return mRestaurantMenuList != null ? mRestaurantMenuList.size() : 0;
     }
 
+    public void setRestaurantMenuList(ArrayList<RestaurantMenu> mRestaurantMenuList) {
+        this.mRestaurantMenuList = mRestaurantMenuList;
+    }
+
+    @SuppressLint("DefaultLocale")
+    public static String toNumFormat(String num) {
+        int number = Integer.parseInt(num);
+        return String.format("%,d", number);
+    }
 }

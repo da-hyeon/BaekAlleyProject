@@ -2,8 +2,12 @@ package com.hdh.baekalleyproject;
 
 import android.app.Activity;
 import android.app.Application;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 
+import com.google.gson.Gson;
 import com.hdh.baekalleyproject.adapter.KakaoSDKAdapter;
+import com.hdh.baekalleyproject.data.model.UserInformation;
 import com.hdh.baekalleyproject.data.util.ServerAPI;
 import com.kakao.auth.KakaoSDK;
 
@@ -19,6 +23,8 @@ import javax.net.ssl.SSLSession;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
 import okhttp3.JavaNetCookieJar;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -28,7 +34,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class MyApplication extends Application {
 
     private static MyApplication appInstance;
-
+    private static UserInformation mUserInformation;
 
     //타임아웃
     private static final int CONNECT_TIMEOUT = 15;
@@ -38,6 +44,9 @@ public class MyApplication extends Application {
 
     private Activity mActivity;
 
+    private static SharedPreferences mPrefs;
+    private static Gson mGson;
+
     private static final String BASE_URL = "http://dutchkor.cafe24.com/";
 
     @Override
@@ -45,6 +54,18 @@ public class MyApplication extends Application {
         super.onCreate();
         appInstance = this;
         KakaoSDK.init(new KakaoSDKAdapter());
+
+        mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        mGson = new Gson();
+
+        Realm.init(this);
+        RealmConfiguration realmConfig = new RealmConfiguration.Builder()
+                .name("hdh.realm")
+                .schemaVersion(0)
+                .deleteRealmIfMigrationNeeded()
+                .build();
+        //Realm.deleteRealm(realmConfig);
+        Realm.setDefaultConfiguration(realmConfig);
     }
 
     /**
@@ -55,6 +76,16 @@ public class MyApplication extends Application {
             appInstance = new MyApplication();
         }
         return appInstance;
+    }
+
+    /**
+     * MyApplication Singleton
+     */
+    public static UserInformation getUserInformationInstance() {
+        if (mUserInformation == null) {
+            loadUser();
+        }
+        return mUserInformation;
     }
 
     /**
@@ -157,5 +188,15 @@ public class MyApplication extends Application {
 
     public static String getBaseUrl() {
         return BASE_URL;
+    }
+
+    /**
+     * 저장된 유저 정보 불러오기
+     */
+    private static void loadUser() {
+        String json = mPrefs.getString(Constants.USER_SAVE_DATA, null);
+        if (json != null) {
+            mUserInformation = mGson.fromJson(json, UserInformation.class);
+        }
     }
 }

@@ -25,6 +25,8 @@ public class RestaurantImageListAdapter extends RecyclerView.Adapter<RestaurantI
     private ArrayList<RestaurantImage> mRestaurantImageList;
     private Context mContext;
     private final int IMG_SIZE;
+    private final int IMG_CORNER_RADIUS;
+
 
     class RestaurantImageListViewHolder extends RecyclerView.ViewHolder {
 
@@ -49,10 +51,10 @@ public class RestaurantImageListAdapter extends RecyclerView.Adapter<RestaurantI
         }
     }
 
-    public RestaurantImageListAdapter(ArrayList<RestaurantImage> mRestaurantImageList, Context mContext) {
-        this.mRestaurantImageList = mRestaurantImageList;
+    public RestaurantImageListAdapter(Context mContext) {
         this.mContext = mContext;
-        IMG_SIZE = Math.round(8 * mContext.getResources().getDisplayMetrics().density);
+        IMG_CORNER_RADIUS = Math.round(8 * mContext.getResources().getDisplayMetrics().density);
+        IMG_SIZE = Math.round(164 * mContext.getResources().getDisplayMetrics().density);
     }
 
     @Override
@@ -65,7 +67,7 @@ public class RestaurantImageListAdapter extends RecyclerView.Adapter<RestaurantI
     public void onBindViewHolder(RestaurantImageListViewHolder holder, int position) {
         Glide.with(mContext)
                 .load(mRestaurantImageList.get(position).getImageURL())
-                .apply(new RequestOptions().transform(new MultiTransformation(new CenterCrop(), new CustomRoundedCornersTransformation(mContext, IMG_SIZE, 0, CustomRoundedCornersTransformation.CornerType.ALL))).override(450 , 450).diskCacheStrategy(DiskCacheStrategy.RESOURCE))
+                .apply(new RequestOptions().transform(new MultiTransformation(new CenterCrop(), new CustomRoundedCornersTransformation(mContext, IMG_CORNER_RADIUS, 0, CustomRoundedCornersTransformation.CornerType.ALL))).override(IMG_SIZE , IMG_SIZE).diskCacheStrategy(DiskCacheStrategy.RESOURCE))
                 .into(holder.binding.ivRestaurantImage);
         //holder.binding.tvRestaurantAlley.setText(mRestaurantList.get(position).getRestaurantTime());
 //        holder.binding.tvRestaurantRepFood.setText(mRestaurantList.get(position).getRestaurantRepFood());
@@ -76,5 +78,7 @@ public class RestaurantImageListAdapter extends RecyclerView.Adapter<RestaurantI
         return mRestaurantImageList != null ? mRestaurantImageList.size() : 0;
     }
 
-
+    public void setRestaurantImageList(ArrayList<RestaurantImage> mRestaurantImageList) {
+        this.mRestaurantImageList = mRestaurantImageList;
+    }
 }

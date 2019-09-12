@@ -8,6 +8,8 @@ public interface BaseActivityContract {
 
         void removeActivity();
         void moveActivity(Intent intent);
+
+        void showToast(String content);
     }
 
     interface Presenter{

@@ -6,6 +6,10 @@ import java.util.ArrayList;
 
 public class RestaurantDetail {
 
+
+    @SerializedName("rev")
+    private ArrayList<Review> reviewList;
+
     @SerializedName("rstrn")
     private ArrayList<Restaurant> restaurant;
 
@@ -20,6 +24,9 @@ public class RestaurantDetail {
 
     @SerializedName("avrg_Price")
     private ArrayList<RestaurantPrice> restaurantPrice;
+
+    @SerializedName("rstrn_Like")
+    private String WillGoClickStatus;
 
 
 
@@ -42,4 +49,13 @@ public class RestaurantDetail {
     public ArrayList<RestaurantPrice> getRestaurantPrice() {
         return restaurantPrice;
     }
+
+    public ArrayList<Review> getReviewList() {
+        return reviewList;
+    }
+
+    public String getWillGoClickStatus() {
+        return WillGoClickStatus;
+    }
+
 }

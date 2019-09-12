@@ -107,6 +107,8 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
+                android:paddingBottom="10dp"
+                android:id="@+id/tvDeleteAll"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/notosans"

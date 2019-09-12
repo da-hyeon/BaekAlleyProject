@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class RestaurantList implements Serializable {
 
     @SerializedName("list")
-    ArrayList<Restaurant> restaurantList;
+    private ArrayList<Restaurant> restaurantList;
 
     public ArrayList<Restaurant> getRestaurantList() {
         return restaurantList;

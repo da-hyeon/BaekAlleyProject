@@ -39,7 +39,8 @@ public interface RestaurantDetailContract {
     }
     interface Presenter extends BaseActivityContract.Presenter{
         void mapAsync(MapView map);
-        void setView(Intent intent , RecyclerView rvImageView , RecyclerView rvMenuView , RecyclerView rvReviewView);
+        void setRecyclerView( RecyclerView rvImageView , RecyclerView rvMenuView , RecyclerView rvReviewView);
+        void setView(Intent intent );
 
         void clickShare();
         void clickMore();
