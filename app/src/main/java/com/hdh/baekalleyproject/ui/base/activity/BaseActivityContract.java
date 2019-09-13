@@ -9,6 +9,8 @@ public interface BaseActivityContract {
         void removeActivity();
         void moveActivity(Intent intent);
 
+        void moveLogin();
+
         void showToast(String content);
     }
 

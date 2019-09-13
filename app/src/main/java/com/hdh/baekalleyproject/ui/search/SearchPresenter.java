@@ -25,7 +25,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class SearchPresenter extends BaseActivityPresenter implements SearchContract.Presenter , RecentSearchTermListAdapter.SearchTermClickListener {
+public class SearchPresenter extends BaseActivityPresenter implements SearchContract.Presenter, RecentSearchTermListAdapter.SearchTermClickListener {
 
     private final int PADDING_SIZE;
 
@@ -50,7 +50,7 @@ public class SearchPresenter extends BaseActivityPresenter implements SearchCont
         PADDING_SIZE = Math.round(4 * mContext.getResources().getDisplayMetrics().density);
         mRestaurantSearchList = new ArrayList<>();
 
-        mRestaurantListAdapter = new RestaurantListAdapter(mContext , Constants.FILTER_ADAPTER);
+        mRestaurantListAdapter = new RestaurantListAdapter(mContext, Constants.FILTER_ADAPTER);
         mRecentSearchTermListAdapter = new RecentSearchTermListAdapter(mContext, this);
 
         mRecentSearchTerm = new ArrayList<>();
@@ -73,6 +73,7 @@ public class SearchPresenter extends BaseActivityPresenter implements SearchCont
 
     /**
      * restaurantRecyclerView 세팅
+     *
      * @param restaurantListView restaurantView
      */
     @Override
@@ -116,6 +117,7 @@ public class SearchPresenter extends BaseActivityPresenter implements SearchCont
 
     /**
      * 검색어 입력 이벤트 처리
+     *
      * @param charSequence 입력 값
      */
     @Override
@@ -179,12 +181,20 @@ public class SearchPresenter extends BaseActivityPresenter implements SearchCont
         mView.changeSearchTerm("");
     }
 
+    /**
+     * 전체삭제 버튼 클릭 이벤트 처리
+     */
+    @Override
+    public void clickDeleteAll() {
+
+    }
+
 
     /**
      * 저장된 검색어 불러오기
      */
     @Override
-    public void loadSearchedData(){
+    public void loadSearchedData() {
         mRecentSearchTerm.clear();
         RealmResults<RecentSearchTerm> realmResults = mRealm.where(RecentSearchTerm.class).findAllAsync();
         mRecentSearchTerm.addAll(realmResults);

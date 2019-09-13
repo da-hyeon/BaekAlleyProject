@@ -1,14 +1,19 @@
 package com.hdh.baekalleyproject.ui.main;
 
-import android.content.Intent;
-import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
+import android.support.design.widget.BottomNavigationView;
+
+import com.hdh.baekalleyproject.ui.base.activity.BaseActivityContract;
 
 public interface MainActivityContract {
-    interface View{
+    interface View extends BaseActivityContract.View{
 
     }
-    interface Presenter{
-        void setData(ViewPager viewpager , TabLayout tabLayout);
+    interface Presenter extends BaseActivityContract.Presenter {
+        void disableShiftMode(BottomNavigationView view);
+       // void setData(ViewPager viewpager , TabLayout tabLayout);
+
+        void popRestaurantFragment();
+        void popNewsFragment();
+        void popMyInfoFragment();
     }
 }

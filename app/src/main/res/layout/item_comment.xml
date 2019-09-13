@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff">
+
+        <ImageView
+            android:id="@+id/ivUserImage"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/icon_user_teal"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvUserName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:fontFamily="@font/notosans"
+            android:includeFontPadding="false"
+            android:letterSpacing="-0.03"
+            android:lineSpacingExtra="2.7sp"
+            android:text="asdasd"
+            android:textColor="#333333"
+            android:textSize="14dp"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toRightOf="@+id/ivUserImage"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvElapsedTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:fontFamily="@font/notosans"
+            android:includeFontPadding="false"
+            android:letterSpacing="-0.03"
+            android:lineSpacingExtra="4.7sp"
+            android:text="17시간 전"
+            android:textColor="#999999"
+            android:textSize="12dp"
+            app:layout_constraintBottom_toBottomOf="@+id/tvUserName"
+            app:layout_constraintLeft_toRightOf="@+id/tvUserName"
+            app:layout_constraintTop_toTopOf="@+id/tvUserName" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/notosans"
+            android:includeFontPadding="false"
+            android:letterSpacing="-0.03"
+            android:text="@string/comment_sample"
+            android:textColor="#333333"
+            android:textSize="14dp"
+            app:layout_constraintLeft_toLeftOf="@+id/tvUserName"
+            app:layout_constraintRight_toLeftOf="@+id/vLike"
+            app:layout_constraintTop_toBottomOf="@+id/tvUserName" />
+
+        <View
+            android:id="@+id/vLike"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="@+id/tvCountOfLike"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/ivLike"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_heart_circle"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvCountOfLike"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="4dp"
+            android:paddingLeft="7.7dp"
+            android:text="1"
+            android:textColor="#666666"
+            android:textSize="12dp"
+            app:layout_constraintBottom_toBottomOf="@+id/ivLike"
+            app:layout_constraintRight_toLeftOf="@+id/ivLike"
+            app:layout_constraintTop_toTopOf="@+id/ivLike" />
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

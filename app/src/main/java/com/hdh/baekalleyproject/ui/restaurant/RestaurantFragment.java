@@ -87,5 +87,4 @@ public class RestaurantFragment extends BaseFragment implements RestaurantContra
         startActivityForResult(intent, requestCode);
         getActivity().overridePendingTransition(R.anim.slide_up, R.anim.stay);
     }
-
 }

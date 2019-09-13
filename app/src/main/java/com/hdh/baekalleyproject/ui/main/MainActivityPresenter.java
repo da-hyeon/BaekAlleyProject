@@ -1,23 +1,26 @@
 package com.hdh.baekalleyproject.ui.main;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
-import android.support.design.widget.TabLayout;
+import android.support.annotation.NonNull;
+import android.support.design.internal.BottomNavigationItemView;
+import android.support.design.internal.BottomNavigationMenuView;
+import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.view.ViewPager;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.support.v4.app.FragmentTransaction;
+import android.view.MenuItem;
 
 import com.hdh.baekalleyproject.R;
-import com.hdh.baekalleyproject.adapter.ContentViewPagerAdapter;
+import com.hdh.baekalleyproject.ui.base.activity.BaseActivityPresenter;
 import com.hdh.baekalleyproject.ui.myinfo.MyInfoFragment;
 import com.hdh.baekalleyproject.ui.news.NewsFragment;
 import com.hdh.baekalleyproject.ui.restaurant.RestaurantFragment;
 
-import java.util.Objects;
+import java.lang.reflect.Field;
 
-public class MainActivityPresenter implements MainActivityContract.Presenter {
+public class MainActivityPresenter extends BaseActivityPresenter implements MainActivityContract.Presenter , BottomNavigationView.OnNavigationItemSelectedListener{
 
     private MainActivityContract.View mView;
     private Context mContext;
@@ -28,47 +31,90 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
     private NewsFragment mNewsFragment;
     private MyInfoFragment mMyInfoFragment;
 
-    MainActivityPresenter(MainActivityContract.View mView, Context mContext, Activity mActivity , FragmentManager mFragmentManager) {
+    private int mFrameLayoutID;
+
+    MainActivityPresenter(MainActivityContract.View mView, Context mContext, Activity mActivity , FragmentManager mFragmentManager, int mFrameLayoutID) {
+        super(mView ,mContext ,mActivity);
         this.mView = mView;
         this.mContext = mContext;
         this.mActivity = mActivity;
         this.mFragmentManager = mFragmentManager;
+        this.mFrameLayoutID = mFrameLayoutID;
 
         mRestaurantFragment = new RestaurantFragment();
         mNewsFragment = new NewsFragment();
         mMyInfoFragment = new MyInfoFragment();
     }
 
+    @SuppressLint("RestrictedApi")
     @Override
-    public void setData(ViewPager viewpager , TabLayout tabLayout) {
-        ContentViewPagerAdapter adapter = new ContentViewPagerAdapter(mFragmentManager);
-        adapter.addFragment(mRestaurantFragment);
-        adapter.addFragment(mNewsFragment);
-        adapter.addFragment(mMyInfoFragment);
-        viewpager.setAdapter(adapter);
+    public void disableShiftMode(BottomNavigationView view) {
+        BottomNavigationMenuView menuView = (BottomNavigationMenuView) view.getChildAt(0);
+        try {
+            Field shiftingMode = menuView.getClass().getDeclaredField("mShiftingMode");
+            shiftingMode.setAccessible(true);
+            shiftingMode.setBoolean(menuView, false);
+            shiftingMode.setAccessible(false);
+            for (int i = 0; i < menuView.getChildCount(); i++) {
+                BottomNavigationItemView item = (BottomNavigationItemView) menuView.getChildAt(i);
+                item.setShiftingMode(false);
+                // set once again checked value, so view will be updated
+                item.setChecked(item.getItemData().isChecked());
+            }
+        } catch (NoSuchFieldException e) {
+            //Timber.e(e, "Unable to get shift mode field");
+        } catch (IllegalAccessException e) {
+            //Timber.e(e, "Unable to change value of shift mode");
+        }
 
-        tabLayout.setupWithViewPager(viewpager);
+        view.setOnNavigationItemSelectedListener(this);
+        view.setSelectedItemId(R.id.menuRestaurantSearch);
+    }
 
-        View restaurantFind = mActivity.getLayoutInflater().inflate(R.layout.custom_tab, null);
-        ImageView restaurantFindImg = restaurantFind.findViewById(R.id.img_tab);
-        TextView restaurantFindText = restaurantFind.findViewById(R.id.txt_tab);
-        restaurantFindImg.setImageResource(R.drawable.selector_findshop);
-        restaurantFindText.setText("식당찾기");
-        Objects.requireNonNull(tabLayout.getTabAt(0)).setCustomView(restaurantFind);
+    @Override
+    public void popRestaurantFragment() {
+        PopFragment(mRestaurantFragment , mNewsFragment , mMyInfoFragment);
+    }
 
-        View restaurantNews = mActivity.getLayoutInflater().inflate(R.layout.custom_tab, null);
-        ImageView restaurantNewsImg = restaurantNews.findViewById(R.id.img_tab);
-        TextView restaurantNewsText = restaurantNews.findViewById(R.id.txt_tab);
-        restaurantNewsImg.setImageResource(R.drawable.selector_shopnews);
-        restaurantNewsText.setText("식당소식");
-        Objects.requireNonNull(tabLayout.getTabAt(1)).setCustomView(restaurantNews);
+    @Override
+    public void popNewsFragment() {
+        PopFragment(mNewsFragment , mRestaurantFragment , mMyInfoFragment);
+    }
 
-        View myInfo = mActivity.getLayoutInflater().inflate(R.layout.custom_tab, null);
-        ImageView myInfoImg = myInfo.findViewById(R.id.img_tab);
-        TextView myInfoText = myInfo.findViewById(R.id.txt_tab);
-        myInfoImg.setImageResource(R.drawable.selector_myinfo);
-        myInfoText.setText("내 정보");
-        Objects.requireNonNull(tabLayout.getTabAt(2)).setCustomView(myInfo);
+    @Override
+    public void popMyInfoFragment() {
+        PopFragment(mMyInfoFragment , mRestaurantFragment , mNewsFragment);
+    }
 
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menuRestaurantSearch:
+                popRestaurantFragment();
+                break;
+            case R.id.menuRestaurantNews:
+                popNewsFragment();
+                break;
+            case R.id.menuMyInformation:
+                popMyInfoFragment();
+                break;
+        }
+        return true;
+    }
+
+    private void PopFragment(Fragment mainFragment, Fragment subFragment_1 , Fragment subFragment_2){
+        FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
+        if (mainFragment.isAdded()) {
+            fragmentTransaction.show(mainFragment);
+        } else {
+            fragmentTransaction.add(mFrameLayoutID, mainFragment, mainFragment.getClass().getName());
+        }
+        if (subFragment_1.isAdded()) {
+            fragmentTransaction.hide(subFragment_1);
+        }
+        if (subFragment_2.isAdded()) {
+            fragmentTransaction.hide(subFragment_2);
+        }
+        fragmentTransaction.commit();
     }
 }

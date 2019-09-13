@@ -192,6 +192,24 @@ public class RestaurantDetailActivity extends BaseActivity implements Restaurant
         mBinding.tvPriceRange.setText(price);
     }
 
+    @SuppressLint("SetTextI18n")
+    @Override
+    public void setReviewCountOfGreat(String count) {
+        mBinding.tvCountOfTasteGreat.setText("("+ count +")");
+    }
+
+    @SuppressLint("SetTextI18n")
+    @Override
+    public void setReviewCountOfGood(String count) {
+        mBinding.tvCountOfTasteGood.setText("("+ count +")");
+    }
+
+    @SuppressLint("SetTextI18n")
+    @Override
+    public void setReviewCountOfBad(String count) {
+        mBinding.tvCountOfTasteBad.setText("("+ count +")");
+    }
+
     @Override
     public void showBusinessHours() {
         mBinding.tvBusinessHoursText.setVisibility(View.VISIBLE);
@@ -249,4 +267,5 @@ public class RestaurantDetailActivity extends BaseActivity implements Restaurant
             mBinding.ivNumberOfLikeButton.setColorFilter(null);
         }
     }
+
 }

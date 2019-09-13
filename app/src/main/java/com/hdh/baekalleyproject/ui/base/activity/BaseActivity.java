@@ -9,6 +9,8 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
+import com.hdh.baekalleyproject.ui.login.LoginActivity;
+
 public class BaseActivity extends AppCompatActivity implements BaseActivityContract.View {
 
     // Permission
@@ -22,6 +24,15 @@ public class BaseActivity extends AppCompatActivity implements BaseActivityContr
     @Override
     public void moveActivity(Intent intent) {
         startActivity(intent);
+    }
+
+    @Override
+    public void moveLogin() {
+        Toast.makeText(this, "로그인 해주세요", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, LoginActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+        finish();
     }
 
     @Override
@@ -70,4 +81,6 @@ public class BaseActivity extends AppCompatActivity implements BaseActivityContr
         super.onDestroy();
       //  Session.getCurrentSession().removeCallback(callback);
     }
+
+
 }

@@ -144,7 +144,8 @@ public class LoginPresenter extends BaseActivityPresenter implements LoginContra
 
     @Override
     public void clickNoneLogin() {
-
+        Intent intent = new Intent(mContext, MainActivity.class);
+        mActivity.startActivity(intent);
     }
 
     private class SessionCallback implements ISessionCallback {

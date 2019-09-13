@@ -24,6 +24,9 @@ public interface RestaurantDetailContract {
         void setBreakTime(String breakTime);
         void setHoliday(String holiday);
         void setPrice(String price);
+        void setReviewCountOfGreat(String count);
+        void setReviewCountOfGood(String count);
+        void setReviewCountOfBad(String count);
 
         void showBusinessHours();
         void showBreakTime();

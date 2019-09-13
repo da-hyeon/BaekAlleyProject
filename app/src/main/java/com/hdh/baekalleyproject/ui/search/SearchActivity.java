@@ -18,18 +18,18 @@ public class SearchActivity extends BaseActivity implements SearchContract.View 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mBinding = DataBindingUtil.setContentView(this , R.layout.activity_search);
+        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_search);
         mPresenter = new SearchPresenter(this, this, this);
 
         initData();
 
         //취소 버튼 클릭
-        mBinding.tvDismiss.setOnClickListener(v->
-            mPresenter.clickOptionDismiss()
+        mBinding.tvDismiss.setOnClickListener(v ->
+                mPresenter.clickOptionDismiss()
         );
 
         //클리어 버튼 클릭
-        mBinding.ivClear.setOnClickListener(v->{
+        mBinding.ivClear.setOnClickListener(v -> {
             mPresenter.clickClearButton();
         });
 
@@ -51,6 +51,10 @@ public class SearchActivity extends BaseActivity implements SearchContract.View 
 
             }
         });
+
+        mBinding.tvDeleteAll.setOnClickListener(v ->
+                mPresenter.clickDeleteAll()
+        );
     }
 
     @Override
@@ -86,15 +90,17 @@ public class SearchActivity extends BaseActivity implements SearchContract.View 
 
     /**
      * EditText 패딩 변경
+     *
      * @param size 패딩 사이즈
      */
     @Override
     public void changeTextPadding(int size) {
-        mBinding.etSearch.setPadding(0,0,0,size);
+        mBinding.etSearch.setPadding(0, 0, 0, size);
     }
 
     /**
      * SearchedFailedText 변경하기
+     *
      * @param text 입력값
      */
     @Override
@@ -104,11 +110,12 @@ public class SearchActivity extends BaseActivity implements SearchContract.View 
 
     /**
      * SearchText 변경하기
+     *
      * @param text
      */
     @Override
     public void changeSearchText(String text) {
-        mBinding.tvInputText.setText("\""+ text +"\"" );
+        mBinding.tvInputText.setText("\"" + text + "\"");
     }
 
     /**

@@ -867,6 +867,7 @@
                                 android:includeFontPadding="false"
                                 />
                             <TextView
+                                android:id="@+id/tvCountOfTasteGreat"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="(53)"
@@ -907,6 +908,7 @@
                                 android:includeFontPadding="false"
                                 />
                             <TextView
+                                android:id="@+id/tvCountOfTasteGood"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="(14)"
@@ -948,7 +950,7 @@
                                 android:includeFontPadding="false"
                                 />
                             <TextView
-                                android:id="@+id/tvBadReviewCount"
+                                android:id="@+id/tvCountOfTasteBad"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="(5)"

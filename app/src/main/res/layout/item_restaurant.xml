@@ -29,6 +29,7 @@
                 android:id="@+id/ivRestaurantImage"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
+                android:scaleType="fitXY"
                 app:layout_constraintBottom_toBottomOf="@+id/gl_65"
                 app:layout_constraintTop_toTopOf="parent"
                 android:background="@drawable/background_rounding"

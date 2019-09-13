@@ -13,57 +13,63 @@
             android:layout_gravity="center"
             android:gravity="center">
 
-           <View
-               android:id="@+id/vDot"
-               android:visibility="invisible"
-               android:layout_width="6.7dp"
-               android:layout_height="6.7dp"
-               android:layout_gravity="center"
-               android:layout_marginRight="16dp"
-               android:background="@drawable/circle_shape_mini_ff4f4f"/>
+            <View
+                android:id="@+id/vDot"
+                android:layout_width="6.7dp"
+                android:layout_height="6.7dp"
+                android:layout_gravity="center"
+                android:layout_marginRight="16dp"
+                android:background="@drawable/circle_shape_mini_ff4f4f"
+                android:visibility="invisible" />
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/flView"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:paddingRight="16dp">
 
-            <FrameLayout
-                android:id="@+id/flView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:paddingRight="16dp">
 
-                <View
-                    android:id="@+id/vAlley"
-                    android:layout_width="97dp"
-                    android:layout_height="91.3dp"
-                    android:background="@drawable/round_stroke_bbbbbb"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" >
-
-                </View>
-
+            <LinearLayout
+                android:id="@+id/llAlleyView"
+                android:layout_width="97dp"
+                android:layout_height="97.3dp"
+                android:orientation="vertical">
 
                 <LinearLayout
+                    android:id="@+id/llArea"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="27.3dp"
                     android:layout_gravity="center"
-                    android:gravity="center"
-                    android:orientation="vertical">
+                    android:background="@drawable/round_left_right_top_bbbbbb">
 
                     <TextView
                         android:id="@+id/tvArea"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
                         android:fontFamily="@font/notosans"
+                        android:gravity="center"
                         android:includeFontPadding="false"
                         android:letterSpacing="-0.02"
                         android:lineSpacingExtra="7sp"
-                        android:text="이태원"
-                        android:textColor="#999999"
-                        android:textSize="15dp"
+                        android:text="서울"
+                        android:textColor="#ffffff"
+                        android:textSize="14dp"
                         android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/llAlley"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:background="@drawable/round_stroke_left_right_bottom_bbbbbb"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
                     <TextView
                         android:id="@+id/tvAlley"
@@ -73,11 +79,13 @@
                         android:gravity="center"
                         android:includeFontPadding="false"
                         android:text="해방촌\n신흥시장"
+                        android:layout_marginBottom="4dp"
                         android:textColor="#999999"
                         android:textSize="15dp" />
 
                 </LinearLayout>
-            </FrameLayout>
+
+            </LinearLayout>
 
         </LinearLayout>
 

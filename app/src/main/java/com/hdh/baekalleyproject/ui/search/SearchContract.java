@@ -35,5 +35,6 @@ public interface SearchContract {
         void enteringText(CharSequence charSequence);
 
         void clickClearButton();
+        void clickDeleteAll();
     }
 }

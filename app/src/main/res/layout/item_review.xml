@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/llReview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#ffffff"
@@ -11,6 +13,8 @@
             android:id="@+id/ivUserImage"
             android:layout_width="36dp"
             android:layout_height="36dp"
+            android:src="@drawable/icon_user_teal"
+            android:scaleType="fitXY"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -30,7 +34,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tv"
+            android:id="@+id/tvElapsedTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
@@ -143,6 +147,7 @@
             />
 
         <TextView
+            android:id="@+id/tvComment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="댓글달기"
@@ -150,9 +155,11 @@
             android:fontFamily="@font/notosans"
             android:includeFontPadding="false"
             app:layout_constraintTop_toTopOf="@+id/tvLikeCount"
+            app:layout_constraintBottom_toBottomOf="@+id/tvLikeCount"
             app:layout_constraintLeft_toRightOf="@+id/tvLikeCount"
             android:textSize="13dp"
-            android:layout_marginLeft="20dp"/>
+            android:padding="10dp"
+            android:layout_marginLeft="10dp"/>
 
     </android.support.constraint.ConstraintLayout>
 </layout>

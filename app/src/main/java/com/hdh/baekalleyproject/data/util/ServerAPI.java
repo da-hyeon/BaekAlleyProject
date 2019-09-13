@@ -101,7 +101,7 @@ public interface ServerAPI {
     /**
      * 가야쥬 등록,삭제 요청
      * @param restaurantID 식당 ID
-     * @param userEmail 회원 email
+     * @param userID 회원 ID
      * @return rstrn_like 가야쥬 개수
      *
      */
@@ -109,7 +109,7 @@ public interface ServerAPI {
     @POST(Constants.REQUEST_REGISTRATION_AND_DELETE_WILL_GO)
     Call<String> requestRegistrationAndDeleteWillGo(
             @Field("rt_idx") String restaurantID ,
-            @Field("mb_idx") String userEmail );
+            @Field("mb_idx") String userID );
 
     /**
      * 리뷰 등록 요청
@@ -119,7 +119,7 @@ public interface ServerAPI {
      * @param selectedTasteScore 선택한 맛의 점수
      * @param selectedTasteType 선택한 맛의 타입
      * @param restaurantID 식당 ID
-     * @param userEmail 회원 email
+     * @param userID 회원 ID
      * @return
      */
     @FormUrlEncoded
@@ -131,20 +131,38 @@ public interface ServerAPI {
             @Field("rw_score") double selectedTasteScore ,
             @Field("rw_type") String selectedTasteType ,
             @Field("rt_idx") int restaurantID ,
-            @Field("mb_idx") int userEmail );
+            @Field("mb_idx") int userID );
 
     /**
      * 리뷰 좋아요 등록,삭제 요청
      * @param restaurantID 식당 ID
-     * @param userEmail 회원 email
+     * @param userID 회원 ID
      * @return rev_count  - 좋아요 개수
      */
     @FormUrlEncoded
     @POST(Constants.REQUEST_REGISTRATION_REVIEW_LIKE)
-    Call<String> requestRegistrationReviewLike(
+    Call<Integer> requestRegistrationReviewLike(
             @Field("rt_idx") String restaurantID ,
-            @Field("mb_idx") String userEmail ,
+            @Field("mb_idx") String userID ,
             @Field("rw_idx") String reviewID);
+
+
+    /**
+     * 리뷰 댓글 등록 요청
+     *
+     * @param comment 댓글내용
+     * @param userID 회원번호
+     * @param reviewID 리뷰번호
+     * @param restaurantID 식당번호
+     * @return 댓글 수
+     */
+    @FormUrlEncoded
+    @POST(Constants.REQUEST_REGISTRATION_REVIEW_COMMENT)
+    Call<Integer> requestRegistrationReviewComment(
+            @Field("cmnt_contents") String comment ,
+            @Field("mb_idx") String userID ,
+            @Field("rw_idx") String reviewID,
+            @Field("rt_idx") String restaurantID);
 //
 //    /**
 //     * 로그인 요청

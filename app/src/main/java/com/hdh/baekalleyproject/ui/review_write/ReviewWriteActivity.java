@@ -95,4 +95,5 @@ public class ReviewWriteActivity extends BaseActivity implements ReviewWriteCont
             );
         }
     }
+
 }

@@ -27,9 +27,9 @@ public class AlleyListAdapter extends RecyclerView.Adapter<AlleyListAdapter.Rest
             super(binding.getRoot());
             this.binding = binding;
 
-            binding.vAlley.setOnClickListener(v1->{
+            binding.llAlleyView.setOnClickListener(v1 -> {
                 int position = getAdapterPosition();
-                if(mAlleyList.get(position).getTag().equals("0")){
+                if (mAlleyList.get(position).getTag().equals("0")) {
                     mAlleyList.get(position).setTag("1");
                 } else {
                     mAlleyList.get(position).setTag("0");
@@ -37,17 +37,15 @@ public class AlleyListAdapter extends RecyclerView.Adapter<AlleyListAdapter.Rest
                 notifyItemChanged(position);
             });
         }
-
-
     }
 
-    public AlleyListAdapter( Context mContext) {
+    public AlleyListAdapter(Context mContext) {
         this.mContext = mContext;
     }
 
     @Override
     public RestaurantImageListViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new RestaurantImageListViewHolder(ItemFilterAlleyBinding.inflate(LayoutInflater.from(parent.getContext()) , parent , false));
+        return new RestaurantImageListViewHolder(ItemFilterAlleyBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
     }
 
     @SuppressLint("SetTextI18n")
@@ -56,22 +54,21 @@ public class AlleyListAdapter extends RecyclerView.Adapter<AlleyListAdapter.Rest
 
         String[] alley = mAlleyList.get(position).getAlleyName().split(" ");
         holder.binding.tvArea.setText(alley[0]);
-        if (alley.length == 3){
-            holder.binding.tvAlley.setText(alley[1]+ "\n" + alley[2]);
+        if (alley.length == 3) {
+            holder.binding.tvAlley.setText(alley[1] + "\n" + alley[2]);
         } else {
             holder.binding.tvAlley.setText(alley[1]);
         }
 
-        if (mAlleyList.get(position).getTag().equals("0")){
-            holder.binding.vAlley.setBackground(ContextCompat.getDrawable(mContext , R.drawable.round_stroke_bbbbbb));
-            holder.binding.tvArea.setTextColor(mContext.getResources().getColor(R.color.foodTextDefaultColor));
+        if (mAlleyList.get(position).getTag().equals("0")) {
+            holder.binding.llArea.setBackground(ContextCompat.getDrawable(mContext, R.drawable.round_left_right_top_bbbbbb));
+            holder.binding.llAlley.setBackground(ContextCompat.getDrawable(mContext, R.drawable.round_stroke_left_right_bottom_bbbbbb));
             holder.binding.tvAlley.setTextColor(mContext.getResources().getColor(R.color.foodTextDefaultColor));
             holder.binding.vDot.setVisibility(View.INVISIBLE);
 
-        }
-        else {
-            holder.binding.vAlley.setBackground(ContextCompat.getDrawable(mContext , R.drawable.round_stroke_ff4f4f));
-            holder.binding.tvArea.setTextColor(mContext.getResources().getColor(R.color.colorPrimary));
+        } else {
+            holder.binding.llArea.setBackground(ContextCompat.getDrawable(mContext, R.drawable.round_left_right_top_ff4f4f));
+            holder.binding.llAlley.setBackground(ContextCompat.getDrawable(mContext, R.drawable.round_stroke_left_right_bottom_ff4f4f));
             holder.binding.tvAlley.setTextColor(mContext.getResources().getColor(R.color.colorPrimary));
             holder.binding.vDot.setVisibility(View.VISIBLE);
         }
@@ -82,6 +79,7 @@ public class AlleyListAdapter extends RecyclerView.Adapter<AlleyListAdapter.Rest
         return mAlleyList != null ? mAlleyList.size() : 0;
     }
 
+
     public void setAlleyList(ArrayList<Alley> mAlleyList) {
         this.mAlleyList = mAlleyList;
     }
@@ -90,10 +88,10 @@ public class AlleyListAdapter extends RecyclerView.Adapter<AlleyListAdapter.Rest
         return mAlleyList;
     }
 
-    public void setSelectedItem(ArrayList<String> selectedItemList){
-        for (int i = 0 ; i < mAlleyList.size(); i++){
-            for(int j = 0 ; j < selectedItemList.size(); j++){
-                if (mAlleyList.get(i).getAlleyName().equals(selectedItemList.get(j))){
+    public void setSelectedItem(ArrayList<String> selectedItemList) {
+        for (int i = 0; i < mAlleyList.size(); i++) {
+            for (int j = 0; j < selectedItemList.size(); j++) {
+                if (mAlleyList.get(i).getAlleyName().equals(selectedItemList.get(j))) {
                     mAlleyList.get(i).setTag("1");
                     break;
                 }

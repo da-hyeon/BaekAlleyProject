@@ -2,7 +2,9 @@ package com.hdh.baekalleyproject.data.model;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Review {
+import java.io.Serializable;
+
+public class Review implements Serializable {
 
     @SerializedName("rw_idx")
     private String reviewID;
@@ -29,7 +31,7 @@ public class Review {
     private String reviewContent;
 
     @SerializedName("rw_check")
-    private boolean willGoClickStatus;
+    private boolean likeClickStatus;
 
     @SerializedName("rw_regdate")
     private String reviewRegistrationDate;
@@ -38,10 +40,13 @@ public class Review {
     private String reviewUpdateDate;
 
     @SerializedName("rw_count")
-    private String reviewLikeCount;
+    private int reviewLikeCount;
 
     @SerializedName("rw_type")
-    private String revivewTasteType;
+    private int revivewTasteType;
+
+    @SerializedName("cmnt_count")
+    private int commentCount;
 
     public String getReviewID() {
         return reviewID;
@@ -79,19 +84,23 @@ public class Review {
         return reviewRegistrationDate;
     }
 
-    public boolean isWillGoClickStatus() {
-        return willGoClickStatus;
+    public boolean isLikeClickStatus() {
+        return likeClickStatus;
     }
 
     public String getReviewUpdateDate() {
         return reviewUpdateDate;
     }
 
-    public String getReviewLikeCount() {
+    public int getReviewLikeCount() {
         return reviewLikeCount;
     }
 
-    public String getRevivewTasteType() {
+    public int getRevivewTasteType() {
         return revivewTasteType;
+    }
+
+    public int getCommentCount() {
+        return commentCount;
     }
 }

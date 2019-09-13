@@ -25,7 +25,6 @@ import com.hdh.baekalleyproject.data.model.UserInformation;
 import com.hdh.baekalleyproject.ui.base.activity.BaseActivityPresenter;
 import com.hdh.baekalleyproject.ui.dialog.share.ShareDialog;
 import com.hdh.baekalleyproject.ui.dialog.view_more.ViewMoreDialog;
-import com.hdh.baekalleyproject.ui.login.LoginActivity;
 import com.hdh.baekalleyproject.ui.modify_info.ModifyInfoActivity;
 import com.hdh.baekalleyproject.ui.review_write.ReviewWriteActivity;
 import com.naver.maps.geometry.LatLng;
@@ -251,9 +250,7 @@ public class RestaurantDetailPresenter extends BaseActivityPresenter implements 
         }
         //비로그인일 때
         else {
-            Intent intent = new Intent(mContext, LoginActivity.class);
-            mView.moveActivity(intent);
-            mView.removeActivity();
+            mView.moveLogin();
         }
     }
 
@@ -262,9 +259,14 @@ public class RestaurantDetailPresenter extends BaseActivityPresenter implements 
      */
     @Override
     public void clickWriteReview() {
-        Intent intent = new Intent(mContext, ReviewWriteActivity.class);
-        intent.putExtra(Constants.RESTAURANT_ID, Integer.parseInt(mRestaurantDetail.getRestaurant().get(0).getRestaurantID()));
-        mView.moveActivity(intent);
+        //로그인일 때
+        if (mUserInformation != null) {
+            Intent intent = new Intent(mContext, ReviewWriteActivity.class);
+            intent.putExtra(Constants.RESTAURANT_ID, Integer.parseInt(mRestaurantDetail.getRestaurant().get(0).getRestaurantID()));
+            mView.moveActivity(intent);
+        } else {
+            mView.moveLogin();
+        }
     }
 
     /**
@@ -391,6 +393,9 @@ public class RestaurantDetailPresenter extends BaseActivityPresenter implements 
         }
 
         mView.setPrice(mRestaurantDetail.getRestaurantPrice().get(0).getPrice());
+        mView.setReviewCountOfGreat(mRestaurantDetail.getRestaurantReviewCountOfTastes().get(0).getTasteGreat());
+        mView.setReviewCountOfGood(mRestaurantDetail.getRestaurantReviewCountOfTastes().get(0).getTasteGood());
+        mView.setReviewCountOfBad(mRestaurantDetail.getRestaurantReviewCountOfTastes().get(0).getTasteBad());
     }
 
     /**

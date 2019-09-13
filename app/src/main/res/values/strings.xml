@@ -39,5 +39,9 @@
 
     <string name="facebook_app_id">677083682794750</string>
     <string name="fb_login_protocol_scheme">fb677083682794750</string>
+    <string name="menu_restaurant_search">식당찾기</string>
+    <string name="menu_restaurant_news">식당소식</string>
+    <string name="menu_my_information">내 정보</string>
+    <string name="comment_sample">저도 모짜렐라 치즈돈까스와 규카츠를 오늘 시켜서 먹었는데 사람들이 많이 몰린 시간이라 그런지 너무 늦게 나왔네요.</string>
 
 </resources>

@@ -14,6 +14,8 @@ public class Constants {
     public static final String MAIN_ADAPTER = "mainAdapter";
     public static final String FILTER_ADAPTER = "filterAdapter";
 
+    public static final String REVIEW_DATA = "reviewData";
+
     /**
      * SharedPreference
      */
@@ -44,4 +46,6 @@ public class Constants {
     public static final String REQUEST_REGISTRATION_REVIEW = "api/rv/reviewWriter";
 
     public static final String REQUEST_REGISTRATION_REVIEW_LIKE = "api/rv/reviewLike";
+
+    public static final String REQUEST_REGISTRATION_REVIEW_COMMENT = "api/rv/commentWriter";
 }

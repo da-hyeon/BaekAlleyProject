@@ -28,6 +28,8 @@ public class RestaurantDetail {
     @SerializedName("rstrn_Like")
     private String WillGoClickStatus;
 
+    @SerializedName("rev_type")
+    private ArrayList<RestaurantReviewCountOfTaste> restaurantReviewCountOfTastes;
 
 
     public ArrayList<Restaurant> getRestaurant() {
@@ -58,4 +60,7 @@ public class RestaurantDetail {
         return WillGoClickStatus;
     }
 
+    public ArrayList<RestaurantReviewCountOfTaste> getRestaurantReviewCountOfTastes() {
+        return restaurantReviewCountOfTastes;
+    }
 }

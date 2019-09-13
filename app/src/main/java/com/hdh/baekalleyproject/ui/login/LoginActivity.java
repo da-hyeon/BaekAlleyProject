@@ -39,6 +39,10 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
         mBinding.btEmail.setOnClickListener(v->{
             mPresenter.clickEmailLogin();
         });
+
+        mBinding.btNotLogin.setOnClickListener(v->
+                mPresenter.clickNoneLogin()
+        );
     }
 
     private void initData(){

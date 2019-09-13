@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="reviewDetailActivity"
+            type="com.hdh.baekalleyproject.ui.review_detail.ReviewDetailActivity" />
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#ffffff">
+
+        <View
+            android:id="@+id/vToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:background="#ffffff"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/vGradient"
+            android:layout_width="match_parent"
+            android:layout_height="2.5dp"
+            android:background="@drawable/drop_shadow"
+            app:layout_constraintTop_toBottomOf="@+id/vToolbar" />
+
+        <View
+            android:id="@+id/vDismiss"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="@+id/vToolbar"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="@+id/tvDismiss"
+            app:layout_constraintTop_toTopOf="@+id/vToolbar" />
+
+        <ImageView
+            android:id="@+id/ivDismiss"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:src="@drawable/button_arrow_back"
+            app:layout_constraintBottom_toBottomOf="@+id/vToolbar"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/vToolbar" />
+
+        <TextView
+            android:id="@+id/tvDismiss"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:fontFamily="@font/notosans"
+            android:includeFontPadding="false"
+            android:text="식당정보"
+            android:textColor="#222222"
+            android:textSize="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/vToolbar"
+            app:layout_constraintLeft_toRightOf="@+id/ivDismiss"
+            app:layout_constraintTop_toTopOf="@+id/vToolbar" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/notosans"
+            android:includeFontPadding="false"
+            android:text="리뷰"
+            android:textColor="#222222"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/vToolbar"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/vToolbar" />
+
+
+        <include
+            android:id="@+id/icReview"
+            layout="@layout/item_review"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="16dp"
+            app:layout_constraintTop_toBottomOf="@+id/vGradient" />
+
+        <View
+            android:id="@+id/vLine"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="10dp"
+            android:background="#dddddd"
+            app:layout_constraintBottom_toBottomOf="@+id/icReview" />
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            app:layout_constraintTop_toBottomOf="@+id/vLine" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="8dp"
+            android:background="#f5f5f5"
+            app:layout_constraintBottom_toTopOf="@+id/vbottom"/>
+        <View
+            android:id="@+id/vbottom"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="#f5f5f5"
+            app:layout_constraintTop_toTopOf="@+id/etComment"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <EditText
+            android:id="@+id/etComment"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:textColor="#333333"
+            android:textColorHint="#999999"
+            android:hint="리뷰 댓글달기.."
+            android:fontFamily="@font/notosans"
+            android:includeFontPadding="false"
+            android:padding="7.7dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/tvRegistrationComment"
+            android:background="@drawable/round_ffffff_8dp"/>
+
+        <TextView
+            android:id="@+id/tvRegistrationComment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/notosans"
+            android:includeFontPadding="false"
+            android:letterSpacing="-0.03"
+            android:lineSpacingExtra="1.7sp"
+            android:text="댓글달기"
+            android:textColor="#666666"
+            android:textSize="15dp"
+            app:layout_constraintBottom_toBottomOf="@+id/etComment"
+            app:layout_constraintRight_toRightOf="parent"
+            android:paddingLeft="8dp"
+            android:paddingRight="16dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            app:layout_constraintTop_toTopOf="@+id/etComment" />
+
+
+
+    </android.support.constraint.ConstraintLayout>
+</layout>
