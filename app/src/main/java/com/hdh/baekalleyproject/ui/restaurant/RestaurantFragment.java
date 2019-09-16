@@ -43,7 +43,6 @@ public class RestaurantFragment extends BaseFragment implements RestaurantContra
         return mBinding.getRoot();
     }
 
-
     /**
      * 데이터 생성 및 초기화
      */
@@ -58,13 +57,12 @@ public class RestaurantFragment extends BaseFragment implements RestaurantContra
     public void onResume() {
         super.onResume();
         mPresenter.setRestaurantView();
-
     }
 
     /**
      * 일반 액티비티 이동
      *
-     * @param intent
+     * @param intent intent
      */
     @Override
     public void moveActivity(Intent intent) {
@@ -74,7 +72,7 @@ public class RestaurantFragment extends BaseFragment implements RestaurantContra
     /**
      * 옵션 액티비티 이동
      *
-     * @param intent
+     * @param intent intent
      */
     @Override
     public void moveOptionActivity(Intent intent) {
@@ -86,5 +84,18 @@ public class RestaurantFragment extends BaseFragment implements RestaurantContra
     public void moveOptionActivityForResult(Intent intent, int requestCode) {
         startActivityForResult(intent, requestCode);
         getActivity().overridePendingTransition(R.anim.slide_up, R.anim.stay);
+    }
+
+    @Override
+    public void showLoading() {
+        mBinding.pbLoading.setVisibility(View.VISIBLE);
+        mBinding.pbLoading.setIndeterminate(true);
+        mBinding.nsView.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void hideLoading() {
+        mBinding.pbLoading.setVisibility(View.GONE);
+        mBinding.nsView.setVisibility(View.VISIBLE);
     }
 }

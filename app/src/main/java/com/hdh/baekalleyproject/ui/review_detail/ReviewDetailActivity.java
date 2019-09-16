@@ -10,7 +10,7 @@ import com.hdh.baekalleyproject.R;
 import com.hdh.baekalleyproject.databinding.ActivityReviewDetailBinding;
 import com.hdh.baekalleyproject.ui.base.activity.BaseActivity;
 
-public class ReviewDetailActivity extends BaseActivity implements ReviewDetailContract.View{
+public class ReviewDetailActivity extends BaseActivity implements ReviewDetailContract.View {
 
     private ActivityReviewDetailBinding mBinding;
     private ReviewDetailContract.Presenter mPresenter;
@@ -25,27 +25,39 @@ public class ReviewDetailActivity extends BaseActivity implements ReviewDetailCo
         initData();
 
         //리뷰 좋아요 클릭
-        mBinding.icReview.vReviewLike.setOnClickListener(v->
+        mBinding.vReviewLike.setOnClickListener(v ->
                 mPresenter.clickReviewLike()
         );
 
         //식당정보 클릭
-        mBinding.vDismiss.setOnClickListener(v->
+        mBinding.vDismiss.setOnClickListener(v ->
                 mPresenter.clickDismiss()
         );
 
-        mBinding.tvRegistrationComment.setOnClickListener(v->
-                mPresenter.clickRegistrationComment(mBinding.tvRegistrationComment.getText().toString())
+        mBinding.tvRegistrationComment.setOnClickListener(v ->
+                mPresenter.clickRegistrationComment(mBinding.etComment.getText().toString())
         );
     }
 
     private void initData() {
         mPresenter.setView(getIntent());
+        mPresenter.setRecyclerView(mBinding.rvReviewComment);
+
+        mBinding.tvReviewContent.setMaxLines(Integer.MAX_VALUE);
+        mBinding.tvReviewContent.setEllipsize(null);
+       // android:maxLines="3"
+       // android:ellipsize="end"
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mPresenter.loadComment();
     }
 
     @Override
     public void setUserImage(String userImageURL) {
-        final int IMG_SIZE  = Math.round(36 * getResources().getDisplayMetrics().density);
+        final int IMG_SIZE = Math.round(36 * getResources().getDisplayMetrics().density);
 
         if (userImageURL == null) {
 
@@ -53,89 +65,90 @@ public class ReviewDetailActivity extends BaseActivity implements ReviewDetailCo
             Glide.with(this)
                     .load(userImageURL)
                     .apply(new RequestOptions().override(IMG_SIZE, IMG_SIZE).centerCrop().circleCrop())
-                    .into(mBinding.icReview.ivUserImage);
+                    .into(mBinding.ivUserImage);
         }
     }
 
     @Override
     public void setUserName(String userName) {
-        mBinding.icReview.tvUserName.setText(userName);
+        mBinding.tvUserName.setText(userName);
     }
 
     @Override
     public void setElapsedTime(String elapsedTime) {
-        mBinding.icReview.tvElapsedTime.setText(elapsedTime);
+        mBinding.tvElapsedTime.setText(elapsedTime);
     }
 
     @Override
     public void setReviewMenu(String reviewMenu) {
-        mBinding.icReview.tvReviewMenu.setText(reviewMenu);
-        mBinding.icReview.tvReviewMenu.setSelected(true);
+        mBinding.tvReviewMenu.setText(reviewMenu);
+        mBinding.tvReviewMenu.setSelected(true);
     }
 
     @Override
     public void setTasteType(int tasteType) {
         switch (tasteType) {
             case 1:
-                mBinding.icReview.ivTaste.setImageResource(R.drawable.icon_great);
+                mBinding.ivTaste.setImageResource(R.drawable.icon_great);
                 break;
             case 2:
-                mBinding.icReview.ivTaste.setImageResource(R.drawable.icon_good);
+                mBinding.ivTaste.setImageResource(R.drawable.icon_good);
                 break;
             case 3:
-                mBinding.icReview.ivTaste.setImageResource(R.drawable.icon_bad);
+                mBinding.ivTaste.setImageResource(R.drawable.icon_bad);
                 break;
         }
     }
 
     @Override
     public void setReviewTitle(String reviewTitle) {
-        mBinding.icReview.tvReviewTitle.setText(reviewTitle);
+        mBinding.tvReviewTitle.setText(reviewTitle);
     }
 
     @Override
     public void setReviewContent(String reviewContent) {
-        mBinding.icReview.tvReviewContent.setText(reviewContent);
+        mBinding.tvReviewContent.setText(reviewContent);
     }
 
     @Override
     public void setLikeMark(boolean status) {
-        mBinding.icReview.cbLikeMark.setChecked(status);
+        mBinding.cbLikeMark.setChecked(status);
     }
 
     @SuppressLint("SetTextI18n")
     @Override
     public void setLikeCount(int likeCount) {
         if (likeCount > 0) {
-            mBinding.icReview.tvLikeCount.setText(likeCount + "개");
+            mBinding.tvLikeCount.setText(likeCount + "개");
         } else {
-            mBinding.icReview.tvLikeCount.setText("");
+            mBinding.tvLikeCount.setText("");
         }
     }
 
     @SuppressLint("SetTextI18n")
     @Override
     public void setCommentCount(int commentCount) {
-        if (commentCount > 0){
-            mBinding.icReview.tvComment.setText("댓글 " + commentCount+"개");
-        } else {
-            mBinding.icReview.tvComment.setText("댓글달기");
-        }
+        mBinding.tvComment.setText("댓글 " + commentCount + "개");
+    }
+
+    @Override
+    public void setCommentInitialization() {
+        mBinding.etComment.setText("");
     }
 
     @Override
     public boolean isLikeMarkChecked() {
-        return mBinding.icReview.cbLikeMark.isChecked();
+        return mBinding.cbLikeMark.isChecked();
     }
 
     @Override
     public void changeLikeTextColor(int color) {
-        mBinding.icReview.tvLikeText.setTextColor(color);
+        mBinding.tvLikeText.setTextColor(color);
     }
 
     @Override
     public void changeLikeCountColor(int color) {
-        mBinding.icReview.tvLikeCount.setTextColor(color);
+        mBinding.tvLikeCount.setTextColor(color);
     }
 
 }

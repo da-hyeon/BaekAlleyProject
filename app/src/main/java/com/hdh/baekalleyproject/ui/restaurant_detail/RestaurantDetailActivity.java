@@ -29,7 +29,7 @@ public class RestaurantDetailActivity extends BaseActivity implements Restaurant
 
         //공유하기 클릭
         mBinding.ivShare.setOnClickListener(v -> {
-                mPresenter.clickShare();
+            mPresenter.clickShare();
         });
 
         //더보기 클릭
@@ -39,7 +39,7 @@ public class RestaurantDetailActivity extends BaseActivity implements Restaurant
 
         //가야쥬 클릭
         mBinding.vNumberOfLikeButton.setOnClickListener(v -> {
-            mPresenter.clickNumberOfLikeText(mBinding.tvNumberOfLikeButton.getCurrentTextColor() == ContextCompat.getColor(this , R.color.colorPrimary));
+            mPresenter.clickNumberOfLikeText(mBinding.tvNumberOfLikeButton.getCurrentTextColor() == ContextCompat.getColor(this, R.color.colorPrimary));
         });
 
         //리뷰쓰기 클릭
@@ -58,9 +58,9 @@ public class RestaurantDetailActivity extends BaseActivity implements Restaurant
         });
 
         //주소복사 클릭
-        mBinding.vAddressCopy.setOnClickListener(v -> {
-
-        });
+        mBinding.vAddressCopy.setOnClickListener(v ->
+                mPresenter.clickAddressCopy()
+        );
 
         //잘못된 정보알림 클릭
         mBinding.vWrongInfo.setOnClickListener(v -> {
@@ -87,7 +87,7 @@ public class RestaurantDetailActivity extends BaseActivity implements Restaurant
      * 데이터 생성 및 초기화
      */
     private void initData() {
-        mPresenter.setRecyclerView( mBinding.rvRestaurantImageList, mBinding.rvRestaurantMenuList, mBinding.rvReviewList);
+        mPresenter.setRecyclerView(mBinding.rvRestaurantImageList, mBinding.rvRestaurantMenuList, mBinding.rvReviewList);
 
         //mPresenter.setView(getIntent() , mBinding.rvRestaurantImageList, mBinding.rvRestaurantMenuList, mBinding.rvReviewList);
 
@@ -99,7 +99,7 @@ public class RestaurantDetailActivity extends BaseActivity implements Restaurant
             getSupportFragmentManager().beginTransaction().add(R.id.map_fragment, mapFragment).commit();
         }*/
 
-       //mPresenter.mapAsync(mBinding.mvMap);
+        //mPresenter.mapAsync(mBinding.mvMap);
     }
 
     @Override
@@ -195,19 +195,26 @@ public class RestaurantDetailActivity extends BaseActivity implements Restaurant
     @SuppressLint("SetTextI18n")
     @Override
     public void setReviewCountOfGreat(String count) {
-        mBinding.tvCountOfTasteGreat.setText("("+ count +")");
+        mBinding.tvCountOfTasteGreat.setText("(" + count + ")");
     }
 
     @SuppressLint("SetTextI18n")
     @Override
     public void setReviewCountOfGood(String count) {
-        mBinding.tvCountOfTasteGood.setText("("+ count +")");
+        mBinding.tvCountOfTasteGood.setText("(" + count + ")");
     }
 
     @SuppressLint("SetTextI18n")
     @Override
     public void setReviewCountOfBad(String count) {
-        mBinding.tvCountOfTasteBad.setText("("+ count +")");
+        mBinding.tvCountOfTasteBad.setText("(" + count + ")");
+    }
+
+    @Override
+    public void showLoading() {
+        mBinding.pbLoading.setVisibility(View.VISIBLE);
+        mBinding.pbLoading.setIndeterminate(true);
+        mBinding.nsView.setVisibility(View.GONE);
     }
 
     @Override
@@ -259,10 +266,16 @@ public class RestaurantDetailActivity extends BaseActivity implements Restaurant
     }
 
     @Override
+    public void hideLoading() {
+        mBinding.pbLoading.setVisibility(View.GONE);
+        mBinding.nsView.setVisibility(View.VISIBLE);
+    }
+
+    @Override
     public void changeGoColor(boolean status) {
         if (status) {
-            mBinding.ivNumberOfLikeButton.setColorFilter(ContextCompat.getColor(this , R.color.colorPrimary));
-            mBinding.tvNumberOfLikeButton.setTextColor(ContextCompat.getColor(this , R.color.colorPrimary));
+            mBinding.ivNumberOfLikeButton.setColorFilter(ContextCompat.getColor(this, R.color.colorPrimary));
+            mBinding.tvNumberOfLikeButton.setTextColor(ContextCompat.getColor(this, R.color.colorPrimary));
         } else {
             mBinding.ivNumberOfLikeButton.setColorFilter(null);
         }

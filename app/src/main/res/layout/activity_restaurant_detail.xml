@@ -16,7 +16,17 @@
         android:layout_height="match_parent"
         android:background="#ffffff">
 
+        <ProgressBar
+            android:id="@+id/pbLoading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/vToolbar"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            style="?android:attr/progressBarStyle"/>
         <!--Toolbar Section-->
+
         <View
             android:id="@+id/vToolbar"
             android:layout_width="match_parent"
@@ -69,7 +79,6 @@
             android:includeFontPadding="false"
             android:letterSpacing="-0.03"
             android:lineSpacingExtra="7.7sp"
-            android:text="연돈 수작 돈카츠"
             android:textColor="#222222"
             android:textSize="16dp"
             android:textStyle="bold"
@@ -102,6 +111,7 @@
 
         <!--Main Section-->
         <android.support.v4.widget.NestedScrollView
+            android:id="@+id/nsView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -573,7 +583,7 @@
                         app:layout_constraintTop_toTopOf="@+id/tvBusinessHoursText" />
 
                     <TextView
-                        
+
                         android:id="@+id/tvBreakTimeText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -799,7 +809,7 @@
                         android:lineSpacingExtra="9.7sp"
                         android:includeFontPadding="false"
                         android:layout_marginLeft="16dp"/>
-                    
+
                     <View
                         android:id="@+id/vReviewForm"
                         android:layout_width="match_parent"

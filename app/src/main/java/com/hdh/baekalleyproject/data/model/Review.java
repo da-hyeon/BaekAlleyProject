@@ -88,12 +88,20 @@ public class Review implements Serializable {
         return likeClickStatus;
     }
 
+    public void setLikeClickStatus(boolean likeClickStatus) {
+        this.likeClickStatus = likeClickStatus;
+    }
+
     public String getReviewUpdateDate() {
         return reviewUpdateDate;
     }
 
     public int getReviewLikeCount() {
         return reviewLikeCount;
+    }
+
+    public void setReviewLikeCount(int reviewLikeCount) {
+        this.reviewLikeCount = reviewLikeCount;
     }
 
     public int getRevivewTasteType() {

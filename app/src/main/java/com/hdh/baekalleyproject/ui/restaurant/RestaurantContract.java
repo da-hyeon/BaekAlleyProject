@@ -11,6 +11,9 @@ public interface RestaurantContract {
         void moveActivity(Intent intent);
         void moveOptionActivity(Intent intent);
         void moveOptionActivityForResult(Intent intent  , int requestCode);
+
+        void showLoading();
+        void hideLoading();
     }
     interface Presenter extends BaseFragmentContract.Presenter {
         void setRestaurantView();

@@ -20,7 +20,7 @@ import com.hdh.baekalleyproject.ui.restaurant.RestaurantFragment;
 
 import java.lang.reflect.Field;
 
-public class MainActivityPresenter extends BaseActivityPresenter implements MainActivityContract.Presenter , BottomNavigationView.OnNavigationItemSelectedListener{
+public class MainActivityPresenter extends BaseActivityPresenter implements MainActivityContract.Presenter, BottomNavigationView.OnNavigationItemSelectedListener {
 
     private MainActivityContract.View mView;
     private Context mContext;
@@ -33,8 +33,11 @@ public class MainActivityPresenter extends BaseActivityPresenter implements Main
 
     private int mFrameLayoutID;
 
-    MainActivityPresenter(MainActivityContract.View mView, Context mContext, Activity mActivity , FragmentManager mFragmentManager, int mFrameLayoutID) {
-        super(mView ,mContext ,mActivity);
+    //앱종료시간체크
+    private long backPressedTime;    //앱종료 위한 백버튼 누른시간
+
+    MainActivityPresenter(MainActivityContract.View mView, Context mContext, Activity mActivity, FragmentManager mFragmentManager, int mFrameLayoutID) {
+        super(mView, mContext, mActivity);
         this.mView = mView;
         this.mContext = mContext;
         this.mActivity = mActivity;
@@ -73,17 +76,36 @@ public class MainActivityPresenter extends BaseActivityPresenter implements Main
 
     @Override
     public void popRestaurantFragment() {
-        PopFragment(mRestaurantFragment , mNewsFragment , mMyInfoFragment);
+        PopFragment(mRestaurantFragment, mNewsFragment, mMyInfoFragment);
     }
 
     @Override
     public void popNewsFragment() {
-        PopFragment(mNewsFragment , mRestaurantFragment , mMyInfoFragment);
+        PopFragment(mNewsFragment, mRestaurantFragment, mMyInfoFragment);
     }
 
     @Override
     public void popMyInfoFragment() {
-        PopFragment(mMyInfoFragment , mRestaurantFragment , mNewsFragment);
+        PopFragment(mMyInfoFragment, mRestaurantFragment, mNewsFragment);
+    }
+
+    @Override
+    public void onBackPressed() {
+        //1번째 백버튼 클릭
+        if (System.currentTimeMillis() > backPressedTime + 2000) {
+            backPressedTime = System.currentTimeMillis();
+            mView.showToast("뒤로가기  버튼을 한번 더 누르면 종료합니다.");
+        }
+        //2번째 백버튼 클릭 (종료)
+        else {
+            AppFinish();
+        }
+    }
+
+    private void AppFinish() {
+        mView.removeActivity();
+        System.exit(0);
+        android.os.Process.killProcess(android.os.Process.myPid());
     }
 
     @Override
@@ -102,7 +124,7 @@ public class MainActivityPresenter extends BaseActivityPresenter implements Main
         return true;
     }
 
-    private void PopFragment(Fragment mainFragment, Fragment subFragment_1 , Fragment subFragment_2){
+    private void PopFragment(Fragment mainFragment, Fragment subFragment_1, Fragment subFragment_2) {
         FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
         if (mainFragment.isAdded()) {
             fragmentTransaction.show(mainFragment);

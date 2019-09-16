@@ -15,5 +15,7 @@ public interface MainActivityContract {
         void popRestaurantFragment();
         void popNewsFragment();
         void popMyInfoFragment();
+
+        void onBackPressed();
     }
 }

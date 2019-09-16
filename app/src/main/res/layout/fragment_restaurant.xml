@@ -24,6 +24,16 @@
             app:layout_constraintBottom_toTopOf="@+id/gl_15"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <ProgressBar
+            android:id="@+id/pbLoading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/vToolbar"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            style="?android:attr/progressBarStyle"/>
+
         <ImageView
             android:id="@+id/tvRanking"
             android:layout_width="wrap_content"
@@ -74,6 +84,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <android.support.v4.widget.NestedScrollView
+            android:id="@+id/nsView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"

@@ -85,6 +85,7 @@ public class RestaurantReviewListAdapter extends RecyclerView.Adapter<Restaurant
                                 if (binding.cbLikeMark.isChecked()) {
                                     binding.tvLikeText.setTextColor(ContextCompat.getColor(mContext, R.color.textColor_ff4f4f));
                                     binding.tvLikeCount.setTextColor(ContextCompat.getColor(mContext, R.color.textColor_ff4f4f));
+
                                 } else {
                                     binding.tvLikeText.setTextColor(ContextCompat.getColor(mContext, R.color.textColor_666666));
                                     binding.tvLikeCount.setTextColor(ContextCompat.getColor(mContext, R.color.textColor_666666));
@@ -94,6 +95,8 @@ public class RestaurantReviewListAdapter extends RecyclerView.Adapter<Restaurant
                                 } else {
                                     binding.tvLikeCount.setText("");
                                 }
+                                mRestaurantReviewList.get(position).setLikeClickStatus(binding.cbLikeMark.isChecked());
+                                mRestaurantReviewList.get(position).setReviewLikeCount(response.body());
                             } else {
                                 //mView.showFailDialog("실패" , "데이터 로딩 실패");
                                 Log.d("실패", "데이터 로딩 실패");
@@ -106,8 +109,6 @@ public class RestaurantReviewListAdapter extends RecyclerView.Adapter<Restaurant
                             Log.d("error", t.getLocalizedMessage());
                         }
                     });
-
-
                 } else {
                     Toast.makeText(mContext, "로그인 해주세요", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(mContext, LoginActivity.class);

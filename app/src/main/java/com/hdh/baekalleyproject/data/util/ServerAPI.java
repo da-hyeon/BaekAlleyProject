@@ -5,6 +5,7 @@ import com.hdh.baekalleyproject.Constants;
 import com.hdh.baekalleyproject.data.model.AlleyList;
 import com.hdh.baekalleyproject.data.model.RestaurantDetail;
 import com.hdh.baekalleyproject.data.model.RestaurantList;
+import com.hdh.baekalleyproject.data.model.ReviewCommentList;
 import com.hdh.baekalleyproject.data.model.UserInformation;
 
 import java.util.ArrayList;
@@ -158,11 +159,45 @@ public interface ServerAPI {
      */
     @FormUrlEncoded
     @POST(Constants.REQUEST_REGISTRATION_REVIEW_COMMENT)
-    Call<Integer> requestRegistrationReviewComment(
+    Call<Void> requestRegistrationReviewComment(
             @Field("cmnt_contents") String comment ,
             @Field("mb_idx") String userID ,
             @Field("rw_idx") String reviewID,
             @Field("rt_idx") String restaurantID);
+
+    /**
+     * 리뷰 댓글 조회
+     * @param userID 회원번호
+     * @param reviewID 리뷰번호
+     * @param restaurantID 식당번호
+     * @return 댓글
+     */
+    @FormUrlEncoded
+    @POST(Constants.SELECT_REGISTRATION_REVIEW_COMMENT)
+    Call<ReviewCommentList> selectRegistrationReviewComment(
+            @Field("mb_idx") String userID ,
+            @Field("rw_idx") String reviewID,
+            @Field("rt_idx") String restaurantID);
+
+
+    /**
+     * 댓글 좋아요 등록,삭제 요청
+     *
+     * @param restaurantID 식당 ID
+     * @param reviewID 리뷰 ID
+     * @param userID 회원 ID
+     * @param commentID 댓글 ID
+     * @return rev_count  - 좋아요 개수
+     */
+    @FormUrlEncoded
+    @POST(Constants.REQUEST_REGISTRATION_REVIEW_COMMENT_LIKE)
+    Call<Integer> requestRegistrationReviewCommentLike(
+            @Field("rt_idx") String restaurantID ,
+            @Field("rw_idx") String reviewID,
+            @Field("mb_idx") String userID ,
+            @Field("cmnt_idx") String commentID
+            );
+
 //
 //    /**
 //     * 로그인 요청

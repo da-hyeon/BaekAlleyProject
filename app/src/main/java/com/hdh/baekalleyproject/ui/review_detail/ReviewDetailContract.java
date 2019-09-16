@@ -1,6 +1,7 @@
 package com.hdh.baekalleyproject.ui.review_detail;
 
 import android.content.Intent;
+import android.support.v7.widget.RecyclerView;
 
 import com.hdh.baekalleyproject.ui.base.activity.BaseActivityContract;
 
@@ -16,16 +17,22 @@ public interface ReviewDetailContract {
         void setLikeMark(boolean status);
         void setLikeCount(int likeCount);
         void setCommentCount(int commentCount);
+        void setCommentInitialization();
 
         boolean isLikeMarkChecked();
+
         void changeLikeTextColor(int color);
         void changeLikeCountColor(int color);
+
     }
 
     interface Presenter extends BaseActivityContract.Presenter {
         void setView(Intent getIntent);
+        void setRecyclerView(RecyclerView commentView);
+
+        void loadComment();
 
         void clickReviewLike();
-        void clickRegistrationComment(String comment);
+        void clickRegistrationComment(String rvComment);
     }
 }

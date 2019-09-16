@@ -6,12 +6,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
 import com.hdh.baekalleyproject.Constants;
 import com.hdh.baekalleyproject.MyApplication;
 import com.hdh.baekalleyproject.R;
+import com.hdh.baekalleyproject.adapter.RestaurantReviewCommentListAdapter;
 import com.hdh.baekalleyproject.data.model.Review;
+import com.hdh.baekalleyproject.data.model.ReviewCommentList;
 import com.hdh.baekalleyproject.data.model.UserInformation;
 import com.hdh.baekalleyproject.ui.base.activity.BaseActivityPresenter;
 
@@ -33,6 +37,8 @@ public class ReviewDetailPresenter extends BaseActivityPresenter implements Revi
     private Review mReview;
 
     private UserInformation mUserInformation;
+    private RestaurantReviewCommentListAdapter mRestaurantReviewCommentListAdapter;
+    private ReviewCommentList mReviewCommentList;
 
     public ReviewDetailPresenter(ReviewDetailContract.View mView, Context mContext, Activity mActivity) {
         super(mView, mContext, mActivity);
@@ -41,6 +47,7 @@ public class ReviewDetailPresenter extends BaseActivityPresenter implements Revi
         this.mActivity = mActivity;
 
         mUserInformation = MyApplication.getUserInformationInstance();
+        mRestaurantReviewCommentListAdapter = new RestaurantReviewCommentListAdapter(mContext, mActivity);
     }
 
     @Override
@@ -48,6 +55,8 @@ public class ReviewDetailPresenter extends BaseActivityPresenter implements Revi
         mReview = (Review) getIntent.getSerializableExtra(Constants.REVIEW_DATA);
 
         if (mReview != null) {
+            mRestaurantReviewCommentListAdapter.setRestaurantID(mReview.getRestaurantID());
+            mRestaurantReviewCommentListAdapter.setReviewID(mReview.getReviewID());
             mView.setUserImage(mReview.getUserImageURL());
             mView.setUserName(mReview.getUserName());
             mView.setElapsedTime(getElapsedTime(mReview.getReviewRegistrationDate()));
@@ -69,6 +78,53 @@ public class ReviewDetailPresenter extends BaseActivityPresenter implements Revi
             mView.showToast("해당 리뷰 정보를 가져오지 못했습니다.");
             mView.removeActivity();
         }
+    }
+
+    @Override
+    public void setRecyclerView(RecyclerView commentView) {
+
+
+        // mRestaurantReviewCommentListAdapter.setRestaurantReviewCommentList(mCommentList);
+
+        LinearLayoutManager commentViewerLayoutManager = new LinearLayoutManager(mContext);
+        commentViewerLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        commentView.setLayoutManager(commentViewerLayoutManager);
+        commentView.setAdapter(mRestaurantReviewCommentListAdapter);
+
+    }
+
+    @Override
+    public void loadComment() {
+        Call<ReviewCommentList> selectRegistrationReviewComment = MyApplication
+                .getRestAdapter()
+                .selectRegistrationReviewComment(
+                        mUserInformation.getId(),
+                        mReview.getReviewID(),
+                        mReview.getRestaurantID());
+
+        selectRegistrationReviewComment.enqueue(new Callback<ReviewCommentList>() {
+
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onResponse(@NonNull Call<ReviewCommentList> call, @NonNull Response<ReviewCommentList> response) {
+                if (response.code() == 200) {
+                    if (response.body() != null) {
+                        mReviewCommentList = response.body();
+                        mRestaurantReviewCommentListAdapter.setRestaurantReviewCommentList(mReviewCommentList.getReviewCommentList());
+                        mRestaurantReviewCommentListAdapter.notifyDataSetChanged();
+                    }
+                } else {
+                    //mView.showFailDialog("실패" , "데이터 로딩 실패");
+                    Log.d("실패", "데이터 로딩 실패");
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<ReviewCommentList> call, @NonNull Throwable t) {
+                Log.d("error", t.getMessage());
+                Log.d("error", t.getLocalizedMessage());
+            }
+        });
     }
 
     @Override
@@ -121,9 +177,9 @@ public class ReviewDetailPresenter extends BaseActivityPresenter implements Revi
     @Override
     public void clickRegistrationComment(String comment) {
         if (mUserInformation != null) {
-            if (!comment.equals("")) {
+            if (comment != null && !comment.equals("")) {
                 Log.d("진입", "진입");
-                Call<Integer> requestRegistrationReviewComment = MyApplication
+                Call<Void> requestRegistrationReviewComment = MyApplication
                         .getRestAdapter()
                         .requestRegistrationReviewComment(
                                 comment,
@@ -131,25 +187,31 @@ public class ReviewDetailPresenter extends BaseActivityPresenter implements Revi
                                 mReview.getReviewID(),
                                 mReview.getRestaurantID());
 
-                requestRegistrationReviewComment.enqueue(new Callback<Integer>() {
+                requestRegistrationReviewComment.enqueue(new Callback<Void>() {
 
                     @Override
-                    public void onResponse(@NonNull Call<Integer> call, @NonNull Response<Integer> response) {
+                    public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
+
                         if (response.code() == 200) {
-                            //댓글 성공
+                            loadComment();
+                            mView.showToast("댓글이 등록되었습니다.");
+                            mView.setCommentInitialization();
+                            mView.setCommentCount(mReviewCommentList.getReviewCommentList().size());
 
                         } else {
-                            //mView.showFailDialog("실패" , "데이터 로딩 실패");
+                            //mView.showFailDialog("실패" , comment);
                             Log.d("실패", "데이터 로딩 실패");
                         }
                     }
 
                     @Override
-                    public void onFailure(@NonNull Call<Integer> call, @NonNull Throwable t) {
+                    public void onFailure(@NonNull Call<Void> call, @NonNull Throwable t) {
                         Log.d("error", t.getMessage());
                         Log.d("error", t.getLocalizedMessage());
                     }
                 });
+
+
             } else {
                 mView.showToast("빈칸을 채워주세요.");
             }

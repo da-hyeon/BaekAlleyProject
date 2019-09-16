@@ -48,4 +48,8 @@ public class Constants {
     public static final String REQUEST_REGISTRATION_REVIEW_LIKE = "api/rv/reviewLike";
 
     public static final String REQUEST_REGISTRATION_REVIEW_COMMENT = "api/rv/commentWriter";
+
+    public static final String SELECT_REGISTRATION_REVIEW_COMMENT = "api/rv/reviewDetails";
+
+    public static final String REQUEST_REGISTRATION_REVIEW_COMMENT_LIKE = "api/rv/commentLike";
 }

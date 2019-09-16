@@ -11,7 +11,6 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.hdh.baekalleyproject.Constants;
 import com.hdh.baekalleyproject.MyApplication;
@@ -120,6 +119,8 @@ public class RestaurantDetailPresenter extends BaseActivityPresenter implements 
     @Override
     public void setView(Intent intent) {
 
+        mView.showLoading();
+
         String userID = "0";
 
         if (mUserInformation != null) {
@@ -159,6 +160,7 @@ public class RestaurantDetailPresenter extends BaseActivityPresenter implements 
                             if (response.code() == 200) {
                                 mLatLon = setMapLocation();
                                 setRestaurantInformationView();
+
                             }
 
                         } else {
@@ -295,9 +297,9 @@ public class RestaurantDetailPresenter extends BaseActivityPresenter implements 
         ClipData clipData = ClipData.newPlainText(Constants.RESTAURANT_ADDRESS, mRestaurantDetail.getRestaurant().get(0).getRestaurantAddress());
         if (clipboardManager != null) {
             clipboardManager.setPrimaryClip(clipData);
-            Toast.makeText(mContext, "클립보드에 주소가 복사되었습니다.", Toast.LENGTH_SHORT).show();
+            mView.showToast("클립보드에 주소가 복사되었습니다.");
         } else {
-            Toast.makeText(mContext, "주소 복사에 실패했습니다.", Toast.LENGTH_SHORT).show();
+            mView.showToast("주소 복사에 실패했습니다.");
         }
     }
 
@@ -412,6 +414,7 @@ public class RestaurantDetailPresenter extends BaseActivityPresenter implements 
         if (mRestaurantDetail != null) {
             if (mRestaurantDetail.getRestaurant() != null) {
                 address = mRestaurantDetail.getRestaurant().get(0).getRestaurantAddress();
+                mView.hideLoading();
             }
         }
         double lat = 0, lon = 0;

@@ -3,16 +3,23 @@ package com.hdh.baekalleyproject.adapter;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.hdh.baekalleyproject.MyApplication;
-import com.hdh.baekalleyproject.data.model.Review;
+import com.hdh.baekalleyproject.R;
+import com.hdh.baekalleyproject.data.model.ReviewComment;
 import com.hdh.baekalleyproject.data.model.UserInformation;
 import com.hdh.baekalleyproject.databinding.ItemCommentBinding;
+import com.hdh.baekalleyproject.ui.login.LoginActivity;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -20,14 +27,21 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class RestaurantReviewCommentListAdapter extends RecyclerView.Adapter<RestaurantReviewCommentListAdapter.RestaurantReviewCommentListViewHolder> {
 
-    private ArrayList<Review> mRestaurantReviewCommentList;
+    private ArrayList<ReviewComment> mRestaurantReviewCommentList;
     private Context mContext;
     private Activity mActivity;
     private final int IMG_SIZE;
 
     private UserInformation mUserInformation;
+
+    private String mRestaurantID;
+    private String mReviewID;
 
     class RestaurantReviewCommentListViewHolder extends RecyclerView.ViewHolder {
 
@@ -36,6 +50,57 @@ public class RestaurantReviewCommentListAdapter extends RecyclerView.Adapter<Res
         RestaurantReviewCommentListViewHolder(ItemCommentBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
+
+            //좋아요 클릭
+            binding.vLike.setOnClickListener(v -> {
+                int position = getAdapterPosition();
+                //로그인일 때
+                if (mUserInformation != null) {
+                    // Toast.makeText(mContext, mRestaurantReviewList.get(position).getReviewID() + "번 , 글쓴이 " + mRestaurantReviewList.get(position).getUserName(), Toast.LENGTH_SHORT).show();
+                    Call<Integer> requestRegistrationReviewCommentLike = MyApplication
+                            .getRestAdapter()
+                            .requestRegistrationReviewCommentLike(
+                                    mRestaurantID,
+                                    mReviewID ,
+                                    mUserInformation.getId(),
+                                    mRestaurantReviewCommentList.get(position).getId());
+
+                    requestRegistrationReviewCommentLike.enqueue(new Callback<Integer>() {
+
+                        @SuppressLint("SetTextI18n")
+                        @Override
+                        public void onResponse(@NonNull Call<Integer> call, @NonNull Response<Integer> response) {
+                            if (response.code() == 200) {
+
+                                binding.cbLike.setChecked(!binding.cbLike.isChecked());
+                                if (binding.cbLike.isChecked()) {
+                                    binding.tvCountOfLike.setTextColor(ContextCompat.getColor(mContext, R.color.textColor_ff4f4f));
+
+                                } else {
+                                    binding.tvCountOfLike.setTextColor(ContextCompat.getColor(mContext, R.color.textColor_666666));
+                                }
+
+                                binding.tvCountOfLike.setText(response.body()+"");
+                            } else {
+                                //mView.showFailDialog("실패" , "데이터 로딩 실패");
+                                Log.d("실패", "데이터 로딩 실패");
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(@NonNull Call<Integer> call, @NonNull Throwable t) {
+                            Log.d("error", t.getMessage());
+                            Log.d("error", t.getLocalizedMessage());
+                        }
+                    });
+                } else {
+                    Toast.makeText(mContext, "로그인 해주세요", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(mContext, LoginActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    mActivity.startActivity(intent);
+                    mActivity.finish();
+                }
+            });
         }
     }
 
@@ -67,6 +132,17 @@ public class RestaurantReviewCommentListAdapter extends RecyclerView.Adapter<Res
         }
 
         holder.binding.tvUserName.setText(mRestaurantReviewCommentList.get(position).getUserName());
+        holder.binding.tvContent.setText(mRestaurantReviewCommentList.get(position).getContent());
+        holder.binding.tvCountOfLike.setText(mRestaurantReviewCommentList.get(position).getCountOfLike());
+        holder.binding.tvElapsedTime.setText(getElapsedTime(mRestaurantReviewCommentList.get(position).getRegistrationDate()));
+
+        holder.binding.cbLike.setChecked(mRestaurantReviewCommentList.get(position).isLikeCheck());
+
+        if (mRestaurantReviewCommentList.get(position).isLikeCheck()) {
+            holder.binding.tvCountOfLike.setTextColor(ContextCompat.getColor(mContext, R.color.textColor_ff4f4f));
+        } else {
+            holder.binding.tvCountOfLike.setTextColor(ContextCompat.getColor(mContext, R.color.textColor_666666));
+        }
     }
 
     @Override
@@ -74,8 +150,16 @@ public class RestaurantReviewCommentListAdapter extends RecyclerView.Adapter<Res
         return mRestaurantReviewCommentList != null ? mRestaurantReviewCommentList.size() : 0;
     }
 
-    public void setRestaurantReviewCommentList(ArrayList<Review> mRestaurantReviewCommentList) {
+    public void setRestaurantReviewCommentList(ArrayList<ReviewComment> mRestaurantReviewCommentList) {
         this.mRestaurantReviewCommentList = mRestaurantReviewCommentList;
+    }
+
+    public void setRestaurantID(String restaurantID) {
+        this.mRestaurantID = restaurantID;
+    }
+
+    public void setReviewID(String reviewID) {
+        this.mReviewID = reviewID;
     }
 
     /**

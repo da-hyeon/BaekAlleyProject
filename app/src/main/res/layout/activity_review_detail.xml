@@ -77,62 +77,239 @@
             app:layout_constraintTop_toTopOf="@id/vToolbar" />
 
 
-        <include
-            android:id="@+id/icReview"
-            layout="@layout/item_review"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="16dp"
-            app:layout_constraintTop_toBottomOf="@+id/vGradient" />
-
-        <View
-            android:id="@+id/vLine"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginBottom="10dp"
-            android:background="#dddddd"
-            app:layout_constraintBottom_toBottomOf="@+id/icReview" />
-
-        <android.support.v7.widget.RecyclerView
+        <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            app:layout_constraintTop_toBottomOf="@+id/vLine" />
+            app:layout_constraintBottom_toTopOf="@+id/vTop"
+            app:layout_constraintTop_toBottomOf="@+id/vGradient"
+            android:fillViewport="true">
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <android.support.constraint.ConstraintLayout
+                    android:id="@+id/llReview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#ffffff"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="16dp"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:id="@+id/ivUserImage"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:src="@drawable/icon_user_teal"
+                        android:scaleType="fitXY"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tvUserName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="12dp"
+                        android:fontFamily="@font/notosans"
+                        android:includeFontPadding="false"
+                        android:letterSpacing="-0.03"
+                        android:lineSpacingExtra="2.7sp"
+                        android:textColor="#333333"
+                        android:textSize="14dp"
+                        android:textStyle="bold"
+                        app:layout_constraintLeft_toRightOf="@+id/ivUserImage"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tvElapsedTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:fontFamily="@font/notosans"
+                        android:includeFontPadding="false"
+                        android:letterSpacing="-0.03"
+                        android:lineSpacingExtra="4.7sp"
+                        android:text="17시간 전"
+                        android:textColor="#999999"
+                        android:textSize="12dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/tvUserName"
+                        app:layout_constraintLeft_toRightOf="@+id/tvUserName"
+                        app:layout_constraintTop_toTopOf="@+id/tvUserName" />
+
+                    <TextView
+                        android:id="@+id/tvReviewMenu"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="1.3dp"
+                        android:fontFamily="@font/notosans"
+                        android:includeFontPadding="false"
+                        android:textColor="#17b1c4"
+                        android:textSize="11dp"
+                        app:layout_constraintLeft_toLeftOf="@+id/tvUserName"
+                        app:layout_constraintRight_toLeftOf="@+id/ivTaste"
+                        android:singleLine="true"
+                        android:ellipsize="marquee"
+                        app:layout_constraintTop_toBottomOf="@+id/tvUserName" />
+
+                    <ImageView
+                        android:id="@+id/ivTaste"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tvReviewTitle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:textColor="#222222"
+                        android:textSize="15dp"
+                        android:singleLine="true"
+                        android:ellipsize="end"
+                        android:textStyle="bold"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toLeftOf="@+id/ivTaste"
+                        app:layout_constraintTop_toBottomOf="@+id/ivUserImage" />
+
+                    <TextView
+                        android:id="@+id/tvReviewContent"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toBottomOf="@+id/tvReviewTitle"
+                        android:layout_marginTop="1dp"
+                        android:fontFamily="@font/notosans"
+                        android:includeFontPadding="false"
+                        android:maxLines="3"
+                        android:ellipsize="end"
+                        android:textColor="#333333"
+                        android:textSize="14dp"/>
+
+                    <View
+                        android:id="@+id/vReviewLike"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        app:layout_constraintTop_toBottomOf="@+id/tvReviewContent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="@+id/tvLikeCount" />
+                    <CheckBox
+                        android:id="@+id/cbLikeMark"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="false"
+                        android:background="@drawable/checkbox_heart_item"
+                        android:button="@null"
+                        app:layout_constraintTop_toBottomOf="@+id/tvReviewContent"
+                        android:layout_marginTop="11dp"
+                        app:layout_constraintLeft_toLeftOf="parent"/>
+
+                    <TextView
+                        android:id="@+id/tvLikeText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintLeft_toRightOf="@+id/cbLikeMark"
+                        app:layout_constraintTop_toTopOf="@+id/cbLikeMark"
+                        app:layout_constraintBottom_toBottomOf="@+id/cbLikeMark"
+                        android:text="좋아요 "
+                        android:layout_marginLeft="8.7dp"
+                        android:textSize="13dp"
+                        android:textColor="#666666"
+                        android:fontFamily="@font/notosans"
+                        android:includeFontPadding="false"
+                        />
+
+
+                    <TextView
+                        android:id="@+id/tvLikeCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintLeft_toRightOf="@+id/tvLikeText"
+                        app:layout_constraintTop_toTopOf="@+id/cbLikeMark"
+                        app:layout_constraintBottom_toBottomOf="@+id/cbLikeMark"
+                        android:textSize="13dp"
+                        android:textColor="#666666"
+                        android:fontFamily="@font/notosans"
+                        android:includeFontPadding="false"
+                        />
+
+                    <TextView
+                        android:id="@+id/tvComment"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="댓글달기"
+                        android:textColor="#666666"
+                        android:fontFamily="@font/notosans"
+                        android:includeFontPadding="false"
+                        app:layout_constraintTop_toTopOf="@+id/tvLikeCount"
+                        app:layout_constraintBottom_toBottomOf="@+id/tvLikeCount"
+                        app:layout_constraintLeft_toRightOf="@+id/tvLikeCount"
+                        android:textSize="13dp"
+                        android:padding="10dp"
+                        android:layout_marginLeft="10dp"/>
+
+                </android.support.constraint.ConstraintLayout>
+
+                <View
+                    android:id="@+id/vLine"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="6dp"
+                    android:background="#dddddd"
+                    app:layout_constraintTop_toBottomOf="@+id/llReview" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rvReviewComment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:nestedScrollingEnabled="false"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="16dp"
+                    app:layout_constraintTop_toBottomOf="@+id/vLine"
+                    tools:targetApi="lollipop" />
+
+            </android.support.constraint.ConstraintLayout>
+
+        </android.support.v4.widget.NestedScrollView>
+
 
         <View
+            android:id="@+id/vTop"
             android:layout_width="match_parent"
             android:layout_height="8dp"
             android:background="#f5f5f5"
-            app:layout_constraintBottom_toTopOf="@+id/vbottom"/>
+            app:layout_constraintBottom_toTopOf="@+id/vBottom" />
+
         <View
-            android:id="@+id/vbottom"
+            android:id="@+id/vBottom"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:background="#f5f5f5"
-            app:layout_constraintTop_toTopOf="@+id/etComment"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/etComment" />
 
         <EditText
             android:id="@+id/etComment"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
-            android:textColor="#333333"
-            android:textColorHint="#999999"
-            android:hint="리뷰 댓글달기.."
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/round_ffffff_8dp"
             android:fontFamily="@font/notosans"
+            android:hint="리뷰 댓글달기.."
             android:includeFontPadding="false"
             android:padding="7.7dp"
-            android:layout_marginBottom="8dp"
+            android:textColor="#333333"
+            android:textColorHint="#999999"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toLeftOf="@+id/tvRegistrationComment"
-            android:background="@drawable/round_ffffff_8dp"/>
+            app:layout_constraintRight_toLeftOf="@+id/tvRegistrationComment" />
 
         <TextView
             android:id="@+id/tvRegistrationComment"
@@ -142,17 +319,16 @@
             android:includeFontPadding="false"
             android:letterSpacing="-0.03"
             android:lineSpacingExtra="1.7sp"
+            android:paddingLeft="8dp"
+            android:paddingTop="10dp"
+            android:paddingRight="16dp"
+            android:paddingBottom="10dp"
             android:text="댓글달기"
             android:textColor="#666666"
             android:textSize="15dp"
             app:layout_constraintBottom_toBottomOf="@+id/etComment"
             app:layout_constraintRight_toRightOf="parent"
-            android:paddingLeft="8dp"
-            android:paddingRight="16dp"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
             app:layout_constraintTop_toTopOf="@+id/etComment" />
-
 
 
     </android.support.constraint.ConstraintLayout>

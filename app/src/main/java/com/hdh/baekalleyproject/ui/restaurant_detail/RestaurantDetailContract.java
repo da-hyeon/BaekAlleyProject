@@ -28,6 +28,7 @@ public interface RestaurantDetailContract {
         void setReviewCountOfGood(String count);
         void setReviewCountOfBad(String count);
 
+        void showLoading();
         void showBusinessHours();
         void showBreakTime();
         void showLastOrderTime();
@@ -37,6 +38,7 @@ public interface RestaurantDetailContract {
         void hideBreakTime();
         void hideLastOrderTime();
         void hideHoliday();
+        void hideLoading();
 
         void changeGoColor(boolean status);
     }

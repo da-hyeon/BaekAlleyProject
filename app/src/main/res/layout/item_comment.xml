@@ -5,7 +5,8 @@
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#ffffff">
+        android:background="#ffffff"
+        android:paddingBottom="24dp">
 
         <ImageView
             android:id="@+id/ivUserImage"
@@ -49,6 +50,7 @@
             app:layout_constraintTop_toTopOf="@+id/tvUserName" />
 
         <TextView
+            android:id="@+id/tvContent"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/notosans"
@@ -65,17 +67,18 @@
             android:id="@+id/vLike"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginBottom="10dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/cbLike"
             app:layout_constraintLeft_toLeftOf="@+id/tvCountOfLike"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/ivLike"
+        <CheckBox
+            android:id="@+id/cbLike"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/icon_heart_circle"
+            android:button="@null"
+            android:clickable="false"
+            android:background="@drawable/checkbox_heart_item"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -88,9 +91,9 @@
             android:text="1"
             android:textColor="#666666"
             android:textSize="12dp"
-            app:layout_constraintBottom_toBottomOf="@+id/ivLike"
-            app:layout_constraintRight_toLeftOf="@+id/ivLike"
-            app:layout_constraintTop_toTopOf="@+id/ivLike" />
+            app:layout_constraintBottom_toBottomOf="@+id/cbLike"
+            app:layout_constraintRight_toLeftOf="@+id/cbLike"
+            app:layout_constraintTop_toTopOf="@+id/cbLike" />
 
     </android.support.constraint.ConstraintLayout>
 </layout>

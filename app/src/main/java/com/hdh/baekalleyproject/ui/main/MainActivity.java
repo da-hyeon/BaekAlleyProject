@@ -30,4 +30,9 @@ public class MainActivity extends BaseActivity implements MainActivityContract.V
 
         mPresenter.disableShiftMode(mBinding.bnMenu);
     }
+
+    @Override
+    public void onBackPressed() {
+        mPresenter.onBackPressed();
+    }
 }

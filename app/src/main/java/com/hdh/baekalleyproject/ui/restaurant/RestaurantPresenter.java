@@ -74,6 +74,8 @@ public class RestaurantPresenter extends BaseFragmentPresenter implements Restau
      */
     @Override
     public void setRestaurantView() {
+        mView.showLoading();
+
         loadFilter();
 
         Call<RestaurantList> getRestaurantList = MyApplication
@@ -97,6 +99,8 @@ public class RestaurantPresenter extends BaseFragmentPresenter implements Restau
 
                         mRestaurantListAdapter.setRestaurantList(restaurantList.getRestaurantList());
                         setRecyclerViewAnimation(mRestaurantListView);
+
+                        mView.hideLoading();
                     } else {
                         //mView.showFailDialog("실패" , "데이터 로딩 실패");
                         Log.d("실패", "데이터 로딩 실패");
