@@ -11,6 +11,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 
 import com.hdh.baekalleyproject.R;
 import com.hdh.baekalleyproject.ui.base.activity.BaseActivityPresenter;
@@ -49,7 +51,7 @@ public class MainActivityPresenter extends BaseActivityPresenter implements Main
         mMyInfoFragment = new MyInfoFragment();
     }
 
-    @SuppressLint("RestrictedApi")
+    @SuppressLint("RestrictedApi , CutPasteId")
     @Override
     public void disableShiftMode(BottomNavigationView view) {
         BottomNavigationMenuView menuView = (BottomNavigationMenuView) view.getChildAt(0);
@@ -59,6 +61,13 @@ public class MainActivityPresenter extends BaseActivityPresenter implements Main
             shiftingMode.setBoolean(menuView, false);
             shiftingMode.setAccessible(false);
             for (int i = 0; i < menuView.getChildCount(); i++) {
+
+                final View iconView = menuView.getChildAt(i).findViewById(android.support.design.R.id.icon);
+                final ViewGroup.LayoutParams layoutParams = iconView.getLayoutParams();
+                layoutParams.height = Math.round(24 * mContext.getResources().getDisplayMetrics().density);
+                layoutParams.width = Math.round(29 * mContext.getResources().getDisplayMetrics().density);
+                iconView.setLayoutParams(layoutParams);
+
                 BottomNavigationItemView item = (BottomNavigationItemView) menuView.getChildAt(i);
                 item.setShiftingMode(false);
                 // set once again checked value, so view will be updated

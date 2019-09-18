@@ -22,9 +22,11 @@ import com.hdh.baekalleyproject.data.model.Restaurant;
 import com.hdh.baekalleyproject.data.model.RestaurantDetail;
 import com.hdh.baekalleyproject.data.model.UserInformation;
 import com.hdh.baekalleyproject.ui.base.activity.BaseActivityPresenter;
+import com.hdh.baekalleyproject.ui.dialog.call.CallDialog;
 import com.hdh.baekalleyproject.ui.dialog.share.ShareDialog;
 import com.hdh.baekalleyproject.ui.dialog.view_more.ViewMoreDialog;
 import com.hdh.baekalleyproject.ui.modify_info.ModifyInfoActivity;
+import com.hdh.baekalleyproject.ui.review_all.ReviewAllActivity;
 import com.hdh.baekalleyproject.ui.review_write.ReviewWriteActivity;
 import com.naver.maps.geometry.LatLng;
 import com.naver.maps.geometry.LatLngBounds;
@@ -70,7 +72,9 @@ public class RestaurantDetailPresenter extends BaseActivityPresenter implements 
 
         mRestaurantImageListAdapter = new RestaurantImageListAdapter(mContext);
         mRestaurantMenuListAdapter = new RestaurantMenuListAdapter(mContext);
-        mRestaurantReviewListAdapter = new RestaurantReviewListAdapter(mContext , mActivity);
+        mRestaurantReviewListAdapter = new RestaurantReviewListAdapter(mContext, mActivity);
+
+        mView.showLoading();
     }
 
 
@@ -177,7 +181,6 @@ public class RestaurantDetailPresenter extends BaseActivityPresenter implements 
                     Log.d("error", t.getLocalizedMessage());
                 }
             });
-
         }
     }
 
@@ -209,8 +212,8 @@ public class RestaurantDetailPresenter extends BaseActivityPresenter implements 
         viewMoreDialog.getWindow().setGravity(Gravity.BOTTOM);
         viewMoreDialog.show();*/
 
-        ViewMoreDialog viewMoreDialog = new ViewMoreDialog(mContext);
-        viewMoreDialog.setRestaurantData(mRestaurantDetail.getRestaurant().get(0));
+        ViewMoreDialog viewMoreDialog = new ViewMoreDialog(mContext, this);
+        viewMoreDialog.setWillGoClickStatus(mView.getNumberOfLikeStatus());
         Objects.requireNonNull(viewMoreDialog.getWindow()).getAttributes().windowAnimations = R.style.dialogAnimation;
         viewMoreDialog.show();
 
@@ -284,6 +287,9 @@ public class RestaurantDetailPresenter extends BaseActivityPresenter implements 
      */
     @Override
     public void clickCall() {
+        CallDialog callDialog = new CallDialog(mContext, "010-7600-1318");
+        Objects.requireNonNull(callDialog.getWindow()).getAttributes().windowAnimations = R.style.dialogFadeAnimation;
+        callDialog.show();
 
     }
 
@@ -297,7 +303,7 @@ public class RestaurantDetailPresenter extends BaseActivityPresenter implements 
         ClipData clipData = ClipData.newPlainText(Constants.RESTAURANT_ADDRESS, mRestaurantDetail.getRestaurant().get(0).getRestaurantAddress());
         if (clipboardManager != null) {
             clipboardManager.setPrimaryClip(clipData);
-            mView.showToast("클립보드에 주소가 복사되었습니다.");
+            mView.showToast("클립보드에 주소가 저장되었습니다.");
         } else {
             mView.showToast("주소 복사에 실패했습니다.");
         }
@@ -309,6 +315,8 @@ public class RestaurantDetailPresenter extends BaseActivityPresenter implements 
     @Override
     public void clickWrongInfo() {
         Intent intent = new Intent(mContext, ModifyInfoActivity.class);
+        intent.putExtra(Constants.REVIEW_FILTER_TYPE, Constants.REVIEW_TASTE_ALL);
+        intent.putExtra(Constants.RESTAURANT_ID, mRestaurantDetail.getRestaurant().get(0).getRestaurantID());
         mView.moveActivity(intent);
     }
 
@@ -317,7 +325,7 @@ public class RestaurantDetailPresenter extends BaseActivityPresenter implements 
      */
     @Override
     public void clickGreat() {
-
+        moveReviewAll(Constants.REVIEW_TASTE_GREAT);
     }
 
     /**
@@ -325,7 +333,7 @@ public class RestaurantDetailPresenter extends BaseActivityPresenter implements 
      */
     @Override
     public void clickGood() {
-
+        moveReviewAll(Constants.REVIEW_TASTE_GOOD);
     }
 
     /**
@@ -333,8 +341,9 @@ public class RestaurantDetailPresenter extends BaseActivityPresenter implements 
      */
     @Override
     public void clickBad() {
-
+        moveReviewAll(Constants.REVIEW_TASTE_BAD);
     }
+
 
     /**
      * 식당정보 뷰 세팅
@@ -347,7 +356,20 @@ public class RestaurantDetailPresenter extends BaseActivityPresenter implements 
         mView.setRestaurantNumberOfView(restaurant.getRestaurantNumberOfView());
         mView.setRestaurantNumberOfReview(restaurant.getRestaurantNumberOfReview());
         mView.setRestaurantNumberOfLike(restaurant.getRestaurantNumberOfLike());
-        //mView.setRanking();
+        mView.setRanking(mRestaurantDetail.getAverageScores().getAverageScore());
+        switch (mRestaurantDetail.getAverageScores().getState()) {
+            case Constants.RANK_STATUS_CONFIRMATION:
+                mView.showRanking();
+                mView.changeRankingColor(true);
+                break;
+            case Constants.RANK_STATUS_DATE_NOT_SET:
+                mView.showRanking();
+                mView.changeRankingColor(false);
+                break;
+            case Constants.RANK_STATUS_EVALUATION_NOT_DECIDED:
+                mView.hideRanking();
+                break;
+        }
         mView.setAddress(restaurant.getRestaurantAddress());
         mView.setUpdate(restaurant.getRestaurantUpdate());
 
@@ -440,6 +462,18 @@ public class RestaurantDetailPresenter extends BaseActivityPresenter implements 
         }
 
         return new double[]{lat, lon};
+    }
+
+    /**
+     * 리뷰 전체보기로 이동
+     *
+     * @param reviewType 선택한 리뷰 타입
+     */
+    private void moveReviewAll(int reviewType) {
+        Intent intent = new Intent(mContext, ReviewAllActivity.class);
+        intent.putExtra(Constants.REVIEW_FILTER_TYPE, reviewType);
+        intent.putExtra(Constants.RESTAURANT_ID, mRestaurantDetail.getRestaurant().get(0).getRestaurantID());
+        mView.moveActivity(intent);
     }
 
     /**

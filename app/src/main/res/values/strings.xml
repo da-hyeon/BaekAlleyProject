@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">BaekAlleyProject</string>
+    <string name="app_name">골목식당</string>
 
     <!--filter-->
     <string name="filter_mainText">필터</string>

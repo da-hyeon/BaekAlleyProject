@@ -107,12 +107,15 @@ public class ReviewDetailPresenter extends BaseActivityPresenter implements Revi
             @SuppressLint("SetTextI18n")
             @Override
             public void onResponse(@NonNull Call<ReviewCommentList> call, @NonNull Response<ReviewCommentList> response) {
-                if (response.code() == 200) {
-                    if (response.body() != null) {
-                        mReviewCommentList = response.body();
+
+                if (response.body() != null) {
+                    mReviewCommentList = response.body();
+
+                    if (response.code() == 200) {
                         mRestaurantReviewCommentListAdapter.setRestaurantReviewCommentList(mReviewCommentList.getReviewCommentList());
                         mRestaurantReviewCommentListAdapter.notifyDataSetChanged();
                     }
+
                 } else {
                     //mView.showFailDialog("실패" , "데이터 로딩 실패");
                     Log.d("실패", "데이터 로딩 실패");
@@ -191,13 +194,13 @@ public class ReviewDetailPresenter extends BaseActivityPresenter implements Revi
 
                     @Override
                     public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
-
-                        if (response.code() == 200) {
+                        if (response.isSuccessful()) {
                             loadComment();
-                            mView.showToast("댓글이 등록되었습니다.");
-                            mView.setCommentInitialization();
-                            mView.setCommentCount(mReviewCommentList.getReviewCommentList().size());
-
+                            if (response.code() == 200) {
+                                mView.showToast("댓글이 등록되었습니다.");
+                                mView.setCommentInitialization();
+                                mView.setCommentCount(mReviewCommentList.getReviewCommentList().size()+1);
+                            }
                         } else {
                             //mView.showFailDialog("실패" , comment);
                             Log.d("실패", "데이터 로딩 실패");

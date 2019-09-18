@@ -9,7 +9,9 @@ import com.naver.maps.map.MapView;
 public interface RestaurantDetailContract {
     interface View extends BaseActivityContract.View {
 
-        void changeNumberOfLikeText(boolean state);
+        void changeNumberOfLikeText(boolean status);
+
+        boolean getNumberOfLikeStatus();
 
         void setRestaurantAlley(String alley);
         void setRestaurantName(String name);
@@ -28,19 +30,24 @@ public interface RestaurantDetailContract {
         void setReviewCountOfGood(String count);
         void setReviewCountOfBad(String count);
 
+
+
         void showLoading();
         void showBusinessHours();
         void showBreakTime();
         void showLastOrderTime();
         void showHoliday();
+        void showRanking();
 
         void hideBusinessHours();
         void hideBreakTime();
         void hideLastOrderTime();
         void hideHoliday();
         void hideLoading();
+        void hideRanking();
 
         void changeGoColor(boolean status);
+        void changeRankingColor(boolean status);
     }
     interface Presenter extends BaseActivityContract.Presenter{
         void mapAsync(MapView map);

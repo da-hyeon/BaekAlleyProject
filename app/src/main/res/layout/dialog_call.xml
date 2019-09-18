@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="248dp"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="159dp"
+        android:background="@drawable/round_top_ffffff"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="12.7dp"
+            android:fontFamily="@font/notosans"
+            android:includeFontPadding="false"
+            android:text="02-549-7788"
+            android:textColor="#191919"
+            android:textSize="17dp"
+            android:textStyle="bold" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="12.7dp"
+            android:background="#999999" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/btCall"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="#ffffff"
+                android:fontFamily="@font/notosans"
+                android:includeFontPadding="false"
+                android:text="전화하기"
+                android:textSize="16dp" />
+
+            <Button
+                android:id="@+id/btCallCopy"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="#ffffff"
+                android:fontFamily="@font/notosans"
+                android:includeFontPadding="false"
+                android:text="전화번호 저장"
+                android:textSize="16dp" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btDismiss"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:layout_marginTop="1dp"
+        android:background="@drawable/round_bottom_ffffff"
+        android:fontFamily="@font/notosans"
+        android:includeFontPadding="false"
+        android:text="닫기"
+        android:textColor="#ff4f4f"
+        android:textSize="16dp">
+
+    </Button>
+
+</LinearLayout>

@@ -12,14 +12,15 @@
         android:name=".MyApplication"
         android:allowBackup="true"
         android:hardwareAccelerated="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/logo_round"
         android:label="@string/app_name"
         android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.FullScreen.Transparent"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.review_detail.ReviewDetailActivity"></activity>
+        <activity android:name=".ui.review_all.ReviewAllActivity"></activity>
+        <activity android:name=".ui.review_detail.ReviewDetailActivity" />
 
         <meta-data
             android:name="com.kakao.sdk.AppKey"

@@ -45,6 +45,7 @@ public class ReviewDetailActivity extends BaseActivity implements ReviewDetailCo
 
         mBinding.tvReviewContent.setMaxLines(Integer.MAX_VALUE);
         mBinding.tvReviewContent.setEllipsize(null);
+        mBinding.rvReviewComment.setNestedScrollingEnabled(false);
        // android:maxLines="3"
        // android:ellipsize="end"
     }

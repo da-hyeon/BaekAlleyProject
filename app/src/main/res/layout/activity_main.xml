@@ -21,12 +21,28 @@
             android:layout_height="0dp"
             android:background="#ffffff"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/vLine"/>
+
+
+        <View
+            android:id="@+id/vLine"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="#cccccc"
             app:layout_constraintBottom_toTopOf="@+id/bnMenu"/>
+
+        <View
+            android:id="@+id/vSelectLine"
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            android:background="#ff4f4f"
+            app:layout_constraintTop_toTopOf="@+id/vLine"
+            app:layout_constraintLeft_toLeftOf="@+id/vLine"/>
 
         <android.support.design.widget.BottomNavigationView
             android:id="@+id/bnMenu"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="48dp"
             app:layout_constraintBottom_toBottomOf="parent"
             android:background="#ffffff"
             app:menu="@menu/menu"/>

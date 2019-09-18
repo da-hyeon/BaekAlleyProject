@@ -26,10 +26,13 @@ public class RestaurantDetail {
     private ArrayList<RestaurantPrice> restaurantPrice;
 
     @SerializedName("rstrn_Like")
-    private String WillGoClickStatus;
+    private String willGoClickStatus;
 
     @SerializedName("rev_type")
     private ArrayList<RestaurantReviewCountOfTaste> restaurantReviewCountOfTastes;
+
+    @SerializedName("average_Score")
+    private AverageScore averageScores;
 
 
     public ArrayList<Restaurant> getRestaurant() {
@@ -57,10 +60,14 @@ public class RestaurantDetail {
     }
 
     public String getWillGoClickStatus() {
-        return WillGoClickStatus;
+        return willGoClickStatus;
     }
 
     public ArrayList<RestaurantReviewCountOfTaste> getRestaurantReviewCountOfTastes() {
         return restaurantReviewCountOfTastes;
+    }
+
+    public AverageScore getAverageScores() {
+        return averageScores;
     }
 }

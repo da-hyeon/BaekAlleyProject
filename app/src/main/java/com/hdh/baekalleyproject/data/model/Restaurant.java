@@ -45,6 +45,12 @@ public class Restaurant implements Serializable {
     @SerializedName("avrg_Price")
     private String restaurantPriceRange;
 
+    @SerializedName("star_arge")
+    private String restaurantRank;
+
+    @SerializedName("arge_check")
+    private String restaurantRankStatus;
+
 
     public String getRestaurantID() {
         return restaurantID;
@@ -98,6 +104,14 @@ public class Restaurant implements Serializable {
         return restaurantPriceRange;
     }
 
+    public String getRestaurantRank() {
+        return restaurantRank;
+    }
+
+    public String getRestaurantRankStatus() {
+        return restaurantRankStatus;
+    }
+
     @Override
     public String toString() {
         return "Restaurant{" +
@@ -114,6 +128,8 @@ public class Restaurant implements Serializable {
                 ", restaurantAddress='" + restaurantAddress + '\'' +
                 ", restaurantNumberOfLike='" + restaurantNumberOfLike + '\'' +
                 ", restaurantPriceRange='" + restaurantPriceRange + '\'' +
+                ", restaurantRank='" + restaurantRank + '\'' +
+                ", restaurantRankStatus='" + restaurantRankStatus + '\'' +
                 '}';
     }
 }

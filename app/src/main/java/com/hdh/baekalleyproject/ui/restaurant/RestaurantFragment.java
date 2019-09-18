@@ -48,6 +48,7 @@ public class RestaurantFragment extends BaseFragment implements RestaurantContra
      */
     private void initData() {
         mPresenter.setAdvertisementView( mBinding.vpEvent, mBinding.tlDots);
+        mBinding.rvRestaurantList.setNestedScrollingEnabled(false);
     }
 
     /**

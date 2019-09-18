@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <integer name="animation_dur_medium">300</integer>
+    <integer name="animation_dur_high">100</integer>
+
+    <dimen name="design_bottom_navigation_text_size" tools:override="true">10dp</dimen>
+    <dimen name="design_bottom_navigation_active_text_size" tools:override="true">10dp</dimen>
+    <dimen name="design_bottom_navigation_margin" tools:override="true">12dp</dimen>
+    <dimen name="design_bottom_navigation_height" tools:override="true">56dp</dimen>
 </resources>

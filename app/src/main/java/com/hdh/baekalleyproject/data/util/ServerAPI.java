@@ -6,6 +6,7 @@ import com.hdh.baekalleyproject.data.model.AlleyList;
 import com.hdh.baekalleyproject.data.model.RestaurantDetail;
 import com.hdh.baekalleyproject.data.model.RestaurantList;
 import com.hdh.baekalleyproject.data.model.ReviewCommentList;
+import com.hdh.baekalleyproject.data.model.ReviewList;
 import com.hdh.baekalleyproject.data.model.UserInformation;
 
 import java.util.ArrayList;
@@ -198,7 +199,22 @@ public interface ServerAPI {
             @Field("cmnt_idx") String commentID
             );
 
-//
+
+    /**
+     * 리뷰 필터 요청
+     *
+     * @param restaurantID 식당 ID
+     * @param userID 회원 ID
+     * @param reviewType 리뷰 타입
+     * @return 리뷰
+     */
+    @FormUrlEncoded
+    @POST(Constants.SELECT_REGISTRATION_REVIEW_FILTER)
+    Call<ReviewList> selectRegistrationReviewFilter(
+            @Field("rt_idx") String restaurantID ,
+            @Field("mb_idx") String userID ,
+            @Field("rw_type") int reviewType);
+
 //    /**
 //     * 로그인 요청
 //     *

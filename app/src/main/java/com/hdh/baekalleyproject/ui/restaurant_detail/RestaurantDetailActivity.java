@@ -53,9 +53,9 @@ public class RestaurantDetailActivity extends BaseActivity implements Restaurant
         });
 
         //전화하기 클릭
-        mBinding.vCall.setOnClickListener(v -> {
-
-        });
+        mBinding.vCall.setOnClickListener(v ->
+            mPresenter.clickCall()
+        );
 
         //주소복사 클릭
         mBinding.vAddressCopy.setOnClickListener(v ->
@@ -68,19 +68,19 @@ public class RestaurantDetailActivity extends BaseActivity implements Restaurant
         });
 
         //맛있네유 클릭
-        mBinding.llGreat.setOnClickListener(v -> {
-
-        });
+        mBinding.llGreat.setOnClickListener(v ->
+            mPresenter.clickGreat()
+        );
 
         //괜찮네유 클릭
-        mBinding.llGood.setOnClickListener(v -> {
-
-        });
+        mBinding.llGood.setOnClickListener(v ->
+            mPresenter.clickGood()
+        );
 
         //별론데유 클릭
-        mBinding.llBad.setOnClickListener(v -> {
-
-        });
+        mBinding.llBad.setOnClickListener(v ->
+            mPresenter.clickBad()
+        );
     }
 
     /**
@@ -88,7 +88,9 @@ public class RestaurantDetailActivity extends BaseActivity implements Restaurant
      */
     private void initData() {
         mPresenter.setRecyclerView(mBinding.rvRestaurantImageList, mBinding.rvRestaurantMenuList, mBinding.rvReviewList);
-
+        mBinding.rvRestaurantImageList.setNestedScrollingEnabled(false);
+        mBinding.rvRestaurantMenuList.setNestedScrollingEnabled(false);
+        mBinding.rvReviewList.setNestedScrollingEnabled(false);
         //mPresenter.setView(getIntent() , mBinding.rvRestaurantImageList, mBinding.rvRestaurantMenuList, mBinding.rvReviewList);
 
         //fragment로 진행 시 밑의 부분 주석 해제
@@ -115,14 +117,20 @@ public class RestaurantDetailActivity extends BaseActivity implements Restaurant
     }
 
     @Override
-    public void changeNumberOfLikeText(boolean state) {
-        if (state) {
+    public void changeNumberOfLikeText(boolean status) {
+        if (status) {
             mBinding.ivNumberOfLikeButton.setImageResource(R.drawable.icon_likeit_on);
             mBinding.tvNumberOfLikeButton.setTextColor(ContextCompat.getColor(this, R.color.colorPrimary));
         } else {
             mBinding.ivNumberOfLikeButton.setImageResource(R.drawable.icon_likeit);
             mBinding.tvNumberOfLikeButton.setTextColor(ContextCompat.getColor(this, R.color.goTextDefaultColor));
         }
+    }
+
+    @Override
+    public boolean getNumberOfLikeStatus() {
+        return mBinding.tvNumberOfLikeButton.getCurrentTextColor() == ContextCompat.getColor(this, R.color.colorPrimary);
+
     }
 
     @Override
@@ -153,6 +161,7 @@ public class RestaurantDetailActivity extends BaseActivity implements Restaurant
 
     @Override
     public void setRanking(String ranking) {
+        mBinding.tvRanking.setText(ranking);
         mBinding.tvRating.setText(ranking);
     }
 
@@ -242,6 +251,12 @@ public class RestaurantDetailActivity extends BaseActivity implements Restaurant
     }
 
     @Override
+    public void showRanking() {
+        mBinding.tvRanking.setVisibility(View.VISIBLE);
+        mBinding.ivRanking.setVisibility(View.VISIBLE);
+    }
+
+    @Override
     public void hideBusinessHours() {
         mBinding.tvBusinessHoursText.setVisibility(View.GONE);
         mBinding.tvBusinessHours.setVisibility(View.GONE);
@@ -272,6 +287,13 @@ public class RestaurantDetailActivity extends BaseActivity implements Restaurant
     }
 
     @Override
+    public void hideRanking() {
+        mBinding.tvRanking.setVisibility(View.GONE);
+        mBinding.ivRanking.setVisibility(View.GONE);
+        mBinding.tvRating.setText("?.?");
+    }
+
+    @Override
     public void changeGoColor(boolean status) {
         if (status) {
             mBinding.ivNumberOfLikeButton.setColorFilter(ContextCompat.getColor(this, R.color.colorPrimary));
@@ -281,4 +303,12 @@ public class RestaurantDetailActivity extends BaseActivity implements Restaurant
         }
     }
 
+    @Override
+    public void changeRankingColor(boolean status) {
+        if (status){
+            mBinding.tvRanking.setTextColor(ContextCompat.getColor(this , R.color.colorPrimary));
+        } else {
+            mBinding.tvRanking.setTextColor(ContextCompat.getColor(this , R.color.foodTextDefaultColor));
+        }
+    }
 }

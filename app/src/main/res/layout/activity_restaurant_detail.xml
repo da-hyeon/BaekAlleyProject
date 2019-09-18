@@ -81,6 +81,7 @@
             android:lineSpacingExtra="7.7sp"
             android:textColor="#222222"
             android:textSize="16dp"
+            android:text="로딩중"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/vToolbar"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -132,8 +133,7 @@
                         android:layout_height="match_parent"
                         android:layout_marginLeft="4dp"
                         android:layout_marginTop="4dp"
-                        android:background="#e9eeee"
-                        android:nestedScrollingEnabled="false">
+                        android:background="#e9eeee">
 
                     </android.support.v7.widget.RecyclerView>
 
@@ -184,6 +184,7 @@
                         app:layout_constraintTop_toBottomOf="@+id/rvRestaurantImageList" />
 
                     <ImageView
+                        android:id="@+id/ivRanking"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@drawable/icon_questionmark"

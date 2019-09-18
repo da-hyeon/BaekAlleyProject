@@ -5,8 +5,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
@@ -15,6 +17,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.request.RequestOptions;
 import com.hdh.baekalleyproject.Constants;
+import com.hdh.baekalleyproject.R;
 import com.hdh.baekalleyproject.data.model.RecentSearchTerm;
 import com.hdh.baekalleyproject.data.model.Restaurant;
 import com.hdh.baekalleyproject.data.util.CustomRoundedCornersTransformation;
@@ -69,7 +72,6 @@ public class RestaurantListAdapter extends RecyclerView.Adapter<RestaurantListAd
                     //saveFilter(mRecentSearchTermList);
                 }
             });
-
         }
     }
 
@@ -103,6 +105,18 @@ public class RestaurantListAdapter extends RecyclerView.Adapter<RestaurantListAd
         holder.binding.tvRestaurantNOV.setText(" " + mRestaurantList.get(position).getRestaurantNumberOfView());
         holder.binding.tvRestaurantReviewNOV.setText(" " + mRestaurantList.get(position).getRestaurantNumberOfReview());
         holder.binding.tvRestaurantRepFood.setText("대표메뉴 : " + mRestaurantList.get(position).getRestaurantRepFood());
+
+        holder.binding.tvRestaurantStar.setText(mRestaurantList.get(position).getRestaurantRank());
+
+        if (mRestaurantList.get(position).getRestaurantRankStatus().equals(Constants.RANK_STATUS_CONFIRMATION)){
+            holder.binding.tvRestaurantStar.setVisibility(View.VISIBLE);
+            holder.binding.tvRestaurantStar.setTextColor(ContextCompat.getColor(mContext, R.color.colorPrimary));
+        } else if (mRestaurantList.get(position).getRestaurantRankStatus().equals(Constants.RANK_STATUS_DATE_NOT_SET)){
+            holder.binding.tvRestaurantStar.setVisibility(View.VISIBLE);
+            holder.binding.tvRestaurantStar.setTextColor(ContextCompat.getColor(mContext, R.color.foodTextDefaultColor));
+        } if (mRestaurantList.get(position).getRestaurantRankStatus().equals(Constants.RANK_STATUS_EVALUATION_NOT_DECIDED)){
+            holder.binding.tvRestaurantStar.setVisibility(View.GONE);
+        }
 
     }
 
