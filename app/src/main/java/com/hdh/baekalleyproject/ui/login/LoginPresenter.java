@@ -139,13 +139,15 @@ public class LoginPresenter extends BaseActivityPresenter implements LoginContra
 
     @Override
     public void clickEmailLogin() {
-        onClickLogout();
+       // onClickLogout();
+        //이메일로 로그인 액티비티로 이동
     }
 
     @Override
     public void clickNoneLogin() {
         Intent intent = new Intent(mContext, MainActivity.class);
         mActivity.startActivity(intent);
+        mView.removeActivity();
     }
 
     private class SessionCallback implements ISessionCallback {
