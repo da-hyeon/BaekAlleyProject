@@ -95,5 +95,14 @@
             app:layout_constraintRight_toLeftOf="@+id/cbLike"
             app:layout_constraintTop_toTopOf="@+id/cbLike" />
 
+        <!--<com.airbnb.lottie.LottieAnimationView-->
+            <!--android:id="@+id/laLikeAnimation"-->
+            <!--android:layout_width="23.3dp"-->
+            <!--android:layout_height="23.3dp"-->
+            <!--app:layout_constraintTop_toTopOf="parent"-->
+            <!--app:lottie_fileName="songLike.json"-->
+            <!--app:layout_constraintRight_toLeftOf="@+id/tvCountOfLike"-->
+            <!--/>-->
+
     </android.support.constraint.ConstraintLayout>
 </layout>

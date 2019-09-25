@@ -222,7 +222,7 @@ public class RestaurantDetailActivity extends BaseActivity implements Restaurant
     @Override
     public void showLoading() {
         mBinding.pbLoading.setVisibility(View.VISIBLE);
-        mBinding.pbLoading.setIndeterminate(true);
+        //mBinding.pbLoading.setIndeterminate(true);
         mBinding.nsView.setVisibility(View.GONE);
     }
 

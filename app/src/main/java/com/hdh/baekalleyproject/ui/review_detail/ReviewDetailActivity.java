@@ -1,8 +1,10 @@
 package com.hdh.baekalleyproject.ui.review_detail;
 
+import android.animation.Animator;
 import android.annotation.SuppressLint;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.view.View;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -37,6 +39,28 @@ public class ReviewDetailActivity extends BaseActivity implements ReviewDetailCo
         mBinding.tvRegistrationComment.setOnClickListener(v ->
                 mPresenter.clickRegistrationComment(mBinding.etComment.getText().toString())
         );
+
+        mBinding.avLikeAnimation.addAnimatorListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animator) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animator) {
+                mBinding.avLikeAnimation.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animator) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animator) {
+
+            }
+        });
     }
 
     private void initData() {
@@ -152,4 +176,10 @@ public class ReviewDetailActivity extends BaseActivity implements ReviewDetailCo
         mBinding.tvLikeCount.setTextColor(color);
     }
 
+    @Override
+    public void showAnimation() {
+        mBinding.avLikeAnimation.setVisibility(View.VISIBLE);
+        mBinding.avLikeAnimation.setAnimation("heart.json");
+        mBinding.avLikeAnimation.playAnimation();
+    }
 }

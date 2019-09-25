@@ -9,6 +9,7 @@
         android:background="#ffffff"
         android:paddingBottom="20dp">
 
+
         <ImageView
             android:id="@+id/ivUserImage"
             android:layout_width="36dp"
@@ -160,6 +161,17 @@
             android:textSize="13dp"
             android:padding="10dp"
             android:layout_marginLeft="10dp"/>
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/avLikeAnimation"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/cbLikeMark"
+            />
+
+
 
     </android.support.constraint.ConstraintLayout>
 </layout>

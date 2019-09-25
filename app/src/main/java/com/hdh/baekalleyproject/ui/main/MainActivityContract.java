@@ -6,7 +6,12 @@ import com.hdh.baekalleyproject.ui.base.activity.BaseActivityContract;
 
 public interface MainActivityContract {
     interface View extends BaseActivityContract.View{
+        void moveMenuBar(int dp);
 
+        int getWindowWidth();
+
+        void showMenu();
+        void hideMenu();
     }
     interface Presenter extends BaseActivityContract.Presenter {
         void disableShiftMode(BottomNavigationView view);

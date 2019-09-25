@@ -154,6 +154,7 @@ public class ReviewDetailPresenter extends BaseActivityPresenter implements Revi
                         if (mView.isLikeMarkChecked()) {
                             mView.changeLikeTextColor(ContextCompat.getColor(mContext, R.color.textColor_ff4f4f));
                             mView.changeLikeCountColor(ContextCompat.getColor(mContext, R.color.textColor_ff4f4f));
+                            mView.showAnimation();
                         } else {
                             mView.changeLikeTextColor(ContextCompat.getColor(mContext, R.color.textColor_666666));
                             mView.changeLikeCountColor(ContextCompat.getColor(mContext, R.color.textColor_666666));

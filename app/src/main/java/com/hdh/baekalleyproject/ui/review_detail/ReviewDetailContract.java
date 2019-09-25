@@ -24,6 +24,8 @@ public interface ReviewDetailContract {
         void changeLikeTextColor(int color);
         void changeLikeCountColor(int color);
 
+        void showAnimation();
+
     }
 
     interface Presenter extends BaseActivityContract.Presenter {

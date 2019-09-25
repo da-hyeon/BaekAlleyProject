@@ -2,6 +2,7 @@ package com.hdh.baekalleyproject.ui.review_all;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
 
@@ -16,6 +17,7 @@ public class ReviewAllActivity extends BaseActivity implements ReviewAllContract
     private ReviewAllContract.Presenter mPresenter;
 
     private  int[] location;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +67,7 @@ public class ReviewAllActivity extends BaseActivity implements ReviewAllContract
         super.onWindowFocusChanged(hasFocus);
 
 
+
         switch (getIntent().getIntExtra(Constants.REVIEW_FILTER_TYPE , -1)){
             case Constants.REVIEW_TASTE_GREAT:
                 mBinding.tvTasteGreat.getLocationOnScreen(location);
@@ -79,6 +82,11 @@ public class ReviewAllActivity extends BaseActivity implements ReviewAllContract
                 mPresenter.clickTasteBad(mBinding.cbTasteBad.isChecked() , location);
                 break;
         }
+
+
+        mBinding.vTasteBar.setLayoutParams(new ConstraintLayout.LayoutParams(mBinding.vLine.getWidth() / 4 ,  Math.round(3 * getResources().getDisplayMetrics().density)));
+        mBinding.vTasteBar.setY(mBinding.vLine.getY() - Math.round(2 * getResources().getDisplayMetrics().density));
+        mBinding.vTasteBar.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -138,15 +146,30 @@ public class ReviewAllActivity extends BaseActivity implements ReviewAllContract
     }
 
     @Override
+    public int getBarWidth() {
+        return mBinding.vLine.getWidth();
+    }
+
+    @Override
     public void showLoading() {
         mBinding.pbLoading.setVisibility(View.VISIBLE);
         mBinding.pbLoading.setIndeterminate(true);
-        mBinding.rvReviewList.setVisibility(View.GONE);
+        mBinding.rvReviewList.setVisibility(View.INVISIBLE);
+    }
+
+    @Override
+    public void showListLoading() {
+        mBinding.pbListLoading.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void hideLoading() {
-        mBinding.pbLoading.setVisibility(View.GONE);
+        mBinding.pbLoading.setVisibility(View.INVISIBLE);
         mBinding.rvReviewList.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideListLoading() {
+        mBinding.pbListLoading.setVisibility(View.INVISIBLE);
     }
 }

@@ -3,6 +3,7 @@ package com.hdh.baekalleyproject.ui.news;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,4 +29,9 @@ public class NewsFragment extends BaseFragment {
         return inflater.inflate(R.layout.fragment_news, container, false);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.d("resume" , "news 진입");
+    }
 }

@@ -14,6 +14,10 @@ public class Constants {
     public static final int REVIEW_TASTE_GOOD = 2;
     public static final int REVIEW_TASTE_BAD = 3;
 
+    public static final int ITEM_TYPE_RESTAURANT = 0;
+    public static final int ITEM_TYPE_REVIEW = 1;
+    public static final int ITEM_TYPE_COMMENT = 2;
+
     /**
      * INTENT TAG
      */
@@ -54,12 +58,12 @@ public class Constants {
 
     public static final String SELECT_ALLEY = "api/rstrn/selectAynm";
 
-    public static final String REQUEST_FILTER_ITEM = "api/rstrn/rstrnFilter";
+    public static final String REQUEST_FILTER_ITEM = "api/rstrn/rstrnFiltertest";
 
     public static final String REQUEST_REGISTRATION_AND_DELETE_WILL_GO = "api/rstrn/rstrnLike";
 
     public static final String REQUEST_REGISTRATION_REVIEW = "api/rv/reviewWriter";
-    public static final String SELECT_REGISTRATION_REVIEW_FILTER = "api/rv/reviewFilter";
+    public static final String SELECT_REGISTRATION_REVIEW_FILTER = "api/rv//reviewFilterTest";
 
     public static final String REQUEST_REGISTRATION_REVIEW_LIKE = "api/rv/reviewLike";
 

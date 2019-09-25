@@ -1,5 +1,6 @@
 package com.hdh.baekalleyproject.adapter;
 
+import android.animation.Animator;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
@@ -9,6 +10,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
@@ -42,6 +44,9 @@ public class RestaurantReviewListAdapter extends RecyclerView.Adapter<Restaurant
 
     private UserInformation mUserInformation;
 
+    // 좋아요 클릭 여부
+    boolean isSongLikedClicked = false;
+
     class RestaurantReviewListViewHolder extends RecyclerView.ViewHolder {
 
         private ItemReviewBinding binding;
@@ -53,20 +58,48 @@ public class RestaurantReviewListAdapter extends RecyclerView.Adapter<Restaurant
             binding.tvReviewMenu.setSelected(true);
 
             //리뷰 클릭
-            binding.llReview.setOnClickListener(v->{
+            binding.llReview.setOnClickListener(v -> {
                 int position = getAdapterPosition();
                 Intent intent = new Intent(mContext, ReviewDetailActivity.class);
                 //리뷰객체 넘기기
                 intent.putExtra(Constants.REVIEW_DATA, mRestaurantReviewList.get(position));
                 mContext.startActivity(intent);
             });
+//
+//            binding.btLike.setOnClickListener(v->{
+//                // 애니메이션을 발동시킨다.
+//                if(toggleSongLikeAnimButton(binding.btLike)){
+//
+//                }
+//            });
 
+            binding.avLikeAnimation.addAnimatorListener(new Animator.AnimatorListener() {
+                @Override
+                public void onAnimationStart(Animator animator) {
+
+                }
+
+                @Override
+                public void onAnimationEnd(Animator animator) {
+                    binding.avLikeAnimation.setVisibility(View.GONE);
+                }
+
+                @Override
+                public void onAnimationCancel(Animator animator) {
+
+                }
+
+                @Override
+                public void onAnimationRepeat(Animator animator) {
+
+                }
+            });
             //좋아요 클릭
             binding.vReviewLike.setOnClickListener(v -> {
                 int position = getAdapterPosition();
                 //로그인일 때
                 if (mUserInformation != null) {
-                   // Toast.makeText(mContext, mRestaurantReviewList.get(position).getReviewID() + "번 , 글쓴이 " + mRestaurantReviewList.get(position).getUserName(), Toast.LENGTH_SHORT).show();
+                    // Toast.makeText(mContext, mRestaurantReviewList.get(position).getReviewID() + "번 , 글쓴이 " + mRestaurantReviewList.get(position).getUserName(), Toast.LENGTH_SHORT).show();
                     Call<Integer> requestRegistrationReviewLike = MyApplication
                             .getRestAdapter()
                             .requestRegistrationReviewLike(
@@ -83,6 +116,16 @@ public class RestaurantReviewListAdapter extends RecyclerView.Adapter<Restaurant
 
                                 binding.cbLikeMark.setChecked(!binding.cbLikeMark.isChecked());
                                 if (binding.cbLikeMark.isChecked()) {
+                                    binding.avLikeAnimation.setVisibility(View.VISIBLE);
+                                    binding.avLikeAnimation.setAnimation("heart.json");
+                                    binding.avLikeAnimation.playAnimation();
+
+//                                    ValueAnimator animator = ValueAnimator.ofFloat(0f, 1f).setDuration(500);
+//
+//                                    animator.addUpdateListener(animation -> binding.avLikeAnimation.setProgress((Float) animation.getAnimatedValue()));
+//                                    animator.start();
+
+
                                     binding.tvLikeText.setTextColor(ContextCompat.getColor(mContext, R.color.textColor_ff4f4f));
                                     binding.tvLikeCount.setTextColor(ContextCompat.getColor(mContext, R.color.textColor_ff4f4f));
 
@@ -119,6 +162,7 @@ public class RestaurantReviewListAdapter extends RecyclerView.Adapter<Restaurant
             });
         }
     }
+
 
     public RestaurantReviewListAdapter(Context mContext, Activity mActivity) {
         this.mContext = mContext;
@@ -178,8 +222,8 @@ public class RestaurantReviewListAdapter extends RecyclerView.Adapter<Restaurant
                 break;
         }
 
-        if (mRestaurantReviewList.get(position).getCommentCount() > 0){
-            holder.binding.tvComment.setText("댓글 " + mRestaurantReviewList.get(position).getCommentCount()+"개");
+        if (mRestaurantReviewList.get(position).getCommentCount() > 0) {
+            holder.binding.tvComment.setText("댓글 " + mRestaurantReviewList.get(position).getCommentCount() + "개");
         } else {
             holder.binding.tvComment.setText("댓글달기");
         }
@@ -242,18 +286,37 @@ public class RestaurantReviewListAdapter extends RecyclerView.Adapter<Restaurant
         } else {
             elapsedTime = (diffDays / 518400) + "년 전";
         }
-//        if (diffDays == 0) {
-//            elapsedTime = "오늘";
-//        } else if (diffDays < 7) {
-//            elapsedTime = diffDays + "일 전";
-//        } else if (diffDays < 31) {
-//            elapsedTime = (diffDays / 7) + "주 전";
-//        } else if (diffDays < 365) {
-//            elapsedTime = (diffDays % 30) + "달 전";
-//        } else {
-//            elapsedTime = (diffDays % 365) + "년 전";
-//        }
-
         return elapsedTime;
     }
+
+//    // 좋아요 로띠 애니메이션을 실행 시키는 메소드
+//    private boolean toggleSongLikeAnimButton(LottieAnimationView view){
+//        if(!isSongLikedClicked){
+//            // 애니메이션을 한번 실행시킨다.
+//            // Custom animation speed or duration.
+//            // ofFloat(시작 시간, 종료 시간).setDuration(지속시간)
+//            ValueAnimator animator = ValueAnimator.ofFloat(0f, 0.29f).setDuration(1000);
+//
+//            animator.addUpdateListener(animation -> view.setProgress((Float) animation.getAnimatedValue()));
+//            animator.start();
+//
+//            isSongLikedClicked = true;
+//        }
+//        else {
+//            // 애니메이션을 한번 실행시킨다.
+//            // Custom animation speed or duration.
+//            // ofFloat(시작 시간, 종료 시간).setDuration(지속시간)
+//            ValueAnimator animator = ValueAnimator.ofFloat(0.3f, 0.7f).setDuration(1000);
+//
+//            animator.addUpdateListener(animation -> view.setProgress((Float) animation.getAnimatedValue()));
+//            animator.start();
+//
+//            isSongLikedClicked = false;
+//
+//        }
+//
+//        return isSongLikedClicked;
+//
+//    }
+
 }

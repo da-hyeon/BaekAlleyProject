@@ -1,6 +1,7 @@
 package com.hdh.baekalleyproject.ui.restaurant;
 
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -20,13 +21,23 @@ public class RestaurantFragment extends BaseFragment implements RestaurantContra
 
     private RestaurantContract.Presenter mPresenter;
     private FragmentRestaurantBinding mBinding;
+    private RestaurantPresenter.ScrollEvent mScrollEvent;
+
+    public RestaurantFragment() {
+    }
+
+    @SuppressLint("ValidFragment")
+    public RestaurantFragment(RestaurantPresenter.ScrollEvent mScrollEvent) {
+        this.mScrollEvent = mScrollEvent;
+    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_restaurant, container, false);
-        mPresenter = new RestaurantPresenter(this, getContext(), getActivity(), getFragmentManager() , mBinding.rvRestaurantList);
+        mPresenter = new RestaurantPresenter(this, getContext(), getActivity(), getFragmentManager(), mBinding.rvRestaurantList, mScrollEvent);
 
         initData();
 
@@ -47,8 +58,9 @@ public class RestaurantFragment extends BaseFragment implements RestaurantContra
      * 데이터 생성 및 초기화
      */
     private void initData() {
-        mPresenter.setAdvertisementView( mBinding.vpEvent, mBinding.tlDots);
+        mPresenter.setAdvertisementView(mBinding.vpEvent, mBinding.tlDots);
         mBinding.rvRestaurantList.setNestedScrollingEnabled(false);
+        mPresenter.dataLoadMore(mBinding.nsView);
     }
 
     /**
@@ -90,13 +102,23 @@ public class RestaurantFragment extends BaseFragment implements RestaurantContra
     @Override
     public void showLoading() {
         mBinding.pbLoading.setVisibility(View.VISIBLE);
-        mBinding.pbLoading.setIndeterminate(true);
+        //mBinding.pbLoading.setIndeterminate(true);
         mBinding.nsView.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void showListLoading() {
+        mBinding.pbListLoading.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void hideLoading() {
         mBinding.pbLoading.setVisibility(View.GONE);
         mBinding.nsView.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideListLoading() {
+        mBinding.pbListLoading.setVisibility(View.INVISIBLE);
     }
 }

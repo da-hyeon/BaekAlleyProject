@@ -78,6 +78,8 @@
 
         <LinearLayout
             android:id="@+id/llTaste"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
             android:layout_width="match_parent"
             android:layout_height="105dp"
             android:orientation="horizontal"
@@ -216,18 +218,22 @@
             android:layout_marginRight="16dp"/>
         
         <View
+            android:visibility="gone"
             android:id="@+id/vTasteBar"
-            android:layout_width="70dp"
+            android:layout_width="0dp"
             android:layout_height="3dp"
             android:background="#ff4f4f"
             app:layout_constraintBottom_toBottomOf="@+id/vLine"
-            app:layout_constraintLeft_toLeftOf="@+id/vLine"/>
+            app:layout_constraintLeft_toLeftOf="@+id/vLine"
+            app:layout_constraintRight_toRightOf="@+id/vLine"/>
 
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rvReviewList"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:background="#ffffff"
             app:layout_constraintTop_toBottomOf="@+id/vLine"
             android:paddingTop="21dp"
             android:layout_marginLeft="16dp"
@@ -240,6 +246,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@+id/vLine"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            style="?android:attr/progressBarStyle"/>
+
+        <ProgressBar
+            android:id="@+id/pbListLoading"
+            android:layout_width="wrap_content"
+            android:visibility="invisible"
+            android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"

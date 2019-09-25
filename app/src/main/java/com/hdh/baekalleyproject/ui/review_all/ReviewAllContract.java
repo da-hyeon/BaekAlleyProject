@@ -14,8 +14,13 @@ public interface ReviewAllContract {
 
         void moveTasteBar(int dp);
 
+        int getBarWidth();
+
         void showLoading();
+        void showListLoading();
+
         void hideLoading();
+        void hideListLoading();
     }
 
     interface Presenter extends BaseActivityContract.Presenter{

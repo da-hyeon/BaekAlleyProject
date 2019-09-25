@@ -66,7 +66,8 @@ public interface ServerAPI {
             @Field("ay_nm") ArrayList<String> ay_nm,
             @Field("cg_nm") ArrayList<String> cg_nm ,
             @Field("avrg_Price") ArrayList<String> avrg_Price,
-            @Field("optionCount") int optionCount);
+            @Field("optionCount") int optionCount,
+            @Field("curPage") int currentPage);
 
 
     /**
@@ -213,7 +214,8 @@ public interface ServerAPI {
     Call<ReviewList> selectRegistrationReviewFilter(
             @Field("rt_idx") String restaurantID ,
             @Field("mb_idx") String userID ,
-            @Field("rw_type") int reviewType);
+            @Field("rw_type") int reviewType ,
+            @Field("curPage") int currentPage);
 
 //    /**
 //     * 로그인 요청

@@ -50,7 +50,7 @@ public class RestaurantReviewCommentListAdapter extends RecyclerView.Adapter<Res
         RestaurantReviewCommentListViewHolder(ItemCommentBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
-
+//37 https://assets9.lottiefiles.com/datafiles/ZfX3q0fK9I8mI6O/data.json
             //좋아요 클릭
             binding.vLike.setOnClickListener(v -> {
                 int position = getAdapterPosition();
@@ -73,6 +73,10 @@ public class RestaurantReviewCommentListAdapter extends RecyclerView.Adapter<Res
                             if (response.code() == 200) {
 
                                 binding.cbLike.setChecked(!binding.cbLike.isChecked());
+
+//                                binding.laLikeAnimation.setAnimation("songLike.json");
+//                                toggleSongLikeAnimButton(binding.laLikeAnimation, binding.cbLike.isChecked());
+
                                 if (binding.cbLike.isChecked()) {
                                     binding.tvCountOfLike.setTextColor(ContextCompat.getColor(mContext, R.color.textColor_ff4f4f));
 
@@ -219,4 +223,31 @@ public class RestaurantReviewCommentListAdapter extends RecyclerView.Adapter<Res
 
         return elapsedTime;
     }
+
+
+
+//    // 좋아요 로띠 애니메이션을 실행 시키는 메소드
+//    private void toggleSongLikeAnimButton(LottieAnimationView view , boolean status){
+//        if(!status){
+//            // 애니메이션을 한번 실행시킨다.
+//            // Custom animation speed or duration.
+//            // ofFloat(시작 시간, 종료 시간).setDuration(지속시간)
+//            ValueAnimator animator = ValueAnimator.ofFloat(0.0f, 0.5f).setDuration(1000);
+//
+//            animator.addUpdateListener(animation -> view.setProgress((Float) animation.getAnimatedValue()));
+//            animator.start();
+//        }
+//        else {
+//            // 애니메이션을 한번 실행시킨다.
+//            // Custom animation speed or duration.
+//            // ofFloat(시작 시간, 종료 시간).setDuration(지속시간)
+//            ValueAnimator animator = ValueAnimator.ofFloat(0.5f, 1.0f).setDuration(1000);
+//
+//            animator.addUpdateListener(animation -> view.setProgress((Float) animation.getAnimatedValue()));
+//            animator.start();
+//
+//
+//        }
+//
+//    }
 }
