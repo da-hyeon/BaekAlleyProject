@@ -43,5 +43,6 @@
     <string name="menu_restaurant_news">식당소식</string>
     <string name="menu_my_information">내 정보</string>
     <string name="comment_sample">저도 모짜렐라 치즈돈까스와 규카츠를 오늘 시켜서 먹었는데 사람들이 많이 몰린 시간이라 그런지 너무 늦게 나왔네요.</string>
+    <string name="find_password_information_text">가입하신 이메일 주소를 입력해주세요. 새로운 비밀번호 설정을 위한 링크를 보내드립니다.</string>
 
 </resources>

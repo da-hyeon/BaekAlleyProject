@@ -70,7 +70,7 @@ public class RestaurantDetailPresenter extends BaseActivityPresenter implements 
 
         mUserInformation = MyApplication.getUserInformationInstance();
 
-        mRestaurantImageListAdapter = new RestaurantImageListAdapter(mContext);
+        mRestaurantImageListAdapter = new RestaurantImageListAdapter(mContext, mActivity);
         mRestaurantMenuListAdapter = new RestaurantMenuListAdapter(mContext);
         mRestaurantReviewListAdapter = new RestaurantReviewListAdapter(mContext, mActivity);
 

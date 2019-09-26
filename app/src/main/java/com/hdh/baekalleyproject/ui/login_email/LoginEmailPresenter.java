@@ -2,9 +2,11 @@ package com.hdh.baekalleyproject.ui.login_email;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 
 import com.hdh.baekalleyproject.MyApplication;
 import com.hdh.baekalleyproject.ui.base.activity.BaseActivityPresenter;
+import com.hdh.baekalleyproject.ui.find_password.FindPasswordActivity;
 
 public class LoginEmailPresenter extends BaseActivityPresenter implements LoginEmailContract.Presenter {
 
@@ -69,6 +71,17 @@ public class LoginEmailPresenter extends BaseActivityPresenter implements LoginE
     public void clickPasswordClear() {
         mView.changePasswordText("");
         mView.changePasswordClearButton(false);
+    }
+
+    @Override
+    public void clickFindPassword() {
+        Intent intent = new Intent(mContext , FindPasswordActivity.class);
+        mView.moveActivity(intent);
+    }
+
+    @Override
+    public void clickRegistration() {
+
     }
 
     /**

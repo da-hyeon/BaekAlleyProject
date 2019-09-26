@@ -75,7 +75,7 @@ public class RestaurantPresenter extends BaseFragmentPresenter implements Restau
         mRestaurantListView = restaurantRecyclerView;
 
         mEventImageSliderAdapter = new EventImageSliderAdapter(mContext, mFragmentManager);
-        mRestaurantListAdapter = new RestaurantListAdapter(mContext, Constants.MAIN_ADAPTER);
+        mRestaurantListAdapter = new RestaurantListAdapter(mContext, mActivity ,Constants.MAIN_ADAPTER);
 
         mFilterSelectedItem = new FilterSelectedItem();
 

@@ -3,27 +3,42 @@ package com.hdh.baekalleyproject.ui.base.activity;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
+import com.hdh.baekalleyproject.R;
 import com.hdh.baekalleyproject.ui.login.LoginActivity;
 
 public class BaseActivity extends AppCompatActivity implements BaseActivityContract.View {
 
     // Permission
     public static final int PERMISSION = 0x00;
+    private BaseActivityContract.Presenter mPresenter;
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        mPresenter = new BaseActivityPresenter(this ,this, this);
+    }
 
     @Override
     public void removeActivity() {
         finish();
+        overridePendingTransition(R.anim.stay,
+                R.anim.slide_right);
     }
 
     @Override
     public void moveActivity(Intent intent) {
         startActivity(intent);
+        overridePendingTransition(R.anim.slide_left,
+                R.anim.stay);
     }
 
     @Override
@@ -82,5 +97,8 @@ public class BaseActivity extends AppCompatActivity implements BaseActivityContr
       //  Session.getCurrentSession().removeCallback(callback);
     }
 
-
+    @Override
+    public void onBackPressed() {
+        mPresenter.clickDismiss();
+    }
 }

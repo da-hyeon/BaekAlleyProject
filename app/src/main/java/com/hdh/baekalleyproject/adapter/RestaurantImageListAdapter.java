@@ -1,6 +1,7 @@
 package com.hdh.baekalleyproject.adapter;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
@@ -13,6 +14,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.request.RequestOptions;
 import com.hdh.baekalleyproject.Constants;
+import com.hdh.baekalleyproject.R;
 import com.hdh.baekalleyproject.data.model.RestaurantImage;
 import com.hdh.baekalleyproject.data.util.CustomRoundedCornersTransformation;
 import com.hdh.baekalleyproject.databinding.ItemRestaurantDetailImgBinding;
@@ -24,6 +26,7 @@ public class RestaurantImageListAdapter extends RecyclerView.Adapter<RestaurantI
 
     private ArrayList<RestaurantImage> mRestaurantImageList;
     private Context mContext;
+    private Activity mActivity;
     private final int IMG_SIZE;
     private final int IMG_CORNER_RADIUS;
 
@@ -47,12 +50,15 @@ public class RestaurantImageListAdapter extends RecyclerView.Adapter<RestaurantI
                 intent.putExtra(Constants.RESTAURANT_IMAGES,imageURLArray);
                 intent.putExtra(Constants.RESTAURANT_IMAGE_CLICK_POSITION , getAdapterPosition());
                 mContext.startActivity(intent);
+                mActivity.overridePendingTransition(R.anim.fade_in,
+                        R.anim.fade_out);
             });
         }
     }
 
-    public RestaurantImageListAdapter(Context mContext) {
+    public RestaurantImageListAdapter(Context mContext , Activity mActivity) {
         this.mContext = mContext;
+        this.mActivity = mActivity;
         IMG_CORNER_RADIUS = Math.round(8 * mContext.getResources().getDisplayMetrics().density);
         IMG_SIZE = Math.round(164 * mContext.getResources().getDisplayMetrics().density);
     }

@@ -50,7 +50,7 @@ public class SearchPresenter extends BaseActivityPresenter implements SearchCont
         PADDING_SIZE = Math.round(4 * mContext.getResources().getDisplayMetrics().density);
         mRestaurantSearchList = new ArrayList<>();
 
-        mRestaurantListAdapter = new RestaurantListAdapter(mContext, Constants.FILTER_ADAPTER);
+        mRestaurantListAdapter = new RestaurantListAdapter(mContext, mActivity ,Constants.FILTER_ADAPTER);
         mRecentSearchTermListAdapter = new RecentSearchTermListAdapter(mContext, this);
 
         mRecentSearchTerm = new ArrayList<>();

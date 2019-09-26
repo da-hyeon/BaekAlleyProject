@@ -80,6 +80,8 @@ public class RestaurantFragment extends BaseFragment implements RestaurantContra
     @Override
     public void moveActivity(Intent intent) {
         startActivity(intent);
+        getActivity().overridePendingTransition(R.anim.slide_left,
+                R.anim.stay);
     }
 
     /**

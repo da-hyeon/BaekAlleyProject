@@ -65,6 +65,18 @@ public class LoginEmailActivity extends BaseActivity implements LoginEmailContra
         mBinding.ivClearPassword.setOnClickListener(v->
                 mPresenter.clickPasswordClear()
         );
+
+        mBinding.vDismiss.setOnClickListener(v->
+                mPresenter.clickDismiss()
+        );
+
+        mBinding.tvFindPassword.setOnClickListener(v->
+                mPresenter.clickFindPassword()
+        );
+
+        mBinding.tvRegistration.setOnClickListener(v->
+                mPresenter.clickRegistration()
+        );
     }
 
     private void initData() {
@@ -107,4 +119,9 @@ public class LoginEmailActivity extends BaseActivity implements LoginEmailContra
     public void changePasswordText(String text) {
         mBinding.etPassword.setText(text);
     }
+
+   // @Override
+   // public void onBackPressed() {
+   //     mPresenter.clickDismiss();
+   // }
 }

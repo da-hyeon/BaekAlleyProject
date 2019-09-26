@@ -24,7 +24,7 @@ public class PhotoActivity extends BaseActivity implements PhotoContract.View {
         initData();
 
         mBinding.ivDismiss.setOnClickListener(v ->
-                mPresenter.clickDismiss()
+                activityFinish()
         );
 
     }
@@ -37,5 +37,16 @@ public class PhotoActivity extends BaseActivity implements PhotoContract.View {
     @Override
     public void setPage(int currentPage , int pageCount) {
         mBinding.tvPage.setText(currentPage + " / " + pageCount);
+    }
+
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+        activityFinish();
+    }
+
+    private void activityFinish(){
+        finish();
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
     }
 }

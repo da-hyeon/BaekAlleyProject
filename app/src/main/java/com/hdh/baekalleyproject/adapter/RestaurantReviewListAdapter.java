@@ -64,6 +64,8 @@ public class RestaurantReviewListAdapter extends RecyclerView.Adapter<Restaurant
                 //리뷰객체 넘기기
                 intent.putExtra(Constants.REVIEW_DATA, mRestaurantReviewList.get(position));
                 mContext.startActivity(intent);
+                mActivity.overridePendingTransition(R.anim.slide_left,
+                        R.anim.stay);
             });
 //
 //            binding.btLike.setOnClickListener(v->{

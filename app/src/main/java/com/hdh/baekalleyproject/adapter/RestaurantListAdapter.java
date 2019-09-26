@@ -1,6 +1,7 @@
 package com.hdh.baekalleyproject.adapter;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
@@ -36,6 +37,7 @@ public class RestaurantListAdapter extends RecyclerView.Adapter<RestaurantListAd
 
     private ArrayList<Restaurant> mRestaurantList;
     private Context mContext;
+    private Activity mActivity;
     private final int IMG_SIZE;
     private final int IMG_CORNER_RADIUS;
     private final String mTag;
@@ -56,6 +58,8 @@ public class RestaurantListAdapter extends RecyclerView.Adapter<RestaurantListAd
                 Intent intent = new Intent(mContext, RestaurantDetailActivity.class);
                 intent.putExtra(Constants.RESTAURANT_ID, mRestaurantList.get(getAdapterPosition()).getRestaurantID());
                 mContext.startActivity(intent);
+                mActivity.overridePendingTransition(R.anim.slide_left,
+                        R.anim.stay);
 
                 if (mTag.equals(Constants.FILTER_ADAPTER)) {
                     SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.KOREA);
@@ -75,8 +79,9 @@ public class RestaurantListAdapter extends RecyclerView.Adapter<RestaurantListAd
         }
     }
 
-    public RestaurantListAdapter(Context mContext, String mTag) {
+    public RestaurantListAdapter(Context mContext, Activity mActivity, String mTag) {
         this.mContext = mContext;
+        this.mActivity = mActivity;
         this.mTag = mTag;
         IMG_CORNER_RADIUS = Math.round(8 * mContext.getResources().getDisplayMetrics().density);
         IMG_SIZE = Math.round(156 * mContext.getResources().getDisplayMetrics().density);

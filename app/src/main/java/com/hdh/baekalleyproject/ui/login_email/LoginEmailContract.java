@@ -17,6 +17,7 @@ public interface LoginEmailContract {
 
         void clickEmailClear();
         void clickPasswordClear();
-
+        void clickFindPassword();
+        void clickRegistration();
     }
 }
