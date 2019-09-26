@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="loginEmailActivity"
+            type="com.hdh.baekalleyproject.ui.login_email.LoginEmailActivity" />
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#ffffff">
+
+        <View
+            android:id="@+id/vToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:background="#ffffff"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/vGradient"
+            android:layout_width="match_parent"
+            android:layout_height="2.5dp"
+            android:background="@drawable/drop_shadow"
+            app:layout_constraintTop_toBottomOf="@+id/vToolbar" />
+
+        <View
+            android:id="@+id/vDismiss"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="@+id/vToolbar"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="@+id/tvDismiss"
+            app:layout_constraintTop_toTopOf="@+id/vToolbar" />
+
+        <ImageView
+            android:id="@+id/ivDismiss"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:src="@drawable/button_arrow_back"
+            app:layout_constraintBottom_toBottomOf="@+id/vToolbar"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/vToolbar" />
+
+        <TextView
+            android:id="@+id/tvDismiss"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:fontFamily="@font/notosans"
+            android:includeFontPadding="false"
+            android:text="홈"
+            android:textColor="#222222"
+            android:textSize="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/vToolbar"
+            app:layout_constraintLeft_toRightOf="@+id/ivDismiss"
+            app:layout_constraintTop_toTopOf="@+id/vToolbar" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/notosans"
+            android:includeFontPadding="false"
+            android:text="로그인"
+            android:textColor="#222222"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/vToolbar"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/vToolbar" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5.3dp"
+            android:fontFamily="@font/notosans"
+            android:includeFontPadding="false"
+            android:text="이메일주소"
+            android:textColor="#999999"
+            android:textSize="10dp"
+            app:layout_constraintBottom_toTopOf="@+id/etEmail"
+            app:layout_constraintLeft_toLeftOf="@+id/etEmail" />
+
+        <EditText
+            android:id="@+id/etEmail"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="37.7dp"
+            android:layout_marginTop="48.3dp"
+            android:layout_marginRight="37.7dp"
+            android:background="#ffffff"
+            android:fontFamily="@font/notosans"
+            android:hint="alley@mamber.com"
+            android:includeFontPadding="false"
+            android:inputType="textEmailAddress"
+            android:textColor="#333333"
+            android:textColorHint="#bbbbbb"
+            android:textSize="16dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/vGradient" />
+
+        <ImageView
+            android:id="@+id/ivClearEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:paddingTop="10dp"
+            android:visibility="gone"
+            android:paddingBottom="10dp"
+            android:src="@drawable/button_search_clear"
+            app:layout_constraintBottom_toBottomOf="@+id/etEmail"
+            app:layout_constraintRight_toRightOf="@+id/etEmail"
+            app:layout_constraintTop_toTopOf="@+id/etEmail" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="37.7dp"
+            android:layout_marginTop="4.2dp"
+            android:layout_marginRight="37.7dp"
+            android:background="#bbbbbb"
+            app:layout_constraintTop_toBottomOf="@+id/etEmail" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5.3dp"
+            android:fontFamily="@font/notosans"
+            android:includeFontPadding="false"
+            android:text="비밀번호"
+            android:textColor="#999999"
+            android:textSize="10dp"
+            app:layout_constraintBottom_toTopOf="@+id/etPassword"
+            app:layout_constraintLeft_toLeftOf="@+id/etPassword" />
+
+        <EditText
+            android:id="@+id/etPassword"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="37.7dp"
+            android:layout_marginTop="40.7dp"
+            android:layout_marginRight="37.7dp"
+            android:background="#ffffff"
+            android:hint="8자리이상"
+            android:inputType="textPassword"
+            android:textColor="#333333"
+            android:textColorHint="#bbbbbb"
+            android:textSize="16dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/etEmail" />
+
+        <ImageView
+            android:id="@+id/ivClearPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:visibility="gone"
+            android:src="@drawable/button_search_clear"
+            app:layout_constraintBottom_toBottomOf="@+id/etPassword"
+            app:layout_constraintRight_toRightOf="@+id/etPassword"
+            app:layout_constraintTop_toTopOf="@+id/etPassword" />
+
+        <View
+            android:id="@+id/vPasswordLine"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="37.7dp"
+            android:layout_marginTop="4.2dp"
+            android:layout_marginRight="37.7dp"
+            android:background="#bbbbbb"
+            app:layout_constraintTop_toBottomOf="@+id/etPassword" />
+
+        <View
+            android:id="@+id/vLogin"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginLeft="33.3dp"
+            android:layout_marginTop="26.8dp"
+            android:layout_marginRight="33.3dp"
+            android:alpha="0.2"
+            android:background="@drawable/round_button_ff4f4f"
+            app:layout_constraintTop_toBottomOf="@+id/vPasswordLine" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/notosans"
+            android:includeFontPadding="false"
+            android:text="로그인"
+            android:textColor="#ffffff"
+            android:textSize="17dp"
+            app:layout_constraintBottom_toBottomOf="@+id/vLogin"
+            app:layout_constraintLeft_toLeftOf="@+id/vLogin"
+            app:layout_constraintRight_toRightOf="@+id/vLogin"
+            app:layout_constraintTop_toTopOf="@+id/vLogin" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7.3dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@+id/vLogin">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/notosans"
+                android:includeFontPadding="false"
+                android:padding="10dp"
+                android:text="비밀번호를 잊으셨나요?"
+                android:textColor="#999999"
+                android:textSize="13dp" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="19dp"
+                android:layout_marginLeft="6.2dp"
+                android:background="#bbbbbb" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="6.2dp"
+                android:fontFamily="@font/notosans"
+                android:includeFontPadding="false"
+                android:padding="10dp"
+                android:text="회원가입하기"
+                android:textColor="#17b1c4"
+                android:textSize="13dp" />
+
+        </LinearLayout>
+
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

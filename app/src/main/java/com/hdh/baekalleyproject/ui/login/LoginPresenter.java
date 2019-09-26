@@ -16,6 +16,7 @@ import com.hdh.baekalleyproject.Constants;
 import com.hdh.baekalleyproject.MyApplication;
 import com.hdh.baekalleyproject.data.model.UserInformation;
 import com.hdh.baekalleyproject.ui.base.activity.BaseActivityPresenter;
+import com.hdh.baekalleyproject.ui.login_email.LoginEmailActivity;
 import com.hdh.baekalleyproject.ui.main.MainActivity;
 import com.kakao.auth.AuthType;
 import com.kakao.auth.ISessionCallback;
@@ -141,6 +142,8 @@ public class LoginPresenter extends BaseActivityPresenter implements LoginContra
     public void clickEmailLogin() {
        // onClickLogout();
         //이메일로 로그인 액티비티로 이동
+        Intent intent = new Intent(mContext , LoginEmailActivity.class);
+        mView.moveActivity(intent);
     }
 
     @Override
